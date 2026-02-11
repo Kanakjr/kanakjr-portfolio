@@ -91,3 +91,68 @@
 .animate-shimmer {
   animation: shimmer 3s linear infinite;
 }
+
+/* Blog MDX prose styles */
+.prose-blog {
+  @apply text-neutral-300 leading-relaxed;
+}
+
+.prose-blog > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose-blog h2 {
+  @apply text-2xl font-bold text-white font-mono mt-10 mb-4;
+}
+
+.prose-blog h3 {
+  @apply text-xl font-bold text-white font-mono mt-8 mb-3;
+}
+
+.prose-blog p {
+  @apply text-lg leading-relaxed;
+}
+
+.prose-blog a {
+  @apply text-cyber-yellow underline underline-offset-4 decoration-cyber-yellow/30 hover:decoration-cyber-yellow transition-colors;
+}
+
+.prose-blog strong {
+  @apply text-white font-semibold;
+}
+
+.prose-blog ul {
+  @apply list-disc list-inside space-y-2 pl-2;
+}
+
+.prose-blog ol {
+  @apply list-decimal list-inside space-y-2 pl-2;
+}
+
+.prose-blog li {
+  @apply text-neutral-300;
+}
+
+.prose-blog blockquote {
+  @apply border-l-2 border-cyber-yellow/50 pl-6 italic text-neutral-400 my-6;
+}
+
+.prose-blog pre {
+  @apply relative rounded-lg border border-white/10 bg-white/5 overflow-hidden my-6;
+}
+
+.prose-blog pre > code {
+  @apply block p-4 overflow-x-auto text-sm font-mono text-neutral-300 leading-relaxed;
+}
+
+.prose-blog :not(pre) > code {
+  @apply px-1.5 py-0.5 rounded bg-white/10 text-cyber-yellow text-sm font-mono;
+}
+
+.prose-blog hr {
+  @apply border-white/10 my-10;
+}
+
+.prose-blog img {
+  @apply rounded-lg border border-white/10 my-6;
+}
