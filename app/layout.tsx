@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import Image from "next/image";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,6 +17,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Kanak Dahake Jr | Developer & Designer",
   description: "Portfolio website of Kanak Dahake Jr - Developer, Designer, and Maker",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +40,18 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          {/* Logo at top left */}
+          <div className="fixed top-8 left-8 z-50 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:border-cyber-yellow/50 transition-all duration-300 hover:scale-110">
+            <div className="relative w-6 h-6">
+              <Image
+                src="/logokanakjr.png"
+                alt="Kanak Jr Logo"
+                fill
+                className="rounded-full object-cover"
+                priority
+              />
+            </div>
+          </div>
           {children}
         </ThemeProvider>
       </body>
