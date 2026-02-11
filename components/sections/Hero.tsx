@@ -76,7 +76,10 @@ export default function Hero() {
             </ShimmerButton>
           </a>
 
-          <button
+          <ShimmerButton
+            shimmerColor="#FF4500"
+            background="rgba(255, 69, 0, 0.1)"
+            className="border-retro-red/30 text-retro-red hover:border-retro-red"
             onClick={() => {
               const footer = document.querySelector('footer');
               if (footer) {
@@ -84,14 +87,8 @@ export default function Hero() {
               }
             }}
           >
-            <ShimmerButton
-              shimmerColor="#FF4500"
-              background="rgba(255, 69, 0, 0.1)"
-              className="border-retro-red/30 text-retro-red hover:border-retro-red"
-            >
-              Get in Touch
-            </ShimmerButton>
-          </button>
+            Get in Touch
+          </ShimmerButton>
         </div>
 
       </div>
