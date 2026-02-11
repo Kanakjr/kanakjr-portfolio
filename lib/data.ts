@@ -17,19 +17,19 @@ export const portfolioData = {
         company: "Amdocs (Amaiz AI)",
         role: "Software Development Specialist - GenAI",
         period: "June 2024 – Present",
-        description: "Building Multimodal RAG pipelines and Human-in-loop command generation systems for Telco AI."
+        description: "Built a configurable Multimodal RAG pipeline, human-in-loop command generation with pydantic models for API integration, and context entity management. Developed AI agents for personalized telco billing support and product recommendations."
       },
       {
         company: "PwC U.S. Advisory",
-        role: "Senior Associate - Innovation Hub",
+        role: "Senior Associate / Associate - Innovation Hub",
         period: "Dec 2020 – June 2024",
-        description: "Led GenAI Enterprise apps, Graph-based anomaly detection, and filed 2 patents."
+        description: "Spearheaded production GenAI enterprise apps (RAG-based search, data insights agents, content creation) on Azure and led InsightsGen, a GenAI accelerator driving multiple client wins. Filed 2 US patents. Built Graph-based anomaly detection for Azure IAM, Federated ML on blockchain, and an NLU pipeline for clinical trial document extraction."
       },
       {
-        company: "Digitate (TCS)",
-        role: "Technical Lead Cybersecurity",
+        company: "Digitate (Ignio AI), TCS",
+        role: "Technical Lead / Product Developer",
         period: "Jun 2017 – Nov 2020",
-        description: "Deep Learning for Phishing detection, Identity Access Management, and Cloud Security."
+        description: "Trained deep learning models for Phishing URL and DGA detection (patented), reducing phishing attacks by 25%. Built phishing campaign detection using Neo4J graph algorithms and ML services via Flask APIs. Developed just-in-time IAM access systems, cloud security controls, and oversaw SAAS security architecture."
       }
     ],
     education: [
