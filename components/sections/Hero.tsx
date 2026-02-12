@@ -66,11 +66,7 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-wrap gap-4 justify-center">
-          <a
-            href="https://resume.kanakjr.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="/resume">
             <ShimmerButton
               shimmerColor="#FFD700"
               background="rgba(255, 215, 0, 0.1)"
