@@ -65,9 +65,14 @@ const config: Config = {
             opacity: "0",
           },
         },
+        "blink-cursor": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
+        },
       },
       animation: {
         "meteor-effect": "meteor-effect linear infinite",
+        "blink-cursor": "blink-cursor 0.8s step-end infinite",
       },
     },
   },

@@ -21,13 +21,13 @@ export const portfolioData = {
       },
       {
         company: "PwC U.S. Advisory",
-        role: "Senior Associate / Associate - Innovation Hub",
+        role: "Senior Associate - Innovation Hub",
         period: "Dec 2020 – June 2024",
         description: "Spearheaded production GenAI enterprise apps (RAG-based search, data insights agents, content creation) on Azure and led InsightsGen, a GenAI accelerator driving multiple client wins. Filed 2 US patents. Built Graph-based anomaly detection for Azure IAM, Federated ML on blockchain, and an NLU pipeline for clinical trial document extraction."
       },
       {
         company: "Digitate (Ignio AI), TCS",
-        role: "Technical Lead / Product Developer",
+        role: "Technical Lead",
         period: "Jun 2017 – Nov 2020",
         description: "Trained deep learning models for Phishing URL and DGA detection (patented), reducing phishing attacks by 25%. Built phishing campaign detection using Neo4J graph algorithms and ML services via Flask APIs. Developed just-in-time IAM access systems, cloud security controls, and oversaw SAAS security architecture."
       }
@@ -64,20 +64,20 @@ export const portfolioData = {
     ],
     skills: {
       core: [
-        "Python", "JavaScript",
+        "Python", "Cybersecurity",
         "Azure", "AWS",
         "Docker", "Git", "Kubernetes",
       ],
       ai: [
-        "GenAI & NLP", "Machine & Deep Learning",
-        "Langchain & Langgraph (Chains & Agents)",
+        "GenAI & NLP", "ML & DL",
+        "Langchain & Langgraph",
         "RAG", "Transformer (GPT, LLaMA)",
         "FLUX, SDXL, LORA FineTuning",
-        "OpenCV", "YOLOv5"
+        "OpenCV",
       ],
       stack: [
-        "Streamlit","VectorDB (Chroma, ACS, MongoDB)",
-        "Neo4j", "Blockchain"
+        "Streamlit","VectorDB", "MongoDB",
+        "Neo4j", "Blockchain", "FastAPI"
       ]
     },
     projects: [
@@ -86,24 +86,21 @@ export const portfolioData = {
         category: "GenAI",
         description: "A GenAI-driven app designed for news media publishers, streamlining content creation and assisting tasks like social media posting, summarization, and bullet point creation.",
         tech: ["Python", "GenAI", "React", "LangChain"],
-        demoVideo: "https://youtu.be/fmH5PAESSxo",
-        icon: "📰"
+        demoVideo: "https://youtu.be/fmH5PAESSxo"
       },
       {
         title: "SalesCompanionAgent",
         category: "AI Agent",
         description: "A chat app for sales assistants, empowering them with AI-powered features like sales plan generation, progress tracking, meeting scheduling, and email drafting.",
         tech: ["LangChain", "Python", "ChromaDB", "SQLite", "Chainlit"],
-        github: "https://github.com/Kanakjr/SalesCompanionAgent",
-        icon: "💼"
+        github: "https://github.com/Kanakjr/SalesCompanionAgent"
       },
       {
         title: "BillBot",
         category: "AI Agent",
         description: "An AI bot that simplifies the management and extraction of information from bills and receipts, and provides users simple Q&A access to the data.",
         tech: ["Python", "LangChain", "OCR", "LLMs"],
-        github: "https://github.com/Kanakjr/BillBot",
-        icon: "🧾"
+        github: "https://github.com/Kanakjr/BillBot"
       },
       {
         title: "CryptoVulnerability - Responsible Vulnerability Reporting",
@@ -111,23 +108,21 @@ export const portfolioData = {
         description: "Developed a privacy-focused vulnerability reporting system on blockchain using Hyperledger Fabric for responsible disclosure.",
         tech: ["Hyperledger Fabric", "Blockchain", "Node.js", "Go"],
         demoVideo: "https://youtu.be/TLWH58xnZPQ?t=403",
-        github: "https://github.com/Kanakjr/VulnReporting",
-        icon: "⛓️"
+        github: "https://github.com/Kanakjr/VulnReporting"
       },
       {
         title: "KanoServer",
         category: "Hardware",
         description: "Raspberry Pi home server with NAS, WiFi sniffing, and 10hr battery.",
-        tech: ["Raspberry Pi", "Linux", "Python"],
-        icon: "🖥️"
+        tech: ["Raspberry Pi", "Linux", "Python"]
       }
     ],
     achievements: [
       {
-        title: "Innovator Award",
-        organization: "PwC",
-        description: "Recognized for innovative contributions in GenAI and Enterprise applications",
-        link: "https://www.linkedin.com/posts/kanak-dahake_innovatoraward-innovation-pwc-activity-7089837735628218370-TMf7?utm_source=share&utm_medium=member_desktop"
+        title: "MS Cybersecurity - 4.0 GPA",
+        organization: "Georgia Institute of Technology",
+        description: "Information Security track covering applied cryptography, secure systems, network security, and binary reverse engineering",
+        link: null
       },
       {
         title: "2 US Patents Filed",
@@ -148,6 +143,12 @@ export const portfolioData = {
         link: "https://wp3.kanakjr.in/diat-certificate/"
       },
       {
+        title: "Innovator Award",
+        organization: "PwC",
+        description: "Recognized for innovative contributions in GenAI and Enterprise applications",
+        link: "https://www.linkedin.com/posts/kanak-dahake_innovatoraward-innovation-pwc-activity-7089837735628218370-TMf7?utm_source=share&utm_medium=member_desktop"
+      },
+      {
         title: "The Best Engineering Student",
         organization: "The Institution of Engineers (India)",
         description: "Awarded for outstanding academic and technical excellence",
@@ -163,12 +164,6 @@ export const portfolioData = {
         title: "100k+ App Downloads",
         organization: "Kanak Assis",
         description: "Mobile application reached over 100,000 downloads",
-        link: null
-      },
-      {
-        title: "MS Cybersecurity - 4.0 GPA",
-        organization: "Georgia Institute of Technology",
-        description: "Perfect GPA in graduate cybersecurity program",
         link: null
       }
     ]

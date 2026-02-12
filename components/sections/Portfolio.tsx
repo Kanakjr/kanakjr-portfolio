@@ -24,44 +24,44 @@ export default function Portfolio() {
           </div>
         </BlurFade>
 
-        {/* Compact preview grid -- one row per section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {/* Compact preview grid -- all sections in one row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
           {galleryData.map((section, sectionIndex) => (
             <BlurFade key={section.id} delay={0.1 + sectionIndex * 0.1} inView>
               <Link href="/stills" className="group block">
                 <MagicCard
-                  className="p-5 transition-transform duration-300 hover:scale-[1.02]"
-                  gradientSize={300}
+                  className="p-4 transition-transform duration-300 hover:scale-[1.02]"
+                  gradientSize={250}
                   gradientColor="#FFD700"
                   gradientOpacity={0.3}
                 >
                   {/* Section label */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3">
                     <div>
-                      <h3 className="text-xl font-bold text-white font-mono group-hover:text-cyber-yellow transition-colors">
+                      <h3 className="text-base font-bold text-white font-mono group-hover:text-cyber-yellow transition-colors">
                         {section.title}
                       </h3>
-                      <p className="text-cyber-yellow/60 font-mono text-xs tracking-wider uppercase">
+                      <p className="text-cyber-yellow/60 font-mono text-[10px] tracking-wider uppercase">
                         {section.accent}
                       </p>
                     </div>
                     <span className="text-neutral-500 group-hover:text-cyber-yellow transition-colors font-mono text-xs">
-                      {section.images.length} photos
+                      {section.images.length}
                     </span>
                   </div>
 
                   {/* Mini image collage */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5">
                     {section.images.slice(0, PREVIEW_COUNT).map((image) => (
                       <div
                         key={image.src}
-                        className="relative aspect-square rounded-lg overflow-hidden"
+                        className="relative aspect-square rounded-md overflow-hidden"
                       >
                         <Image
                           src={image.thumb}
                           alt={image.alt}
                           fill
-                          sizes="(max-width: 768px) 30vw, 15vw"
+                          sizes="(max-width: 640px) 30vw, (max-width: 1024px) 15vw, 10vw"
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           loading="lazy"
                         />

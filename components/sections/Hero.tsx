@@ -1,7 +1,7 @@
 "use client";
 
 import RetroGrid from "@/components/magicui/retro-grid";
-import WordRotate from "@/components/magicui/word-rotate";
+import { TypingAnimation } from "@/components/magicui/typing-animation";
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import BorderBeam from "@/components/magicui/border-beam";
 import Image from "next/image";
@@ -35,7 +35,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Title with Word Rotate */}
+        {/* Title with Typing Animation */}
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-5xl font-bold text-white font-mono md:text-7xl">
             I&apos;m <span className="text-cyber-yellow">{hero.name}</span>
@@ -43,10 +43,14 @@ export default function Hero() {
 
           <div className="flex items-center gap-3 text-3xl md:text-4xl">
             <span className="text-neutral-300">I am a</span>
-            <WordRotate
-              words={["GenAI Engineer", "Cybersecurity Expert", "AI Agent Builder", "Innovator"]}
-              className="text-cyber-yellow"
-              duration={3000}
+            <TypingAnimation
+              words={["GenAI Engineer", "Security Specialist", "Agent Builder", "Innovator"]}
+              className="text-cyber-yellow font-bold"
+              typeSpeed={80}
+              deleteSpeed={40}
+              pauseDelay={2000}
+              loop
+              cursorStyle="line"
             />
           </div>
         </div>
