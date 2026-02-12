@@ -62,7 +62,7 @@ export default function ClicksPage() {
         <BlurFade delay={0.1} inView>
           <div className="mb-16 text-center">
             <h1 className="text-5xl font-bold text-white font-mono md:text-6xl mb-4">
-              Photo <span className="text-cyber-yellow">Gallery</span>
+              <span className="text-cyber-yellow">Stills</span>
             </h1>
             <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
               Beyond code -- bikes, builds, and things I make with my hands

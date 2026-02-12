@@ -16,7 +16,7 @@ export default function Portfolio() {
         <BlurFade delay={0.1} inView>
           <div className="mb-12 text-center">
             <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
-              Photo <span className="text-cyber-yellow">Gallery</span>
+              <span className="text-cyber-yellow">Stills</span>
             </h2>
             <p className="text-neutral-400 text-lg">
               Beyond code -- bikes, builds, and things I make with my hands
@@ -28,7 +28,7 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {galleryData.map((section, sectionIndex) => (
             <BlurFade key={section.id} delay={0.1 + sectionIndex * 0.1} inView>
-              <Link href="/clicks" className="group block">
+              <Link href="/stills" className="group block">
                 <MagicCard
                   className="p-5 transition-transform duration-300 hover:scale-[1.02]"
                   gradientSize={300}
@@ -78,7 +78,7 @@ export default function Portfolio() {
         <BlurFade delay={0.3} inView>
           <div className="text-center">
             <Link
-              href="/clicks"
+              href="/stills"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-cyber-yellow/10 border border-white/10 hover:border-cyber-yellow/50 rounded-lg text-white hover:text-cyber-yellow transition-all font-mono text-sm"
             >
               View Full Gallery

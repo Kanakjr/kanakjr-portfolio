@@ -8,8 +8,8 @@ export default function QuickNav() {
 
   const navItems = [
     { label: "Blog", href: "/blog", icon: "📝" },
-    { label: "Videos", href: "/videos", icon: "🎬" },
-    { label: "Clicks", href: "/clicks", icon: "📸" },
+    { label: "Stills", href: "/stills", icon: "📸" },
+    { label: "Reels", href: "/reels", icon: "🎬" },
   ];
 
   return (
