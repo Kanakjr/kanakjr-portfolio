@@ -4,6 +4,7 @@ import Patents from "@/components/sections/Patents";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Achievements from "@/components/sections/Achievements";
+import Portfolio from "@/components/sections/Portfolio";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Skills />
       <Projects />
       <Achievements />
+      <Portfolio />
       <Footer />
     </main>
   );

@@ -10,7 +10,18 @@ RUN apk add --no-cache libc6-compat
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
 
-# Build the app
+# ── Development target (hot reload) ──────────────────────────────
+# Usage: docker compose up (mounts source via volumes)
+FROM base AS dev
+RUN apk add --no-cache libc6-compat
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
+# Enable polling so file-change events propagate through Docker volumes
+ENV WATCHPACK_POLLING=true
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
+
+# ── Production build ─────────────────────────────────────────────
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
