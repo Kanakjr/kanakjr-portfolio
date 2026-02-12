@@ -2,8 +2,8 @@ export const portfolioData = {
     hero: {
       name: "Kanak Dahake Jr",
       role: "Software Development Specialist - GenAI",
-      tagline: "Crafting innovative solutions at the intersection of technology and design. Specialized in cybersecurity, full-stack development, and cutting-edge AI applications.",
-      bio: "I build AI Agents, secure systems, and physical machines. Master's in Cybersecurity from Georgia Tech. Currently engineering the future of Telco AI at Amdocs.",
+      tagline: "Turning complex problems into intelligent systems - from enterprise GenAI and cybersecurity to smart home automation.",
+      bio: "Master's in Cybersecurity from Georgia Tech, 2 US patents, and a relentless urge to automate everything. Currently at Amdocs engineering Telco AI.",
       location: "Pune, India",
       email: "ksdusa4@gmail.com",
       links: {
@@ -52,14 +52,14 @@ export const portfolioData = {
         title: "Systems and methods for relational database insight extraction and visualization",
         date: "Mar 18, 2025",
         description: "A system for processing relational database data using generative AI language models to extract insights and generate visualizations from user queries.",
-        link: "https://resume.kanakjr.in/kanak-dahake_patent-us-12254015-b1.pdf"
+        link: "/patent/US-12254015-B1.pdf"
       },
       {
         id: "US-20250384199-A1",
         title: "Systems and methods for generating dashboards from images",
         date: "Dec 18, 2025",
         description: "A method for generating dashboards from images using machine learning techniques including object detection, OCR, and natural language processing.",
-        link: "https://ppubs.uspto.gov/api/pdf/downloadPdf/20250384199?requestToken=eyJzdWIiOiJiYmQwMWE0Yy05YmJmLTRmM2MtODA3ZS01M2U2NDJiMmFkNTQiLCJ2ZXIiOiIwMDU1OTU2ZS1iYzA3LTQzYjctYWNiZS01OTBiOGEyNTU3MDIiLCJleHAiOjB9"
+        link: "/patent/US-20250384199-A1.pdf"
       }
     ],
     skills: {
@@ -82,39 +82,52 @@ export const portfolioData = {
     },
     projects: [
       {
-        title: "NewsGenius - GenAI based News Article Generation",
+        title: "NewsGenius - GenAI News Generation",
         category: "GenAI",
-        description: "A GenAI-driven app designed for news media publishers, streamlining content creation and assisting tasks like social media posting, summarization, and bullet point creation.",
+        description: "A GenAI-driven app for news media publishers, streamlining content creation with AI-assisted social media posting, summarization, and bullet point generation.",
         tech: ["Python", "GenAI", "React", "LangChain"],
         demoVideo: "https://youtu.be/fmH5PAESSxo"
       },
       {
-        title: "SalesCompanionAgent",
+        title: "AI Companion Agents",
         category: "AI Agent",
-        description: "A chat app for sales assistants, empowering them with AI-powered features like sales plan generation, progress tracking, meeting scheduling, and email drafting.",
-        tech: ["LangChain", "Python", "ChromaDB", "SQLite", "Chainlit"],
-        github: "https://github.com/Kanakjr/SalesCompanionAgent"
+        description: "Conversational AI agents built with LangChain for domain-specific tasks -- SalesCompanion for sales planning and email drafting, BillBot for receipt management and data extraction, and PDF Deep Agent for natural language PDF manipulation via MCP.",
+        tech: ["Python", "LangChain", "LLMs", "FastMCP", "ChromaDB"],
+        githubLinks: [
+          { label: "Sales", url: "https://github.com/Kanakjr/SalesCompanionAgent" },
+          { label: "Bill", url: "https://github.com/Kanakjr/BillBot" },
+          { label: "PDF", url: "https://github.com/Kanakjr/pdf-deep-agent" }
+        ]
       },
       {
-        title: "BillBot",
-        category: "AI Agent",
-        description: "An AI bot that simplifies the management and extraction of information from bills and receipts, and provides users simple Q&A access to the data.",
-        tech: ["Python", "LangChain", "OCR", "LLMs"],
-        github: "https://github.com/Kanakjr/BillBot"
+        title: "InstaGenie - AI Image Bot",
+        category: "AI / Automation",
+        description: "A Telegram bot that generates personalized AI images from text, voice, and photo inputs using Flux with custom LoRA adaptation, orchestrated entirely through n8n visual workflows.",
+        tech: ["n8n", "Flux LoRA", "Replicate", "Supabase", "OpenAI"],
+        blog: "/blog/instagenie-ai-image-bot-with-n8n"
       },
       {
-        title: "CryptoVulnerability - Responsible Vulnerability Reporting",
+        title: "AI-Powered Smart Home",
+        category: "IoT / AI",
+        description: "An ambient intelligence system combining Home Assistant, n8n, and Google Gemini for AI-generated daily digests, context-aware security alerts with image captioning, and adaptive home automation.",
+        tech: ["Home Assistant", "n8n", "Google Gemini", "Telegram API"],
+        blog: "/blog/my-house-thinks-smart-home-ai",
+        demoVideo: "https://youtu.be/Fru0LM9Jgvg"
+      },
+      {
+        title: "Home Lab & Maker Workshop",
+        category: "Hardware / Self-Hosting",
+        description: "A Mac Mini-powered home server running 15+ containerized services (Plex, Ollama, Coolify) alongside a Bambu A1 3D printer integrated into Home Assistant for smart monitoring and custom prints.",
+        tech: ["Docker", "Mac Mini", "3D Printing", "Home Assistant", "Coolify"],
+        blog: "/blog/goodbye-raspberry-pi-hello-mac-mini"
+      },
+      {
+        title: "CryptoVulnerability - Vulnerability Reporting",
         category: "Blockchain",
-        description: "Developed a privacy-focused vulnerability reporting system on blockchain using Hyperledger Fabric for responsible disclosure.",
+        description: "A privacy-focused vulnerability reporting system on blockchain using Hyperledger Fabric for responsible disclosure.",
         tech: ["Hyperledger Fabric", "Blockchain", "Node.js", "Go"],
         demoVideo: "https://youtu.be/TLWH58xnZPQ?t=403",
         github: "https://github.com/Kanakjr/VulnReporting"
-      },
-      {
-        title: "KanoServer",
-        category: "Hardware",
-        description: "Raspberry Pi home server with NAS, WiFi sniffing, and 10hr battery.",
-        tech: ["Raspberry Pi", "Linux", "Python"]
       }
     ],
     achievements: [
