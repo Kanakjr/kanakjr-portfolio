@@ -128,3 +128,19 @@ Adjust career information in `components/sections/Career.tsx`.
 ## License
 
 All rights reserved © 2026 Kanak Dahake Jr
+
+## Docker
+
+### Build image
+
+```bash
+docker build -t kanakjr-website .
+```
+
+### Run container
+
+```bash
+docker run --rm -p 3000:3000 kanakjr-website
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser.

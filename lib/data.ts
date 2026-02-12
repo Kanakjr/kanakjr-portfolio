@@ -8,7 +8,7 @@ export const portfolioData = {
       email: "ksdusa4@gmail.com",
       links: {
         github: "https://github.com/kanakjr",
-        linkedin: "https://linkedin.com/in/kanakjr",
+        linkedin: "https://www.linkedin.com/in/kanak-dahake/",
         medium: "https://medium.com/@kanakjr"
       }
     },

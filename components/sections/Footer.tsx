@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
-            Let's <span className="text-cyber-yellow">Connect</span>
+            Let&apos;s <span className="text-cyber-yellow">Connect</span>
           </h2>
           <p className="text-neutral-400 text-lg">
             Find me on these platforms

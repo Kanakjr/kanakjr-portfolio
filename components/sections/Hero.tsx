@@ -38,7 +38,7 @@ export default function Hero() {
         {/* Title with Word Rotate */}
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-5xl font-bold text-white font-mono md:text-7xl">
-            I'm <span className="text-cyber-yellow">{hero.name}</span>
+            I&apos;m <span className="text-cyber-yellow">{hero.name}</span>
           </h1>
 
           <div className="flex items-center gap-3 text-3xl md:text-4xl">

@@ -6,7 +6,7 @@ import { portfolioData } from "@/lib/data";
 const slugs = [
   "python",
   "javascript",
-  "bash",
+  "gnubash",
   "react",
   "streamlit",
   "amazonaws",
@@ -14,12 +14,13 @@ const slugs = [
   "docker",
   "kubernetes",
   "git",
-  "ansible",
   "mongodb",
   "neo4j",
   "tensorflow",
   "pytorch",
   "openai",
+  "langchain",
+  "fastapi",
 ];
 
 export default function Skills() {

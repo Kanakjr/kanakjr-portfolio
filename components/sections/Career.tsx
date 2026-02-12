@@ -1,6 +1,7 @@
 "use client";
 
-import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
+import { BentoGrid } from "@/components/magicui/bento-grid";
+import { Meteors } from "@/components/magicui/meteors";
 import { portfolioData } from "@/lib/data";
 
 const experienceIcons = {
@@ -30,7 +31,7 @@ const experienceIcons = {
       <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
     </svg>
   ),
-  "Digitate (TCS)": (
+  "Digitate (Ignio AI), TCS": (
     <svg
       className="h-8 w-8"
       fill="none"
@@ -58,34 +59,39 @@ export default function Career() {
           </p>
         </div>
 
-        <div className="space-y-8">
+        <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[28rem]">
           {portfolioData.experience.map((exp, index) => (
             <div
               key={exp.company}
-              className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyber-yellow/50 transition-all duration-500 p-6"
+              className="group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyber-yellow/50 transition-all duration-500 ease-out hover:shadow-[0_0_30px_rgba(255,215,0,0.2)]"
             >
-              <div className="flex flex-col md:flex-row md:items-start gap-6">
-                <div className="text-cyber-yellow">
-                  {experienceIcons[exp.company as keyof typeof experienceIcons]}
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                    <h3 className="text-2xl font-bold text-white font-mono">
-                      {exp.role}
-                    </h3>
-                    <span className="text-sm text-neutral-500 font-mono mt-1 md:mt-0">
-                      {exp.period}
-                    </span>
+              <Meteors number={15} opacity={0.2} />
+              
+              <div className="relative z-10 flex flex-col gap-4 p-6">
+                <div className="flex items-start justify-between">
+                  <div className="text-cyber-yellow">
+                    {experienceIcons[exp.company as keyof typeof experienceIcons]}
                   </div>
-                  <p className="text-lg text-cyber-yellow mb-3">{exp.company}</p>
-                  <p className="text-neutral-400 leading-relaxed">
+                  <span className="text-xs text-neutral-500 font-mono bg-white/5 px-3 py-1 rounded-full">
+                    {exp.period}
+                  </span>
+                </div>
+                
+                <div className="flex-1 space-y-3">
+                  <h3 className="text-2xl font-bold text-white font-mono leading-tight">
+                    {exp.role}
+                  </h3>
+                  <p className="text-lg text-cyber-yellow font-mono">
+                    {exp.company}
+                  </p>
+                  <p className="text-neutral-400 leading-relaxed text-sm">
                     {exp.description}
                   </p>
                 </div>
               </div>
             </div>
           ))}
-        </div>
+        </BentoGrid>
       </div>
     </section>
   );

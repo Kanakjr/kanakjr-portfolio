@@ -1,11 +1,20 @@
 "use client";
 
 import { portfolioData } from "@/lib/data";
+import { Particles } from "@/components/magicui/particles";
 
 export default function Achievements() {
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-white/5 to-transparent">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-white/5 to-transparent overflow-hidden">
+      <Particles
+        className="absolute inset-0"
+        quantity={150}
+        ease={80}
+        color="#FFD700"
+        refresh={false}
+      />
+      
+      <div className="mx-auto max-w-7xl relative z-10">
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
             Awards & <span className="text-cyber-yellow">Recognition</span>
