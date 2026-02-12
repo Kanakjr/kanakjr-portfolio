@@ -13,6 +13,7 @@ export interface BlogPost {
   readTime: string;
   author: string;
   featured: boolean;
+  coverImage: string;
   content: string;
 }
 
@@ -34,6 +35,7 @@ export function getAllPosts(): BlogPost[] {
       readTime: data.readTime ?? "",
       author: data.author ?? "",
       featured: data.featured ?? false,
+      coverImage: data.coverImage ?? "",
       content,
     };
   });
@@ -63,6 +65,7 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
     readTime: data.readTime ?? "",
     author: data.author ?? "",
     featured: data.featured ?? false,
+    coverImage: data.coverImage ?? "",
     content,
   };
 }

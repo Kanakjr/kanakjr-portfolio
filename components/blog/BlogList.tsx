@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import MagicCard from "@/components/magicui/magic-card";
 
@@ -14,6 +15,7 @@ interface BlogPost {
   readTime: string;
   author: string;
   featured: boolean;
+  coverImage: string;
 }
 
 interface TagCount {
@@ -79,73 +81,91 @@ export default function BlogList({ posts, tags }: BlogListProps) {
               transition={{ duration: 0.3, delay: index * 0.05 }}
             >
               <Link href={`/blog/${post.slug}`}>
-                <MagicCard className="p-8 hover:border-cyber-yellow/30 transition-all duration-300 cursor-pointer">
-                  <div className="flex flex-col gap-4">
-                    {/* Meta */}
-                    <div className="flex items-center gap-3 flex-wrap">
-                      {post.featured && (
-                        <span className="px-2.5 py-0.5 text-[10px] font-mono rounded-full bg-retro-red/10 text-retro-red border border-retro-red/20 uppercase tracking-wider">
-                          Featured
+                <MagicCard className="p-0 hover:border-cyber-yellow/30 transition-all duration-300 cursor-pointer overflow-hidden">
+                  <div className="flex flex-row-reverse">
+                    {/* Text content */}
+                    <div className="flex flex-col gap-4 p-8 flex-1 min-w-0">
+                      {/* Meta */}
+                      <div className="flex items-center gap-3 flex-wrap">
+                        {post.featured && (
+                          <span className="px-2.5 py-0.5 text-[10px] font-mono rounded-full bg-retro-red/10 text-retro-red border border-retro-red/20 uppercase tracking-wider">
+                            Featured
+                          </span>
+                        )}
+                        <span className="text-xs font-mono text-neutral-500">
+                          {new Date(post.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
                         </span>
-                      )}
-                      <span className="text-xs font-mono text-neutral-500">
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </span>
-                      <span className="text-xs font-mono text-neutral-600">
-                        /
-                      </span>
-                      <span className="text-xs font-mono text-neutral-500">
-                        {post.readTime}
-                      </span>
-                    </div>
+                        <span className="text-xs font-mono text-neutral-600">
+                          /
+                        </span>
+                        <span className="text-xs font-mono text-neutral-500">
+                          {post.readTime}
+                        </span>
+                      </div>
 
-                    {/* Title */}
-                    <h2 className="text-2xl font-bold text-white font-mono transition-colors md:text-3xl">
-                      {post.title}
-                    </h2>
+                      {/* Title */}
+                      <h2 className="text-2xl font-bold text-white font-mono transition-colors md:text-3xl">
+                        {post.title}
+                      </h2>
 
-                    {/* Excerpt */}
-                    <p className="text-neutral-400 leading-relaxed">
-                      {post.description}
-                    </p>
+                      {/* Excerpt */}
+                      <p className="text-neutral-400 leading-relaxed">
+                        {post.description}
+                      </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className={`px-2 py-0.5 text-xs font-mono border rounded transition-colors ${
-                            activeTag === tag
-                              ? "text-cyber-yellow border-cyber-yellow/30"
-                              : "text-neutral-500 border-white/10"
-                          }`}
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {post.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className={`px-2 py-0.5 text-xs font-mono border rounded transition-colors ${
+                              activeTag === tag
+                                ? "text-cyber-yellow border-cyber-yellow/30"
+                                : "text-neutral-500 border-white/10"
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Read More */}
+                      <div className="flex items-center gap-2 mt-2 text-sm font-mono text-cyber-yellow/70 transition-colors">
+                        <span>Read article</span>
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
                         >
-                          {tag}
-                        </span>
-                      ))}
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </div>
                     </div>
 
-                    {/* Read More */}
-                    <div className="flex items-center gap-2 mt-2 text-sm font-mono text-cyber-yellow/70 transition-colors">
-                      <span>Read article</span>
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    {/* Cover image on left */}
+                    {post.coverImage && (
+                      <div className="relative hidden md:block w-64 flex-shrink-0">
+                        <Image
+                          src={post.coverImage}
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                          sizes="256px"
                         />
-                      </svg>
-                    </div>
+                        {/* Yellow gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/60 to-cyber-yellow/20" />
+                      </div>
+                    )}
                   </div>
                 </MagicCard>
               </Link>
