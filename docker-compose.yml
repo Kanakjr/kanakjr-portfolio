@@ -3,18 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
+      target: runner
     ports:
       - "3000:3000"
-    volumes:
-      # Mount source code so changes on host are reflected immediately
-      - .:/app
-      # Anonymous volumes to keep container-installed deps and build cache
-      # (prevents host node_modules from overwriting the container's)
-      - /app/node_modules
-      - /app/.next
     env_file:
       - .env.local
-    environment:
-      - WATCHPACK_POLLING=true
     restart: unless-stopped
