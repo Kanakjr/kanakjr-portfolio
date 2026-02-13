@@ -25,7 +25,7 @@ const slugs = [
 
 export default function Skills() {
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
+    <section id="skills" className="relative py-20 px-4 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">

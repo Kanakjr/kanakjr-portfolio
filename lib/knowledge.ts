@@ -104,25 +104,28 @@ function chunkToMeta(chunk: EmbeddedChunk): { title: string; url: string } {
   }
   if (id.startsWith("exp-")) {
     const m = content.match(/Work Experience: (.+)/);
-    return { title: m?.[1] || id, url: "/resume" };
+    return { title: m?.[1] || id, url: "/#career" };
   }
   if (id.startsWith("videos-")) {
     const m = content.match(/YouTube Videos - (.+?) \(/);
-    return { title: `${m?.[1] || "YouTube"} Videos`, url: "/reels" };
+    // Extract the first YouTube URL from the chunk content
+    const ytMatch = content.match(/https:\/\/youtube\.com\/watch\?v=[\w-]+/);
+    const url = ytMatch ? ytMatch[0] : "/reels";
+    return { title: `${m?.[1] || "YouTube"} Videos`, url };
   }
   if (id.startsWith("patent-")) {
     const m = content.match(/"(.+?)"/);
-    return { title: m?.[1] || id, url: "/" };
+    return { title: m?.[1] || id, url: "/#patents" };
   }
 
   const known: Record<string, { title: string; url: string }> = {
     profile: { title: "Kanak Dahake Jr -- Profile", url: "/" },
-    summary: { title: "Professional Summary", url: "/resume" },
-    education: { title: "Education", url: "/resume" },
-    skills: { title: "Technical Skills", url: "/resume" },
-    certifications: { title: "Certifications", url: "/resume" },
-    awards: { title: "Awards & Recognition", url: "/" },
-    volunteer: { title: "Speaking & Volunteer Work", url: "/resume" },
+    summary: { title: "Professional Summary", url: "/#career" },
+    education: { title: "Education", url: "/#career" },
+    skills: { title: "Technical Skills", url: "/#skills" },
+    certifications: { title: "Certifications", url: "/#achievements" },
+    awards: { title: "Awards & Recognition", url: "/#achievements" },
+    volunteer: { title: "Speaking & Volunteer Work", url: "/#achievements" },
     navigation: { title: "Site Navigation", url: "/" },
     gallery: { title: "Photo Gallery", url: "/stills" },
   };

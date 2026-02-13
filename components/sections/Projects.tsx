@@ -40,7 +40,7 @@ const projectIcons: Record<string, React.ReactNode> = {
 
 export default function Projects() {
   return (
-    <section className="relative py-20 px-4">
+    <section id="projects" className="relative py-20 px-4">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">

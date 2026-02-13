@@ -6,7 +6,7 @@ import { Particles } from "@/components/magicui/particles";
 
 export default function Patents() {
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
+    <section id="patents" className="relative py-20 px-4 overflow-hidden">
       <Particles
         className="absolute inset-0"
         quantity={100}

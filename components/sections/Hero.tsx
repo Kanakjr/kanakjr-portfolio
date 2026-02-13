@@ -44,7 +44,7 @@ export default function Hero() {
           <div className="flex items-center gap-3 text-3xl md:text-4xl">
             <span className="text-neutral-300">I am a</span>
             <TypingAnimation
-              words={["GenAI Engineer", "Security Specialist", "Agent Builder", "Innovator"]}
+              words={["AI Engineer", "Security Specialist", "Innovator", "Hacker"]}
               className="text-cyber-yellow font-bold"
               typeSpeed={80}
               deleteSpeed={40}

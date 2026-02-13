@@ -10,7 +10,7 @@ const PREVIEW_COUNT = 3;
 
 export default function Portfolio() {
   return (
-    <section className="relative py-20 px-4">
+    <section id="portfolio" className="relative py-20 px-4">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <BlurFade delay={0.1} inView>

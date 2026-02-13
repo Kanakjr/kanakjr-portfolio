@@ -50,7 +50,7 @@ const achievementIcons: Record<string, React.ReactNode> = {
 
 export default function Achievements() {
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-white/5 to-transparent overflow-hidden">
+    <section id="achievements" className="relative py-20 px-4 bg-gradient-to-b from-transparent via-white/5 to-transparent overflow-hidden">
       <Particles
         className="absolute inset-0"
         quantity={150}
