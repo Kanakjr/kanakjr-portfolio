@@ -20,8 +20,6 @@ import {
 import { join } from "path";
 import matter from "gray-matter";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { HumanMessage } from "@langchain/core/messages";
 import { portfolioData } from "../lib/data";
 import { resumeData } from "../lib/resume";
 import { videosData, type Video } from "../lib/videos";
@@ -369,43 +367,6 @@ async function main() {
     `  ${chunks.length} chunks, ${vectors[0].length} dimensions each`
   );
   console.log(`  File size: ${fileSizeKB} KB`);
-
-  // ─── Generate blog TL;DR summaries ───────────────────────────────────
-  console.log("\nGenerating blog TL;DR summaries...\n");
-  const blogChunks = chunks.filter((c) => c.source === "blog");
-  const summaries: Record<string, string> = {};
-
-  if (blogChunks.length > 0) {
-    const summaryModel = new ChatGoogleGenerativeAI({
-      model: "gemini-2.5-flash",
-      apiKey,
-      temperature: 0.3,
-      maxOutputTokens: 1024,
-      maxRetries: 1,
-    });
-
-    for (let bi = 0; bi < blogChunks.length; bi++) {
-      const chunk = blogChunks[bi];
-      const slug = chunk.id.replace("blog-", "");
-      try {
-        // Rate-limit: wait 2s between calls
-        if (bi > 0) await new Promise((r) => setTimeout(r, 2000));
-        const result = await summaryModel.invoke([
-          new HumanMessage(
-            `Summarize this blog post in exactly 1-2 concise sentences (under 40 words). No markdown, no bullet points, plain text only:\n\n${chunk.content.slice(0, 1500)}`
-          ),
-        ]);
-        summaries[slug] = (result.content as string).trim();
-        console.log(`  [tldr] ${slug}: ${summaries[slug]}`);
-      } catch (err) {
-        console.error(`  [tldr] Failed for ${slug}:`, (err as Error).message?.slice(0, 120));
-      }
-    }
-  }
-
-  const summariesPath = join(outDir, "blog-summaries.json");
-  writeFileSync(summariesPath, JSON.stringify(summaries, null, 2));
-  console.log(`\nBlog summaries written to ${summariesPath}`);
 
   // ─── Compute content graph ───────────────────────────────────────────
   console.log("\nComputing content graph...\n");

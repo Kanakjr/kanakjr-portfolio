@@ -255,11 +255,3 @@ export function getContentGraph(): {
   return JSON.parse(readFileSync(filePath, "utf-8"));
 }
 
-// ---------------------------------------------------------------------------
-// Public API: Get blog summaries (for blog listing TL;DR)
-// ---------------------------------------------------------------------------
-export function getBlogSummaries(): Record<string, string> {
-  const filePath = join(process.cwd(), "data", "blog-summaries.json");
-  if (!existsSync(filePath)) return {};
-  return JSON.parse(readFileSync(filePath, "utf-8"));
-}

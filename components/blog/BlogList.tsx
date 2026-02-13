@@ -26,10 +26,9 @@ interface TagCount {
 interface BlogListProps {
   posts: BlogPost[];
   tags: TagCount[];
-  summaries?: Record<string, string>;
 }
 
-export default function BlogList({ posts, tags, summaries = {} }: BlogListProps) {
+export default function BlogList({ posts, tags }: BlogListProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
   const filteredPosts = activeTag
@@ -117,18 +116,6 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
                       <p className="text-neutral-400 leading-relaxed">
                         {post.description}
                       </p>
-
-                      {/* AI TL;DR */}
-                      {summaries[post.slug] && (
-                        <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-cyber-yellow/5 border border-cyber-yellow/10">
-                          <span className="text-[10px] font-mono text-cyber-yellow/60 uppercase tracking-wider whitespace-nowrap mt-0.5">
-                            TL;DR
-                          </span>
-                          <p className="text-xs text-neutral-400 leading-relaxed">
-                            {summaries[post.slug]}
-                          </p>
-                        </div>
-                      )}
 
                       {/* Tags */}
                       <div className="flex flex-wrap gap-2 mt-2">

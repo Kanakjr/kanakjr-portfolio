@@ -27,7 +27,7 @@ A high-performance, neo-retro portfolio website built with Next.js 15, featuring
 ### Pages & Routes
 
 - **Home** -- Hero section with animated avatar, typing animation, career timeline, patents, skills cloud, project cards, achievements, portfolio gallery, and social dock footer.
-- **Blog** (`/blog`) -- MDX-powered blog with tag filtering and AI-generated TL;DR summaries per post.
+- **Blog** (`/blog`) -- MDX-powered blog with tag filtering.
 - **Blog Post** (`/blog/[slug]`) -- Full MDX rendering with syntax highlighting and responsive images.
 - **Semantic Search** (`/search`) -- Real-time semantic search across all content (blog, projects, experience, skills, videos, patents) powered by precomputed embeddings.
 - **Knowledge Graph** (`/graph`) -- Interactive SVG graph showing how skills, projects, experience, and content connect via embedding similarity. Nodes are clickable and color-coded by category.
@@ -50,7 +50,6 @@ A floating AI chat assistant available on every page, toggled via `Cmd/Ctrl+K` o
 
 - **MDX Blog** -- Posts authored in `blog/content/*.mdx` with gray-matter frontmatter. Content stripped from client payloads for performance.
 - **Knowledge Embeddings** -- All portfolio data (experience, projects, patents, skills, blog posts, videos) chunked and embedded via `npm run embeddings`. Stored in `data/knowledge-embeddings.json`.
-- **Blog Summaries** -- AI-generated TL;DR summaries stored in `data/blog-summaries.json`.
 - **Content Graph** -- Nodes and edges computed from embedding similarity (threshold >= 0.70), laid out using Fruchterman-Reingold. Stored in `data/content-graph.json`.
 - **Gallery Thumbnails** -- WebP thumbnails auto-generated from full-size images via Sharp (`npm run thumbs`).
 
@@ -106,7 +105,7 @@ npm install --legacy-peer-deps
 
 ### Generate Data
 
-Build the knowledge embeddings, blog summaries, and content graph:
+Build the knowledge embeddings and content graph:
 
 ```bash
 npm run embeddings
@@ -199,10 +198,9 @@ kanakjr-website/
 │   └── utils.ts                # Tailwind + utility helpers
 ├── data/
 │   ├── knowledge-embeddings.json   # Precomputed embeddings
-│   ├── blog-summaries.json         # AI blog summaries
 │   └── content-graph.json          # Graph nodes & edges
 ├── scripts/
-│   ├── generate-embeddings.ts  # Build embeddings, summaries, graph
+│   ├── generate-embeddings.ts  # Build embeddings and graph
 │   └── generate-thumbnails.mjs # WebP thumbnail generation
 ├── public/                     # Static assets (images, avatar, favicon)
 ├── docs/screenshots/           # README screenshots
@@ -247,7 +245,7 @@ kanakjr-website/
 | `npm run dev` | Start development server |
 | `npm run build` | Generate thumbnails + production build |
 | `npm run start` | Start production server |
-| `npm run embeddings` | Generate knowledge embeddings, blog summaries, and content graph |
+| `npm run embeddings` | Generate knowledge embeddings and content graph |
 | `npm run thumbs` | Generate WebP thumbnails for gallery images |
 | `npm run lint` | Run ESLint |
 
