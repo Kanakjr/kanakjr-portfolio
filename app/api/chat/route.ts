@@ -31,7 +31,7 @@ When relevant, reference pages on the site using markdown links, for example:
 - If asked "who are you", introduce yourself as Jarvis, the AI assistant for Kanak's portfolio`;
 
 // ---------------------------------------------------------------------------
-// Fallback: full knowledge prompt used when embeddings are unavailable
+// Fallback context when embeddings are unavailable
 // ---------------------------------------------------------------------------
 const FALLBACK_CONTEXT = `=== PROFILE ===
 Name: Kanak Dahake Jr
@@ -54,9 +54,12 @@ Experienced Engineer specializing in GenAI, Cybersecurity, NLP, and multimodal R
 === SITE NAVIGATION ===
 - Home: / | Blog: /blog | Reels: /reels | Stills: /stills | Resume: /resume`;
 
+// Max messages to send to the LLM (conversation window)
+const MAX_MESSAGES = 10;
+
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, currentPath, conversationSummary } = await req.json();
 
     if (!process.env.GOOGLE_API_KEY) {
       return new Response(
@@ -74,11 +77,13 @@ export async function POST(req: Request) {
       .find((m: { role: string }) => m.role === "user");
 
     // Retrieve relevant knowledge chunks via embedding similarity
+    // Pass currentPath for page-aware boosting
     let context: string;
     try {
       const retrieved = await retrieveContext(
         lastUserMessage?.content || "",
-        5
+        5,
+        currentPath
       );
       context = retrieved || FALLBACK_CONTEXT;
     } catch (err) {
@@ -86,12 +91,24 @@ export async function POST(req: Request) {
       context = FALLBACK_CONTEXT;
     }
 
-    const systemPrompt = `${BASE_PROMPT}
+    // Build system prompt with conversation memory + page context
+    let systemPrompt = BASE_PROMPT;
 
-=== RETRIEVED CONTEXT ===
-The following information was retrieved as most relevant to the user's question:
+    if (conversationSummary) {
+      systemPrompt += `\n\n=== CONVERSATION HISTORY SUMMARY ===\nEarlier in this conversation: ${conversationSummary}`;
+    }
 
-${context}`;
+    if (currentPath && currentPath !== "/") {
+      systemPrompt += `\n\n=== CURRENT PAGE ===\nThe user is currently viewing: ${currentPath}`;
+    }
+
+    systemPrompt += `\n\n=== RETRIEVED CONTEXT ===\nThe following information was retrieved as most relevant to the user's question:\n\n${context}`;
+
+    // Window the conversation to keep context lean
+    const recentMessages =
+      messages.length > MAX_MESSAGES
+        ? messages.slice(-MAX_MESSAGES)
+        : messages;
 
     const model = new ChatGoogleGenerativeAI({
       model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
@@ -104,7 +121,7 @@ ${context}`;
 
     const langchainMessages = [
       new SystemMessage(systemPrompt),
-      ...messages.map((m: { role: string; content: string }) => {
+      ...recentMessages.map((m: { role: string; content: string }) => {
         if (m.role === "user") return new HumanMessage(m.content);
         return new AIMessage(m.content);
       }),

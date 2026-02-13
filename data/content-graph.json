@@ -1,0 +1,665 @@
+{
+  "width": 1200,
+  "height": 800,
+  "nodes": [
+    {
+      "id": "profile",
+      "label": "Kanak Dahake Jr",
+      "source": "profile",
+      "url": "/",
+      "x": 1140,
+      "y": 264
+    },
+    {
+      "id": "summary",
+      "label": "Professional Summary",
+      "source": "summary",
+      "url": "/resume",
+      "x": 967,
+      "y": 501
+    },
+    {
+      "id": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "label": "Software Development Specialist @ Amdocs (Amaiz AI)",
+      "source": "experience",
+      "url": "/resume",
+      "x": 1140,
+      "y": 512
+    },
+    {
+      "id": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "label": "Senior Associate @ PwC U.S. Advisory",
+      "source": "experience",
+      "url": "/resume",
+      "x": 1041,
+      "y": 634
+    },
+    {
+      "id": "exp-pwc-u-s-advisory-associate-innovation-hub",
+      "label": "Associate @ PwC U.S. Advisory",
+      "source": "experience",
+      "url": "/resume",
+      "x": 1140,
+      "y": 588
+    },
+    {
+      "id": "exp-digitate-ignio-ai-tcs-technical-lead-cybersecurity",
+      "label": "Technical Lead Cybersecurity @ Digitate (Ignio AI), TCS",
+      "source": "experience",
+      "url": "/resume",
+      "x": 1140,
+      "y": 740
+    },
+    {
+      "id": "exp-digitate-ignio-ai-tcs-product-developer-cognitive-threat-manager",
+      "label": "Product Developer @ Digitate (Ignio AI), TCS",
+      "source": "experience",
+      "url": "/resume",
+      "x": 1140,
+      "y": 651
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "source": "education",
+      "url": "/resume",
+      "x": 1112,
+      "y": 740
+    },
+    {
+      "id": "patent-US-12254015-B1",
+      "label": "Systems and methods for relational database insigh",
+      "source": "patents",
+      "url": "/",
+      "x": 887,
+      "y": 740
+    },
+    {
+      "id": "patent-US-20250384199-A1",
+      "label": "Systems and methods for generating dashboards from",
+      "source": "patents",
+      "url": "/",
+      "x": 816,
+      "y": 740
+    },
+    {
+      "id": "skills",
+      "label": "Technical Skills",
+      "source": "skills",
+      "url": "/resume",
+      "x": 682,
+      "y": 500
+    },
+    {
+      "id": "project-newsgenius-genai-news-generation",
+      "label": "NewsGenius - GenAI News Generation",
+      "source": "projects",
+      "url": "/#projects",
+      "x": 372,
+      "y": 480
+    },
+    {
+      "id": "project-ai-companion-agents",
+      "label": "AI Companion Agents",
+      "source": "projects",
+      "url": "/#projects",
+      "x": 60,
+      "y": 740
+    },
+    {
+      "id": "project-instagenie-ai-image-bot",
+      "label": "InstaGenie - AI Image Bot",
+      "source": "projects",
+      "url": "/#projects",
+      "x": 60,
+      "y": 383
+    },
+    {
+      "id": "project-ai-powered-smart-home",
+      "label": "AI-Powered Smart Home",
+      "source": "projects",
+      "url": "/#projects",
+      "x": 161,
+      "y": 192
+    },
+    {
+      "id": "project-home-lab-maker-workshop",
+      "label": "Home Lab & Maker Workshop",
+      "source": "projects",
+      "url": "/#projects",
+      "x": 60,
+      "y": 117
+    },
+    {
+      "id": "project-cryptovulnerability-vulnerability-reporting",
+      "label": "CryptoVulnerability - Vulnerability Reporting",
+      "source": "projects",
+      "url": "/#projects",
+      "x": 246,
+      "y": 60
+    },
+    {
+      "id": "certifications",
+      "label": "Certifications",
+      "source": "certifications",
+      "url": "/resume",
+      "x": 588,
+      "y": 740
+    },
+    {
+      "id": "awards",
+      "label": "Awards",
+      "source": "awards",
+      "url": "/",
+      "x": 749,
+      "y": 740
+    },
+    {
+      "id": "volunteer",
+      "label": "Speaking & Volunteer",
+      "source": "volunteer",
+      "url": "/resume",
+      "x": 1140,
+      "y": 434
+    },
+    {
+      "id": "blog-goodbye-raspberry-pi-hello-mac-mini",
+      "label": "Goodbye Raspberry Pi, Hello Mac Mini: My Quest for the Ultimate Home Server",
+      "source": "blog",
+      "url": "/blog/goodbye-raspberry-pi-hello-mac-mini",
+      "x": 60,
+      "y": 60
+    },
+    {
+      "id": "blog-instagenie-ai-image-bot-with-n8n",
+      "label": "InstaGenie: Building a Personal AI Image Artist as a Telegram Bot",
+      "source": "blog",
+      "url": "/blog/instagenie-ai-image-bot-with-n8n",
+      "x": 60,
+      "y": 310
+    },
+    {
+      "id": "blog-my-house-thinks-smart-home-ai",
+      "label": "My House Thinks: Building a Genius-Level Smart Home with AI",
+      "source": "blog",
+      "url": "/blog/my-house-thinks-smart-home-ai",
+      "x": 60,
+      "y": 201
+    },
+    {
+      "id": "blog-one-month-with-3d-printer",
+      "label": "One Month With a 3D Printer: From Plastic Doodles to a Fully Connected Smart Workshop",
+      "source": "blog",
+      "url": "/blog/one-month-with-3d-printer",
+      "x": 90,
+      "y": 60
+    },
+    {
+      "id": "blog-patent-genai-database-insights",
+      "label": "Unlocking Database Secrets: AI-Powered Insight Extraction",
+      "source": "blog",
+      "url": "/blog/patent-genai-database-insights",
+      "x": 962,
+      "y": 740
+    },
+    {
+      "id": "videos-motorcycle",
+      "label": "Motorcycle Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 507,
+      "y": 60
+    },
+    {
+      "id": "videos-genai",
+      "label": "GenAI Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 509,
+      "y": 249
+    },
+    {
+      "id": "videos-iot-ai",
+      "label": "IoT / AI Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 365,
+      "y": 138
+    },
+    {
+      "id": "videos-iot-hardware",
+      "label": "IoT / Hardware Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 553,
+      "y": 60
+    },
+    {
+      "id": "videos-blockchain",
+      "label": "Blockchain Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 447,
+      "y": 60
+    },
+    {
+      "id": "videos-cybersecurity",
+      "label": "Cybersecurity Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 598,
+      "y": 60
+    },
+    {
+      "id": "videos-ai-assistant",
+      "label": "AI Assistant Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 394,
+      "y": 60
+    },
+    {
+      "id": "videos-app-development",
+      "label": "App Development Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 481,
+      "y": 138
+    },
+    {
+      "id": "videos-hardware",
+      "label": "Hardware Videos",
+      "source": "videos",
+      "url": "/reels",
+      "x": 559,
+      "y": 133
+    }
+  ],
+  "edges": [
+    {
+      "source": "profile",
+      "target": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "weight": 0.75
+    },
+    {
+      "source": "summary",
+      "target": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "weight": 0.71
+    },
+    {
+      "source": "summary",
+      "target": "exp-digitate-ignio-ai-tcs-product-developer-cognitive-threat-manager",
+      "weight": 0.71
+    },
+    {
+      "source": "summary",
+      "target": "skills",
+      "weight": 0.72
+    },
+    {
+      "source": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "target": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "weight": 0.75
+    },
+    {
+      "source": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "target": "exp-pwc-u-s-advisory-associate-innovation-hub",
+      "weight": 0.72
+    },
+    {
+      "source": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "target": "exp-digitate-ignio-ai-tcs-technical-lead-cybersecurity",
+      "weight": 0.72
+    },
+    {
+      "source": "exp-amdocs-amaiz-ai-software-development-specialist-genai",
+      "target": "exp-digitate-ignio-ai-tcs-product-developer-cognitive-threat-manager",
+      "weight": 0.72
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "target": "exp-pwc-u-s-advisory-associate-innovation-hub",
+      "weight": 0.87
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "target": "exp-digitate-ignio-ai-tcs-technical-lead-cybersecurity",
+      "weight": 0.7
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "target": "exp-digitate-ignio-ai-tcs-product-developer-cognitive-threat-manager",
+      "weight": 0.72
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "target": "awards",
+      "weight": 0.74
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
+      "target": "volunteer",
+      "weight": 0.71
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-associate-innovation-hub",
+      "target": "exp-digitate-ignio-ai-tcs-technical-lead-cybersecurity",
+      "weight": 0.74
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-associate-innovation-hub",
+      "target": "exp-digitate-ignio-ai-tcs-product-developer-cognitive-threat-manager",
+      "weight": 0.75
+    },
+    {
+      "source": "exp-pwc-u-s-advisory-associate-innovation-hub",
+      "target": "volunteer",
+      "weight": 0.7
+    },
+    {
+      "source": "exp-digitate-ignio-ai-tcs-technical-lead-cybersecurity",
+      "target": "exp-digitate-ignio-ai-tcs-product-developer-cognitive-threat-manager",
+      "weight": 0.83
+    },
+    {
+      "source": "patent-US-12254015-B1",
+      "target": "patent-US-20250384199-A1",
+      "weight": 0.74
+    },
+    {
+      "source": "patent-US-12254015-B1",
+      "target": "blog-patent-genai-database-insights",
+      "weight": 0.92
+    },
+    {
+      "source": "patent-US-20250384199-A1",
+      "target": "blog-patent-genai-database-insights",
+      "weight": 0.7
+    },
+    {
+      "source": "skills",
+      "target": "certifications",
+      "weight": 0.71
+    },
+    {
+      "source": "skills",
+      "target": "videos-genai",
+      "weight": 0.71
+    },
+    {
+      "source": "project-newsgenius-genai-news-generation",
+      "target": "videos-genai",
+      "weight": 0.85
+    },
+    {
+      "source": "project-instagenie-ai-image-bot",
+      "target": "project-ai-powered-smart-home",
+      "weight": 0.76
+    },
+    {
+      "source": "project-instagenie-ai-image-bot",
+      "target": "blog-instagenie-ai-image-bot-with-n8n",
+      "weight": 0.91
+    },
+    {
+      "source": "project-instagenie-ai-image-bot",
+      "target": "blog-my-house-thinks-smart-home-ai",
+      "weight": 0.7
+    },
+    {
+      "source": "project-ai-powered-smart-home",
+      "target": "project-home-lab-maker-workshop",
+      "weight": 0.71
+    },
+    {
+      "source": "project-ai-powered-smart-home",
+      "target": "blog-instagenie-ai-image-bot-with-n8n",
+      "weight": 0.75
+    },
+    {
+      "source": "project-ai-powered-smart-home",
+      "target": "blog-my-house-thinks-smart-home-ai",
+      "weight": 0.87
+    },
+    {
+      "source": "project-ai-powered-smart-home",
+      "target": "blog-one-month-with-3d-printer",
+      "weight": 0.72
+    },
+    {
+      "source": "project-ai-powered-smart-home",
+      "target": "videos-iot-ai",
+      "weight": 0.84
+    },
+    {
+      "source": "project-ai-powered-smart-home",
+      "target": "videos-ai-assistant",
+      "weight": 0.71
+    },
+    {
+      "source": "project-home-lab-maker-workshop",
+      "target": "blog-goodbye-raspberry-pi-hello-mac-mini",
+      "weight": 0.82
+    },
+    {
+      "source": "project-home-lab-maker-workshop",
+      "target": "blog-my-house-thinks-smart-home-ai",
+      "weight": 0.73
+    },
+    {
+      "source": "project-home-lab-maker-workshop",
+      "target": "blog-one-month-with-3d-printer",
+      "weight": 0.78
+    },
+    {
+      "source": "project-cryptovulnerability-vulnerability-reporting",
+      "target": "videos-blockchain",
+      "weight": 0.82
+    },
+    {
+      "source": "certifications",
+      "target": "awards",
+      "weight": 0.75
+    },
+    {
+      "source": "blog-goodbye-raspberry-pi-hello-mac-mini",
+      "target": "blog-my-house-thinks-smart-home-ai",
+      "weight": 0.78
+    },
+    {
+      "source": "blog-goodbye-raspberry-pi-hello-mac-mini",
+      "target": "blog-one-month-with-3d-printer",
+      "weight": 0.76
+    },
+    {
+      "source": "blog-instagenie-ai-image-bot-with-n8n",
+      "target": "blog-my-house-thinks-smart-home-ai",
+      "weight": 0.79
+    },
+    {
+      "source": "blog-my-house-thinks-smart-home-ai",
+      "target": "blog-one-month-with-3d-printer",
+      "weight": 0.8
+    },
+    {
+      "source": "blog-my-house-thinks-smart-home-ai",
+      "target": "videos-iot-ai",
+      "weight": 0.79
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-iot-ai",
+      "weight": 0.72
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-iot-hardware",
+      "weight": 0.72
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-blockchain",
+      "weight": 0.72
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-cybersecurity",
+      "weight": 0.73
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-ai-assistant",
+      "weight": 0.7
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-app-development",
+      "weight": 0.7
+    },
+    {
+      "source": "videos-motorcycle",
+      "target": "videos-hardware",
+      "weight": 0.72
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-iot-ai",
+      "weight": 0.81
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-iot-hardware",
+      "weight": 0.76
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-blockchain",
+      "weight": 0.75
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-cybersecurity",
+      "weight": 0.74
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-ai-assistant",
+      "weight": 0.79
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-app-development",
+      "weight": 0.79
+    },
+    {
+      "source": "videos-genai",
+      "target": "videos-hardware",
+      "weight": 0.74
+    },
+    {
+      "source": "videos-iot-ai",
+      "target": "videos-iot-hardware",
+      "weight": 0.82
+    },
+    {
+      "source": "videos-iot-ai",
+      "target": "videos-blockchain",
+      "weight": 0.77
+    },
+    {
+      "source": "videos-iot-ai",
+      "target": "videos-cybersecurity",
+      "weight": 0.77
+    },
+    {
+      "source": "videos-iot-ai",
+      "target": "videos-ai-assistant",
+      "weight": 0.82
+    },
+    {
+      "source": "videos-iot-ai",
+      "target": "videos-app-development",
+      "weight": 0.77
+    },
+    {
+      "source": "videos-iot-ai",
+      "target": "videos-hardware",
+      "weight": 0.77
+    },
+    {
+      "source": "videos-iot-hardware",
+      "target": "videos-blockchain",
+      "weight": 0.73
+    },
+    {
+      "source": "videos-iot-hardware",
+      "target": "videos-cybersecurity",
+      "weight": 0.75
+    },
+    {
+      "source": "videos-iot-hardware",
+      "target": "videos-ai-assistant",
+      "weight": 0.84
+    },
+    {
+      "source": "videos-iot-hardware",
+      "target": "videos-app-development",
+      "weight": 0.86
+    },
+    {
+      "source": "videos-iot-hardware",
+      "target": "videos-hardware",
+      "weight": 0.85
+    },
+    {
+      "source": "videos-blockchain",
+      "target": "videos-cybersecurity",
+      "weight": 0.79
+    },
+    {
+      "source": "videos-blockchain",
+      "target": "videos-ai-assistant",
+      "weight": 0.71
+    },
+    {
+      "source": "videos-blockchain",
+      "target": "videos-app-development",
+      "weight": 0.73
+    },
+    {
+      "source": "videos-blockchain",
+      "target": "videos-hardware",
+      "weight": 0.74
+    },
+    {
+      "source": "videos-cybersecurity",
+      "target": "videos-ai-assistant",
+      "weight": 0.74
+    },
+    {
+      "source": "videos-cybersecurity",
+      "target": "videos-app-development",
+      "weight": 0.75
+    },
+    {
+      "source": "videos-cybersecurity",
+      "target": "videos-hardware",
+      "weight": 0.78
+    },
+    {
+      "source": "videos-ai-assistant",
+      "target": "videos-app-development",
+      "weight": 0.87
+    },
+    {
+      "source": "videos-ai-assistant",
+      "target": "videos-hardware",
+      "weight": 0.81
+    },
+    {
+      "source": "videos-app-development",
+      "target": "videos-hardware",
+      "weight": 0.81
+    }
+  ]
+}

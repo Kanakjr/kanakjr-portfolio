@@ -20,6 +20,8 @@ import {
 import { join } from "path";
 import matter from "gray-matter";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { HumanMessage } from "@langchain/core/messages";
 import { portfolioData } from "../lib/data";
 import { resumeData } from "../lib/resume";
 import { videosData, type Video } from "../lib/videos";
@@ -342,8 +344,12 @@ async function main() {
   const texts = chunks.map((c) => c.content);
   const vectors = await embeddings.embedDocuments(texts);
 
+  const outDir = join(process.cwd(), "data");
+  mkdirSync(outDir, { recursive: true });
+
+  // ─── Write embeddings ────────────────────────────────────────────────
   const output = {
-    model: "text-embedding-004",
+    model: "gemini-embedding-001",
     dimensions: vectors[0].length,
     generatedAt: new Date().toISOString(),
     chunks: chunks.map((chunk, i) => ({
@@ -354,9 +360,6 @@ async function main() {
     })),
   };
 
-  const outDir = join(process.cwd(), "data");
-  mkdirSync(outDir, { recursive: true });
-
   const outPath = join(outDir, "knowledge-embeddings.json");
   writeFileSync(outPath, JSON.stringify(output));
 
@@ -366,6 +369,224 @@ async function main() {
     `  ${chunks.length} chunks, ${vectors[0].length} dimensions each`
   );
   console.log(`  File size: ${fileSizeKB} KB`);
+
+  // ─── Generate blog TL;DR summaries ───────────────────────────────────
+  console.log("\nGenerating blog TL;DR summaries...\n");
+  const blogChunks = chunks.filter((c) => c.source === "blog");
+  const summaries: Record<string, string> = {};
+
+  if (blogChunks.length > 0) {
+    const summaryModel = new ChatGoogleGenerativeAI({
+      model: "gemini-2.5-flash",
+      apiKey,
+      temperature: 0.3,
+      maxOutputTokens: 1024,
+      maxRetries: 1,
+    });
+
+    for (let bi = 0; bi < blogChunks.length; bi++) {
+      const chunk = blogChunks[bi];
+      const slug = chunk.id.replace("blog-", "");
+      try {
+        // Rate-limit: wait 2s between calls
+        if (bi > 0) await new Promise((r) => setTimeout(r, 2000));
+        const result = await summaryModel.invoke([
+          new HumanMessage(
+            `Summarize this blog post in exactly 1-2 concise sentences (under 40 words). No markdown, no bullet points, plain text only:\n\n${chunk.content.slice(0, 1500)}`
+          ),
+        ]);
+        summaries[slug] = (result.content as string).trim();
+        console.log(`  [tldr] ${slug}: ${summaries[slug]}`);
+      } catch (err) {
+        console.error(`  [tldr] Failed for ${slug}:`, (err as Error).message?.slice(0, 120));
+      }
+    }
+  }
+
+  const summariesPath = join(outDir, "blog-summaries.json");
+  writeFileSync(summariesPath, JSON.stringify(summaries, null, 2));
+  console.log(`\nBlog summaries written to ${summariesPath}`);
+
+  // ─── Compute content graph ───────────────────────────────────────────
+  console.log("\nComputing content graph...\n");
+
+  // Build node metadata
+  const graphNodes = chunks
+    .filter((c) => !["navigation", "gallery"].includes(c.id))
+    .map((c) => {
+      let label = c.id;
+      let url = "/";
+
+      if (c.id.startsWith("blog-")) {
+        const m = c.content.match(/Blog Post: "(.+?)"/);
+        label = m?.[1] || c.id;
+        url = `/blog/${c.id.replace("blog-", "")}`;
+      } else if (c.id.startsWith("project-")) {
+        const m = c.content.match(/Project: (.+?) \[/);
+        label = m?.[1] || c.id;
+        url = "/#projects";
+      } else if (c.id.startsWith("exp-")) {
+        const m = c.content.match(/Work Experience: (.+?) at (.+)/);
+        label = m ? `${m[1].split(" - ")[0]} @ ${m[2].split("\n")[0]}` : c.id;
+        url = "/resume";
+      } else if (c.id.startsWith("videos-")) {
+        const m = c.content.match(/YouTube Videos - (.+?) \(/);
+        label = `${m?.[1] || "Videos"} Videos`;
+        url = "/reels";
+      } else if (c.id.startsWith("patent-")) {
+        const m = c.content.match(/"(.+?)"/);
+        label = m?.[1]?.slice(0, 50) || c.id;
+        url = "/";
+      } else {
+        const knownLabels: Record<string, string> = {
+          profile: "Kanak Dahake Jr",
+          summary: "Professional Summary",
+          education: "Education",
+          skills: "Technical Skills",
+          certifications: "Certifications",
+          awards: "Awards",
+          volunteer: "Speaking & Volunteer",
+        };
+        label = knownLabels[c.id] || c.id;
+        if (["summary", "education", "skills", "certifications", "volunteer"].includes(c.id)) url = "/resume";
+      }
+
+      return { id: c.id, label, source: c.source, url };
+    });
+
+  // Compute pairwise similarities and keep strong edges
+  const SIMILARITY_THRESHOLD = 0.70;
+  const graphEdges: { source: string; target: string; weight: number }[] = [];
+  const nodeIds = new Set(graphNodes.map((n) => n.id));
+
+  for (let i = 0; i < chunks.length; i++) {
+    if (!nodeIds.has(chunks[i].id)) continue;
+    for (let j = i + 1; j < chunks.length; j++) {
+      if (!nodeIds.has(chunks[j].id)) continue;
+      const sim = cosineSim(vectors[i], vectors[j]);
+      if (sim >= SIMILARITY_THRESHOLD) {
+        graphEdges.push({
+          source: chunks[i].id,
+          target: chunks[j].id,
+          weight: Math.round(sim * 100) / 100,
+        });
+      }
+    }
+  }
+
+  // Force-directed layout (Fruchterman-Reingold)
+  const W = 1200, H = 800;
+  const positions = forceLayout(graphNodes, graphEdges, W, H, 400);
+
+  const graphOutput = {
+    width: W,
+    height: H,
+    nodes: graphNodes.map((n, i) => ({
+      ...n,
+      x: Math.round(positions[i].x),
+      y: Math.round(positions[i].y),
+    })),
+    edges: graphEdges,
+  };
+
+  const graphPath = join(outDir, "content-graph.json");
+  writeFileSync(graphPath, JSON.stringify(graphOutput, null, 2));
+  console.log(
+    `Content graph written to ${graphPath} (${graphNodes.length} nodes, ${graphEdges.length} edges)`
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Cosine similarity (for graph computation)
+// ---------------------------------------------------------------------------
+function cosineSim(a: number[], b: number[]): number {
+  let dot = 0, nA = 0, nB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    nA += a[i] * a[i];
+    nB += b[i] * b[i];
+  }
+  return dot / (Math.sqrt(nA) * Math.sqrt(nB));
+}
+
+// ---------------------------------------------------------------------------
+// Simple Fruchterman-Reingold force-directed layout
+// ---------------------------------------------------------------------------
+function forceLayout(
+  nodes: { id: string }[],
+  edges: { source: string; target: string }[],
+  width: number,
+  height: number,
+  iterations: number
+): { x: number; y: number }[] {
+  const n = nodes.length;
+  const area = width * height;
+  const k = Math.sqrt(area / n) * 0.8;
+  const nodeIndex = new Map(nodes.map((node, i) => [node.id, i]));
+
+  // Seed positions in a circle to start
+  const pos = nodes.map((_, i) => ({
+    x: width / 2 + (width * 0.35) * Math.cos((2 * Math.PI * i) / n),
+    y: height / 2 + (height * 0.35) * Math.sin((2 * Math.PI * i) / n),
+  }));
+
+  for (let iter = 0; iter < iterations; iter++) {
+    const temp = Math.max(0.5, (1 - iter / iterations) * 40);
+    const disp = nodes.map(() => ({ x: 0, y: 0 }));
+
+    // Repulsive forces between all pairs
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const dx = pos[i].x - pos[j].x;
+        const dy = pos[i].y - pos[j].y;
+        const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 0.1);
+        const force = (k * k) / dist;
+        const fx = (dx / dist) * force;
+        const fy = (dy / dist) * force;
+        disp[i].x += fx;
+        disp[i].y += fy;
+        disp[j].x -= fx;
+        disp[j].y -= fy;
+      }
+    }
+
+    // Attractive forces along edges
+    for (const edge of edges) {
+      const si = nodeIndex.get(edge.source);
+      const ti = nodeIndex.get(edge.target);
+      if (si === undefined || ti === undefined) continue;
+      const dx = pos[si].x - pos[ti].x;
+      const dy = pos[si].y - pos[ti].y;
+      const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 0.1);
+      const force = (dist * dist) / k;
+      const fx = (dx / dist) * force;
+      const fy = (dy / dist) * force;
+      disp[si].x -= fx;
+      disp[si].y -= fy;
+      disp[ti].x += fx;
+      disp[ti].y += fy;
+    }
+
+    // Center gravity
+    for (let i = 0; i < n; i++) {
+      disp[i].x += (width / 2 - pos[i].x) * 0.01;
+      disp[i].y += (height / 2 - pos[i].y) * 0.01;
+    }
+
+    // Apply displacements capped by temperature
+    for (let i = 0; i < n; i++) {
+      const dx = disp[i].x;
+      const dy = disp[i].y;
+      const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 0.1);
+      const cap = Math.min(dist, temp);
+      pos[i].x += (dx / dist) * cap;
+      pos[i].y += (dy / dist) * cap;
+      pos[i].x = Math.max(60, Math.min(width - 60, pos[i].x));
+      pos[i].y = Math.max(60, Math.min(height - 60, pos[i].y));
+    }
+  }
+
+  return pos;
 }
 
 main().catch((err) => {

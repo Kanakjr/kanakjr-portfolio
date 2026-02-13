@@ -1,0 +1,7 @@
+{
+  "goodbye-raspberry-pi-hello-mac-mini": "The author upgraded their struggling Raspberry Pi 4 home server to a powerful, silent Mac Mini. This new machine now efficiently runs Plex, Home Assistant, AI models, and a dev playground.",
+  "instagenie-ai-image-bot-with-n8n": "InstaGenie is a Telegram bot that uses AI to generate custom images from text, voice, or photo inputs. Built with n8n and Replicate's Flux model, it acts as a personal AI artist without traditional coding.",
+  "my-house-thinks-smart-home-ai": "The author built an AI-powered smart home using Home Assistant, n8n, and Google Gemini. This setup provides ambient intelligence, from daily digests to context-aware security, moving beyond basic automation.",
+  "one-month-with-3d-printer": "The author integrated a Bambu A1 3D printer into their smart home using Home Assistant, moving from printing trinkets to practical items and planning AI-powered future uses within a month.",
+  "patent-genai-database-insights": "A new patent uses Generative AI to extract meaningful insights and visualizations from relational databases through natural language queries, making complex data analysis accessible to non-technical users."
+}

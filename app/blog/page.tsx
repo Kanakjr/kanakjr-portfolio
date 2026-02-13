@@ -2,10 +2,12 @@ import Link from "next/link";
 import RetroGrid from "@/components/magicui/retro-grid";
 import BlogList from "@/components/blog/BlogList";
 import { getAllPosts, getAllTags } from "@/lib/blog";
+import { getBlogSummaries } from "@/lib/knowledge";
 
 export default function BlogPage() {
   const posts = getAllPosts();
   const tags = getAllTags();
+  const summaries = getBlogSummaries();
 
   // Strip content before passing to client component
   const postsWithoutContent = posts.map(({ content, ...rest }) => rest);
@@ -27,7 +29,7 @@ export default function BlogPage() {
         </div>
 
         {/* Blog List with Tag Filtering */}
-        <BlogList posts={postsWithoutContent} tags={tags} />
+        <BlogList posts={postsWithoutContent} tags={tags} summaries={summaries} />
 
         {/* Back to Home */}
         <div className="mt-16 text-center">
