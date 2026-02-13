@@ -22,6 +22,7 @@ interface HeroVideoProps {
   thumbnailAlt?: string;
   className?: string;
   fallbackThumbnailSrc?: string;
+  defaultOpen?: boolean;
 }
 
 const animationVariants = {
@@ -74,8 +75,9 @@ export function HeroVideoDialog({
   thumbnailAlt = "Video thumbnail",
   className,
   fallbackThumbnailSrc,
+  defaultOpen = false,
 }: HeroVideoProps) {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(defaultOpen);
   const [mounted, setMounted] = useState(false);
   const [imgSrc, setImgSrc] = useState(thumbnailSrc);
   const selectedAnimation = animationVariants[animationStyle];

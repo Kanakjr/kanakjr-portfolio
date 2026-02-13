@@ -108,9 +108,9 @@ function chunkToMeta(chunk: EmbeddedChunk): { title: string; url: string } {
   }
   if (id.startsWith("videos-")) {
     const m = content.match(/YouTube Videos - (.+?) \(/);
-    // Extract the first YouTube URL from the chunk content
-    const ytMatch = content.match(/https:\/\/youtube\.com\/watch\?v=[\w-]+/);
-    const url = ytMatch ? ytMatch[0] : "/reels";
+    // Extract the first YouTube video ID so the reels page auto-opens it
+    const ytMatch = content.match(/watch\?v=([\w-]+)/);
+    const url = ytMatch ? `/reels?v=${ytMatch[1]}` : "/reels";
     return { title: `${m?.[1] || "YouTube"} Videos`, url };
   }
   if (id.startsWith("patent-")) {

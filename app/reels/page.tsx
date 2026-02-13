@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import RetroGrid from "@/components/magicui/retro-grid";
@@ -11,9 +12,22 @@ import {
   getEmbedUrl,
   getThumbnailUrl,
 } from "@/lib/videos";
+import { Suspense } from "react";
 
-export default function ReelsPage() {
+function ReelsContent() {
+  const searchParams = useSearchParams();
+  const autoPlayId = searchParams.get("v") || null;
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const autoPlayRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to the video that should auto-play
+  useEffect(() => {
+    if (autoPlayId && autoPlayRef.current) {
+      setTimeout(() => {
+        autoPlayRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 500);
+    }
+  }, [autoPlayId]);
 
   const featuredVideo = videosData.find((v) => v.featured) ?? videosData[0];
 
@@ -62,12 +76,13 @@ export default function ReelsPage() {
               gradientOpacity={0.15}
             >
               <div className="grid md:grid-cols-5 gap-0">
-                <div className="md:col-span-3">
+                <div className="md:col-span-3" ref={autoPlayId === featuredVideo.youtubeId ? autoPlayRef : undefined}>
                   <HeroVideoDialog
                     animationStyle="from-center"
                     videoSrc={getEmbedUrl(featuredVideo.youtubeId)}
                     thumbnailSrc={getThumbnailUrl(featuredVideo.youtubeId)}
                     thumbnailAlt={featuredVideo.title}
+                    defaultOpen={autoPlayId === featuredVideo.youtubeId}
                   />
                 </div>
                 <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
@@ -130,12 +145,15 @@ export default function ReelsPage() {
 
         {/* Video Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredVideos.map((video, index) => (
+          {filteredVideos.map((video, index) => {
+            const shouldAutoPlay = autoPlayId === video.youtubeId;
+            return (
             <BlurFade
               key={video.id}
               delay={0.04 * (index % 6)}
               inView
             >
+              <div ref={shouldAutoPlay ? autoPlayRef : undefined}>
               <MagicCard
                 className="overflow-hidden h-full flex flex-col"
                 gradientSize={250}
@@ -147,6 +165,7 @@ export default function ReelsPage() {
                   videoSrc={getEmbedUrl(video.youtubeId)}
                   thumbnailSrc={getThumbnailUrl(video.youtubeId)}
                   thumbnailAlt={video.title}
+                  defaultOpen={shouldAutoPlay}
                 />
 
                 <div className="p-5 flex flex-col flex-1">
@@ -178,8 +197,10 @@ export default function ReelsPage() {
                   </div>
                 </div>
               </MagicCard>
+              </div>
             </BlurFade>
-          ))}
+            );
+          })}
         </div>
 
         {/* YouTube Channel CTA */}
@@ -227,5 +248,13 @@ export default function ReelsPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ReelsPage() {
+  return (
+    <Suspense>
+      <ReelsContent />
+    </Suspense>
   );
 }
