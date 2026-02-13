@@ -48,8 +48,11 @@ COPY --from=deps /app/node_modules ./node_modules
 # Blog content needed at runtime for MDX rendering
 COPY --from=builder /app/blog ./blog
 
+# Pre-computed knowledge embeddings for Jarvis chatbot RAG
+COPY --from=builder /app/data ./data
+
 # Ensure all app files are accessible by the non-root user
-RUN chown -R nextjs:nodejs .next public blog
+RUN chown -R nextjs:nodejs .next public blog data
 
 USER nextjs
 
