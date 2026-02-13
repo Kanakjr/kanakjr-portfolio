@@ -48,8 +48,8 @@ COPY --from=deps /app/node_modules ./node_modules
 # Blog content needed at runtime for MDX rendering
 COPY --from=builder /app/blog ./blog
 
-# Ensure Next.js build output is writable by the non-root user
-RUN chown -R nextjs:nodejs .next
+# Ensure all app files are accessible by the non-root user
+RUN chown -R nextjs:nodejs .next public blog
 
 USER nextjs
 
