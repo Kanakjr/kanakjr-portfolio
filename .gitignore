@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+sync-to-server.sh
 
 # generated thumbnails (rebuilt at build time)
 public/portfolio/images/**/_thumbs/

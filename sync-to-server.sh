@@ -34,6 +34,7 @@ echo ""
 EXCLUDES=(
   --exclude 'node_modules'
   --exclude '.next'
+  --exclude '.smbdelete*'
 )
 
 if [ "$SYNC_GIT" = false ]; then
