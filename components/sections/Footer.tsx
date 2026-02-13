@@ -113,7 +113,7 @@ export default function Footer() {
 
             <DockIcon>
               <a
-                href="mailto:hello@kanakjr.in"
+                href="mailto:ksdusa4@gmail.com"
                 className="flex items-center justify-center w-full h-full text-white hover:text-cyber-yellow transition-colors"
               >
                 <svg

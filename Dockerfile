@@ -25,6 +25,8 @@ CMD ["npm", "run", "dev"]
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Blog content needed at build time for static generation;
+# GOOGLE_API_KEY is only needed at runtime (dynamic API route)
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -42,6 +44,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./package.json
 COPY --from=deps /app/node_modules ./node_modules
+
+# Blog content needed at runtime for MDX rendering
+COPY --from=builder /app/blog ./blog
 
 # Ensure Next.js build output is writable by the non-root user
 RUN chown -R nextjs:nodejs .next

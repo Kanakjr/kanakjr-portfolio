@@ -13,6 +13,8 @@ services:
       # (prevents host node_modules from overwriting the container's)
       - /app/node_modules
       - /app/.next
+    env_file:
+      - .env.local
     environment:
       - WATCHPACK_POLLING=true
     restart: unless-stopped

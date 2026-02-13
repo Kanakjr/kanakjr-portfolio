@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import QuickNav from "@/components/QuickNav";
+import JarvisChat from "@/components/JarvisChat";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -59,6 +60,9 @@ export default function RootLayout({
           <QuickNav />
           
           {children}
+          
+          {/* Jarvis AI Assistant */}
+          <JarvisChat />
         </ThemeProvider>
       </body>
     </html>
