@@ -15,7 +15,7 @@ export default function Hero() {
 
       <div className="relative z-10 flex flex-col items-center gap-6 px-4 text-center max-w-5xl mx-auto py-20">
         {/* Avatar with Border Beam */}
-        <div className="relative h-40 w-40">
+        <div className="relative h-48 w-48">
           <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-white/20">
             <Image
               src="/avatar.jpg"
