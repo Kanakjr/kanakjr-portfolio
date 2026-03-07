@@ -10,9 +10,11 @@ SRC="/Users/kanakd/Workspace/kanakjr_website_26/"
 DEST="/Volumes/kanakjr/HomeServer/Apps/kanakjr_website_26/"
 
 SYNC_GIT=false
-if [ "$1" = "--git" ]; then
-  SYNC_GIT=true
-fi
+for arg in "$@"; do
+  if [ "$arg" = "--git" ]; then
+    SYNC_GIT=true
+  fi
+done
 
 # Check if destination is reachable
 if [ ! -d "$DEST" ]; then
