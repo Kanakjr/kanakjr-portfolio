@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { resumeData } from "@/lib/resume";
 import PrintButton from "./print-button";
+import TailorPanel from "./tailor-panel";
 
 export const metadata: Metadata = {
   title: "Resume | Kanak Dahake",
@@ -81,13 +82,14 @@ export default function ResumePage() {
         </header>
 
         {/* ========== SUMMARY ========== */}
-        <div className="px-8 py-4 border-b border-white/10">
+        <div className="px-8 py-4 border-b border-white/10 space-y-4">
           <p className="text-sm text-neutral-300 leading-relaxed print:text-neutral-700">
             <span className="font-semibold text-white print:text-black">
               Summary:
             </span>{" "}
             {r.summary}
           </p>
+          <TailorPanel />
         </div>
 
         {/* ========== TWO-COLUMN BODY ========== */}

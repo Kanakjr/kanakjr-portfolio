@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import QuickNav from "@/components/QuickNav";
 import JarvisChat from "@/components/JarvisChat";
 import Terminal from "@/components/Terminal";
+import EasterEggs from "@/components/EasterEggs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -57,6 +58,9 @@ export default function RootLayout({
           
           {/* Terminal overlay (backtick to toggle) */}
           <Terminal />
+          
+          {/* Easter eggs */}
+          <EasterEggs />
         </ThemeProvider>
       </body>
     </html>

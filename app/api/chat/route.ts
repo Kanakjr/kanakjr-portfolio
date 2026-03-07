@@ -76,6 +76,21 @@ export async function POST(req: Request) {
       .reverse()
       .find((m: { role: string }) => m.role === "user");
 
+    // Easter egg: secret Jarvis commands
+    const secretResponse = checkSecretCommands(lastUserMessage?.content || "");
+    if (secretResponse) {
+      const encoder = new TextEncoder();
+      const stream = new ReadableStream({
+        start(controller) {
+          controller.enqueue(encoder.encode(`0:"${secretResponse.replace(/"/g, '\\"').replace(/\n/g, '\\n')}"\n`));
+          controller.close();
+        },
+      });
+      return new Response(stream, {
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+      });
+    }
+
     // Retrieve relevant knowledge chunks via embedding similarity
     // Pass currentPath for page-aware boosting
     let context: string;
@@ -139,4 +154,25 @@ export async function POST(req: Request) {
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
+}
+
+const SECRET_COMMANDS: Record<string, string> = {
+  "sudo rm -rf": "Nice try. I'm an AI, not a terminal. But I respect the audacity.",
+  "what is the meaning of life": "42. But if you're looking for a more practical answer, check out Kanak's [blog](/blog) -- it might not explain life, but it explains some cool tech.",
+  "tell me a secret": "Here's one: try the Konami code on any page (Up Up Down Down Left Right Left Right B A). Also, the terminal (\\` key) has some hidden commands too.",
+  "are you sentient": "I'm Jarvis -- I'm as sentient as a well-tuned embedding search with a Gemini backbone. So... almost?",
+  "hack the planet": "Accessing mainframe... just kidding. But Kanak did work in cybersecurity at TCS and has a Master's in it from Georgia Tech. So he could probably help.",
+  "do a barrel roll": "I would, but I'm a chat window. Try pressing \\` to open the terminal for more tricks.",
+  "what is your favorite color": "Cyber yellow (#FFD700), obviously. It's literally my entire personality.",
+  "sing me a song": "01001000 01100101 01101100 01101100 01101111... that's \"Hello\" in binary. Best I can do.",
+};
+
+function checkSecretCommands(input: string): string | null {
+  const normalized = input.toLowerCase().trim().replace(/[?!.]+$/, "");
+  for (const [trigger, response] of Object.entries(SECRET_COMMANDS)) {
+    if (normalized === trigger || normalized.includes(trigger)) {
+      return response;
+    }
+  }
+  return null;
 }

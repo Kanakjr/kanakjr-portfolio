@@ -338,6 +338,22 @@ export default function JarvisChat() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
+  // Listen for "jarvis-ask" events from gallery lightbox
+  useEffect(() => {
+    const handleJarvisAsk = (e: Event) => {
+      const { message, imageSrc } = (e as CustomEvent).detail;
+      setIsOpen(true);
+      setTimeout(() => {
+        const prompt = imageSrc
+          ? `${message}\n\nTell me more about this image.`
+          : message;
+        append({ role: "user", content: prompt });
+      }, 300);
+    };
+    window.addEventListener("jarvis-ask", handleJarvisAsk);
+    return () => window.removeEventListener("jarvis-ask", handleJarvisAsk);
+  }, [append]);
+
   const handleExampleClick = (question: string) => {
     append({ role: "user", content: question });
   };

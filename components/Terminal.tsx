@@ -195,6 +195,49 @@ export default function Terminal() {
           setIsOpen(false);
           break;
 
+        case "sudo":
+          addLines({
+            type: "error",
+            text: "Permission denied. This incident will be reported... to no one, because this is a portfolio website.",
+          });
+          break;
+
+        case "matrix":
+          addLines({ type: "system", text: "Entering the Matrix..." });
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent("easter-egg", { detail: "matrix" }));
+          }, 500);
+          break;
+
+        case "coffee":
+          addLines({
+            type: "output",
+            text: `
+   ( (
+    ) )
+  ........
+  |      |]
+  \\      /
+   \`----'
+418: I'm a teapot... just kidding. Here's your coffee.`,
+          });
+          break;
+
+        case "neofetch":
+          addLines({
+            type: "output",
+            text: `  kanakjr.in @ ${new Date().getFullYear()}
+  ─────────────────
+  OS:        Next.js 15 / React 19
+  Shell:     Terminal v1.0
+  Theme:     Neo-Retro Dark
+  AI:        Gemini 2.5 Flash
+  RAG:       LangChain + Embeddings
+  Uptime:    Since Dec 2024
+  Stack:     TypeScript, Tailwind, Framer Motion`,
+          });
+          break;
+
         default:
           addLines({
             type: "error",
