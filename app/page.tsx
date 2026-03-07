@@ -5,6 +5,7 @@ import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Achievements from "@/components/sections/Achievements";
 import Portfolio from "@/components/sections/Portfolio";
+import GitHubActivity from "@/components/sections/GitHubActivity";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Projects />
       <Achievements />
       <Portfolio />
+      <GitHubActivity />
       <Footer />
     </main>
   );

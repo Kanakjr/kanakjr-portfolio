@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, getBlogSummary } from "@/lib/blog";
+import { getRelatedContent } from "@/lib/knowledge";
+import RelatedContent from "@/components/blog/RelatedContent";
+import ReadingProgress from "@/components/blog/ReadingProgress";
+import BookmarkButton from "@/components/blog/BookmarkButton";
 
 export function generateStaticParams() {
   const posts = getAllPosts();
@@ -20,8 +24,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const relatedItems = getRelatedContent(`blog-${slug}`, 4);
+  const summary = getBlogSummary(slug);
+
   return (
     <main className="relative min-h-screen bg-background">
+      <ReadingProgress />
       {/* Subtle grid background */}
       <div className="fixed inset-0 opacity-5">
         <div
@@ -81,12 +89,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </span>
           </div>
 
-          <h1 className="text-4xl font-bold text-white font-mono leading-tight md:text-5xl">
-            {post.title}
-          </h1>
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="text-4xl font-bold text-white font-mono leading-tight md:text-5xl">
+              {post.title}
+            </h1>
+            <BookmarkButton slug={slug} className="flex-shrink-0 mt-2" />
+          </div>
 
           <div className="mt-6 h-0.5 w-20 bg-gradient-to-r from-cyber-yellow to-retro-red" />
         </header>
+
+        {/* AI-generated TL;DR */}
+        {summary && (
+          <div className="mb-10 p-5 rounded-xl border border-cyber-yellow/20 bg-cyber-yellow/[0.03]">
+            <p className="text-[11px] font-mono text-cyber-yellow/70 uppercase tracking-wider mb-2">
+              TL;DR -- AI Summary
+            </p>
+            <p className="text-sm text-neutral-300 leading-relaxed">
+              {summary}
+            </p>
+          </div>
+        )}
 
         {/* MDX Content */}
         <article className="prose-blog">
@@ -106,6 +129,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             ))}
           </div>
         </div>
+
+        {/* Related Content */}
+        <RelatedContent items={relatedItems} />
 
         {/* Navigation */}
         <div className="mt-12 flex justify-between items-center">

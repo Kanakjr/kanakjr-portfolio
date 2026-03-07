@@ -24,6 +24,7 @@
     --input: 0 0% 15%;
     --ring: 51 100% 50%;
     --radius: 0.5rem;
+
   }
 }
 
@@ -53,7 +54,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFC700;
+  background: #e6c200;
 }
 
 /* Animations */

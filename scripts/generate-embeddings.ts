@@ -455,6 +455,7 @@ async function main() {
   console.log(
     `Content graph written to ${graphPath} (${graphNodes.length} nodes, ${graphEdges.length} edges)`
   );
+
 }
 
 // ---------------------------------------------------------------------------

@@ -324,7 +324,7 @@
     {
       "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
       "target": "exp-digitate-ignio-ai-tcs-technical-lead-cybersecurity",
-      "weight": 0.7
+      "weight": 0.71
     },
     {
       "source": "exp-pwc-u-s-advisory-senior-associate-innovation-hub",
@@ -439,17 +439,17 @@
     {
       "source": "project-home-lab-maker-workshop",
       "target": "blog-goodbye-raspberry-pi-hello-mac-mini",
-      "weight": 0.82
+      "weight": 0.81
     },
     {
       "source": "project-home-lab-maker-workshop",
       "target": "blog-my-house-thinks-smart-home-ai",
-      "weight": 0.73
+      "weight": 0.72
     },
     {
       "source": "project-home-lab-maker-workshop",
       "target": "blog-one-month-with-3d-printer",
-      "weight": 0.78
+      "weight": 0.79
     },
     {
       "source": "project-cryptovulnerability-vulnerability-reporting",
@@ -494,7 +494,7 @@
     {
       "source": "videos-motorcycle",
       "target": "videos-iot-hardware",
-      "weight": 0.72
+      "weight": 0.71
     },
     {
       "source": "videos-motorcycle",
@@ -504,7 +504,7 @@
     {
       "source": "videos-motorcycle",
       "target": "videos-cybersecurity",
-      "weight": 0.73
+      "weight": 0.72
     },
     {
       "source": "videos-motorcycle",
@@ -519,7 +519,7 @@
     {
       "source": "videos-motorcycle",
       "target": "videos-hardware",
-      "weight": 0.72
+      "weight": 0.71
     },
     {
       "source": "videos-genai",
@@ -569,7 +569,7 @@
     {
       "source": "videos-iot-ai",
       "target": "videos-cybersecurity",
-      "weight": 0.77
+      "weight": 0.76
     },
     {
       "source": "videos-iot-ai",
@@ -604,7 +604,7 @@
     {
       "source": "videos-iot-hardware",
       "target": "videos-app-development",
-      "weight": 0.86
+      "weight": 0.85
     },
     {
       "source": "videos-iot-hardware",
@@ -619,7 +619,7 @@
     {
       "source": "videos-blockchain",
       "target": "videos-ai-assistant",
-      "weight": 0.71
+      "weight": 0.72
     },
     {
       "source": "videos-blockchain",
@@ -654,12 +654,12 @@
     {
       "source": "videos-ai-assistant",
       "target": "videos-hardware",
-      "weight": 0.81
+      "weight": 0.8
     },
     {
       "source": "videos-app-development",
       "target": "videos-hardware",
-      "weight": 0.81
+      "weight": 0.8
     }
   ]
 }

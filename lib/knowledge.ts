@@ -244,6 +244,47 @@ export async function searchContent(
 }
 
 // ---------------------------------------------------------------------------
+// Public API: Get related content by chunk ID (no runtime API call needed)
+// ---------------------------------------------------------------------------
+export function getRelatedContent(
+  chunkId: string,
+  topK: number = 4
+): SearchResult[] {
+  const knowledgeStore = getStore();
+  if (!knowledgeStore) return [];
+
+  const anchor = knowledgeStore.chunks.find((c) => c.id === chunkId);
+  if (!anchor) return [];
+
+  const scored = knowledgeStore.chunks
+    .filter((c) => c.id !== chunkId && !["navigation", "gallery"].includes(c.id))
+    .map((chunk) => ({
+      chunk,
+      score: cosineSimilarity(anchor.embedding, chunk.embedding),
+    }));
+
+  scored.sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, topK).map(({ chunk, score }) => {
+    const meta = chunkToMeta(chunk);
+    const lines = chunk.content.split("\n").filter((l) => l.trim());
+    const snippet =
+      lines.length > 1
+        ? lines.slice(1).join(" ").replace(/\s+/g, " ").slice(0, 200).trim() + "..."
+        : lines[0].slice(0, 200);
+
+    return {
+      id: chunk.id,
+      source: chunk.source,
+      title: meta.title,
+      snippet,
+      url: meta.url,
+      score: Math.round(score * 100) / 100,
+    };
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Public API: Get content graph data (for /graph page)
 // ---------------------------------------------------------------------------
 export function getContentGraph(): {

@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 
 const BLOG_DIR = path.join(process.cwd(), "blog", "content");
+const SUMMARIES_PATH = path.join(process.cwd(), "data", "blog-summaries.json");
 
 export interface BlogPost {
   slug: string;
@@ -68,6 +69,22 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
     coverImage: data.coverImage ?? "",
     content,
   };
+}
+
+let summariesCache: Record<string, string> | null = null;
+
+export function getBlogSummaries(): Record<string, string> {
+  if (summariesCache) return summariesCache;
+  try {
+    summariesCache = JSON.parse(fs.readFileSync(SUMMARIES_PATH, "utf-8"));
+    return summariesCache!;
+  } catch {
+    return {};
+  }
+}
+
+export function getBlogSummary(slug: string): string {
+  return getBlogSummaries()[slug] || "";
 }
 
 export function getAllTags(): { tag: string; count: number }[] {

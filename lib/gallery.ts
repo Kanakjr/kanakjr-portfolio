@@ -36,20 +36,13 @@ export const galleryData: GallerySection[] = [
     description:
       "My Yamaha XSR -- a neo-retro machine that matches the aesthetic of everything I build.",
     images: [
-      img("/portfolio/images/xsr/1766057467722~2.jpg", "Yamaha XSR shot 1"),
-      img("/portfolio/images/xsr/1769835130126~3.jpg", "Yamaha XSR shot 2"),
-      img(
-        "/portfolio/images/xsr/PXL_20260119_045206060~4.jpg",
-        "Yamaha XSR shot 3"
-      ),
-      img(
-        "/portfolio/images/xsr/PXL_20260123_084138501.MP~3.jpg",
-        "Yamaha XSR shot 4"
-      ),
-      img(
-        "/portfolio/images/xsr/PXL_20260124_123336217~3 (1).jpg",
-        "Yamaha XSR shot 5"
-      ),
+      img("/portfolio/images/xsr/street-parked.jpg", "XSR parked on the street with helmet on the seat"),
+      img("/portfolio/images/xsr/beach-ride.jpg", "Rider on the XSR parked on a sandy beach"),
+      img("/portfolio/images/xsr/office-parking.jpg", "XSR under a covered office parking area"),
+      img("/portfolio/images/xsr/ruins-backdrop.jpg", "XSR with backpack parked against old brick ruins"),
+      img("/portfolio/images/xsr/coastal-sunset.jpg", "XSR with backpack on a rocky coast at sunset"),
+      img("/portfolio/images/xsr/hilltop-stop.jpg", "XSR parked at a hilltop road barrier with mountain view"),
+      img("/portfolio/images/xsr/park-dappled-light.jpg", "XSR in dappled sunlight near park steps"),
     ],
   },
   {
@@ -59,54 +52,23 @@ export const galleryData: GallerySection[] = [
     description:
       "Things I design and print on my Bambu Lab printer -- from functional parts to creative builds.",
     images: [
-      img(
-        "/portfolio/images/3d_prints/PXL_20250716_183504049.MP.jpg",
-        "3D print project 1"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250718_034742705~2.jpg",
-        "3D print project 2"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250721_025507177.jpg",
-        "3D print project 3"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250726_163810766_exported_5723~2.jpg",
-        "3D print project 4"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250727_045652202.jpg",
-        "3D print project 5"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250727_121004178.jpg",
-        "3D print project 6"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250727_133711372.PORTRAIT.ORIGINAL.jpg",
-        "3D print project 7"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250802_122610839.PORTRAIT.jpg",
-        "3D print project 8"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250809_065436314.jpg",
-        "3D print project 9"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250809_110654069.PORTRAIT.jpg",
-        "3D print project 10"
-      ),
-      img(
-        "/portfolio/images/3d_prints/PXL_20250817_070143283.jpg",
-        "3D print project 11"
-      ),
-      img(
-        "/portfolio/images/3d_prints/ha-dashboard-bambulab.jpg",
-        "Home Assistant dashboard with Bambu Lab printer status"
-      ),
+      img("/portfolio/images/3d_prints/first-prints.jpg", "First batch of prints: a small boat, USB dongle holder and misc parts"),
+      img("/portfolio/images/3d_prints/cup-holder.jpg", "Desk cup holder clipped to monitor with a Starbucks mug"),
+      img("/portfolio/images/3d_prints/first-batch.jpg", "First creative batch: bust, KANAKJR nameplate, dragon figure and keycap"),
+      img("/portfolio/images/3d_prints/ipad-arm-stand.jpg", "Articulated arm stand holding an iPad with a CAD drawing on screen"),
+      img("/portfolio/images/3d_prints/enclosure-parts.jpg", "Enclosure parts freshly off the Bambu print plate"),
+      img("/portfolio/images/3d_prints/gundam-figure.jpg", "Gundam figure build laid out on a cutting mat with tools"),
+      img("/portfolio/images/3d_prints/t13-figure.jpg", "T13 articulated mech figure posed on a cutting mat"),
+      img("/portfolio/images/3d_prints/space-shuttle.jpg", "Space shuttle launch scene with printed smoke cloud base"),
+      img("/portfolio/images/3d_prints/tanjiro-sword.jpg", "Tanjiro's nichirin blade from Demon Slayer"),
+      img("/portfolio/images/3d_prints/alpaca.jpg", "White alpaca figurine perched on an Xbox Series S"),
+      img("/portfolio/images/3d_prints/pegboard-wall.jpg", "Full pegboard wall displaying all prints and tools"),
+      img("/portfolio/images/3d_prints/ha-bambu-dashboard.jpg", "Home Assistant dashboard with Bambu Lab printer status"),
+      img("/portfolio/images/3d_prints/headphone-stand.jpg", "J-shaped headphone stand in two-tone filament"),
+      img("/portfolio/images/3d_prints/demogorgon.jpg", "Demogorgon figure from Stranger Things"),
+      img("/portfolio/images/3d_prints/sims-cat.jpg", "Low-poly cat wearing headphones with a Sims plumbob"),
+      img("/portfolio/images/3d_prints/stormtrooper.jpg", "Articulated Stormtrooper figure from Star Wars"),
+      img("/portfolio/images/3d_prints/baby-chimp.jpg", "Cute articulated baby chimp figurine"),
     ],
   },
   {
@@ -116,50 +78,17 @@ export const galleryData: GallerySection[] = [
     description:
       "Digital illustrations drawn on my iPad -- anime-inspired characters and quick studies.",
     images: [
-      img(
-        "/portfolio/images/sketches/PXL_20230105_124643880~2.jpg",
-        "Sketch 1"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230105_1347595.jpg",
-        "Sketch 2"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230105_134759544.jpg",
-        "Sketch 3"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230126_093522091.jpg",
-        "Sketch 4"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230411_143355061.jpg",
-        "Sketch 5"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230415_100324592~2.jpg",
-        "Sketch 6"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230604_091205214.jpg",
-        "Sketch 7"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230625_051909277~2.jpg",
-        "Sketch 8"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230725_042100823~2.jpg",
-        "Sketch 9"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20230903_163303086.MP~2.jpg",
-        "Sketch 10"
-      ),
-      img(
-        "/portfolio/images/sketches/PXL_20231220_152024543.jpg",
-        "Sketch 11"
-      ),
+      img("/portfolio/images/sketches/luffy.jpg", "Monkey D. Luffy from One Piece"),
+      img("/portfolio/images/sketches/portrait-wip.jpg", "Portrait study of a girl in a winter coat, work in progress"),
+      img("/portfolio/images/sketches/sasuke.jpg", "Sasuke Uchiha from Naruto"),
+      img("/portfolio/images/sketches/zenitsu.jpg", "Zenitsu Agatsuma from Demon Slayer in action pose"),
+      img("/portfolio/images/sketches/todoroki.jpg", "Shoto Todoroki from My Hero Academia"),
+      img("/portfolio/images/sketches/blonde-boy.jpg", "Blonde anime boy character"),
+      img("/portfolio/images/sketches/anime-girl-blue.jpg", "Anime girl with blue hair"),
+      img("/portfolio/images/sketches/portrait-bold.jpg", "Bold portrait of a woman with red lips"),
+      img("/portfolio/images/sketches/anime-boy-blue.jpg", "Anime boy with dark hair and blue eyes"),
+      img("/portfolio/images/sketches/killua.jpg", "Killua Zoldyck from Hunter x Hunter"),
+      img("/portfolio/images/sketches/anime-girl-ponytail.jpg", "Anime girl with orange ponytail"),
     ],
   },
 ];

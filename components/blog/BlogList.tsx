@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import MagicCard from "@/components/magicui/magic-card";
+import BookmarkButton from "@/components/blog/BookmarkButton";
+import { useBookmarks } from "@/lib/hooks/useBookmarks";
 
 interface BlogPost {
   slug: string;
@@ -26,14 +28,19 @@ interface TagCount {
 interface BlogListProps {
   posts: BlogPost[];
   tags: TagCount[];
+  summaries?: Record<string, string>;
 }
 
-export default function BlogList({ posts, tags }: BlogListProps) {
+export default function BlogList({ posts, tags, summaries = {} }: BlogListProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [showBookmarked, setShowBookmarked] = useState(false);
+  const { isBookmarked, loaded: bookmarksLoaded } = useBookmarks();
 
-  const filteredPosts = activeTag
-    ? posts.filter((post) => post.tags.includes(activeTag))
-    : posts;
+  const filteredPosts = posts.filter((post) => {
+    if (showBookmarked && !isBookmarked(post.slug)) return false;
+    if (activeTag && !post.tags.includes(activeTag)) return false;
+    return true;
+  });
 
   const totalCount = posts.length;
 
@@ -42,9 +49,9 @@ export default function BlogList({ posts, tags }: BlogListProps) {
       {/* Tag Filter Bar */}
       <div className="mb-12 flex flex-wrap gap-2 justify-center">
         <button
-          onClick={() => setActiveTag(null)}
+          onClick={() => { setActiveTag(null); setShowBookmarked(false); }}
           className={`px-4 py-1.5 text-xs font-mono rounded-full border transition-all duration-300 ${
-            activeTag === null
+            activeTag === null && !showBookmarked
               ? "bg-cyber-yellow/15 border-cyber-yellow/50 text-cyber-yellow"
               : "bg-white/5 border-white/10 text-neutral-400 hover:border-white/30 hover:text-neutral-300"
           }`}
@@ -52,6 +59,21 @@ export default function BlogList({ posts, tags }: BlogListProps) {
           All{" "}
           <span className="ml-1 text-[10px] opacity-70">{totalCount}</span>
         </button>
+        {bookmarksLoaded && (
+          <button
+            onClick={() => { setShowBookmarked(!showBookmarked); setActiveTag(null); }}
+            className={`px-4 py-1.5 text-xs font-mono rounded-full border transition-all duration-300 flex items-center gap-1.5 ${
+              showBookmarked
+                ? "bg-cyber-yellow/15 border-cyber-yellow/50 text-cyber-yellow"
+                : "bg-white/5 border-white/10 text-neutral-400 hover:border-white/30 hover:text-neutral-300"
+            }`}
+          >
+            <svg className="w-3 h-3" fill={showBookmarked ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+            </svg>
+            Saved
+          </button>
+        )}
         {tags.map(({ tag, count }) => (
           <button
             key={tag}
@@ -117,6 +139,16 @@ export default function BlogList({ posts, tags }: BlogListProps) {
                         {post.description}
                       </p>
 
+                      {/* AI Summary */}
+                      {summaries[post.slug] && (
+                        <p className="text-xs text-neutral-500 italic border-l-2 border-cyber-yellow/20 pl-3">
+                          <span className="text-cyber-yellow/50 not-italic font-mono text-[10px] mr-1">AI</span>
+                          {summaries[post.slug].length > 150
+                            ? summaries[post.slug].slice(0, 150) + "..."
+                            : summaries[post.slug]}
+                        </p>
+                      )}
+
                       {/* Tags */}
                       <div className="flex flex-wrap gap-2 mt-2">
                         {post.tags.map((tag) => (
@@ -133,7 +165,7 @@ export default function BlogList({ posts, tags }: BlogListProps) {
                         ))}
                       </div>
 
-                      {/* Read More */}
+                      {/* Read More + Bookmark */}
                       <div className="flex items-center gap-2 mt-2 text-sm font-mono text-cyber-yellow/70 transition-colors">
                         <span>Read article</span>
                         <svg
@@ -149,6 +181,7 @@ export default function BlogList({ posts, tags }: BlogListProps) {
                             d="M17 8l4 4m0 0l-4 4m4-4H3"
                           />
                         </svg>
+                        <BookmarkButton slug={post.slug} className="ml-auto" />
                       </div>
                     </div>
 
@@ -176,7 +209,9 @@ export default function BlogList({ posts, tags }: BlogListProps) {
         {filteredPosts.length === 0 && (
           <div className="text-center py-16">
             <p className="text-neutral-500 font-mono">
-              No posts found for this tag.
+              {showBookmarked
+                ? "No bookmarked posts yet. Save posts to find them here."
+                : "No posts found for this tag."}
             </p>
           </div>
         )}

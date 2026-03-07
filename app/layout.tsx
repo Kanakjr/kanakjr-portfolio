@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import QuickNav from "@/components/QuickNav";
 import JarvisChat from "@/components/JarvisChat";
+import Terminal from "@/components/Terminal";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,6 +23,11 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
     apple: "/favicon.png",
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
   },
 };
 
@@ -48,6 +54,9 @@ export default function RootLayout({
           
           {/* Jarvis AI Assistant */}
           <JarvisChat />
+          
+          {/* Terminal overlay (backtick to toggle) */}
+          <Terminal />
         </ThemeProvider>
       </body>
     </html>
