@@ -5,7 +5,6 @@ import { useChat } from "ai/react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface SpeechRecognitionLike {
   continuous: boolean;
   interimResults: boolean;
@@ -16,7 +15,6 @@ interface SpeechRecognitionLike {
   start: () => void;
   stop: () => void;
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 const EXAMPLE_QUESTIONS = [
   "What are Kanak's key skills?",
@@ -186,7 +184,6 @@ function useSpeechRecognition() {
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const w = window as any;
     const SR = w.SpeechRecognition || w.webkitSpeechRecognition;
     setSupported(!!SR);
@@ -203,7 +200,6 @@ function useSpeechRecognition() {
     (onResult: (transcript: string) => void) => {
       const recognition = recognitionRef.current;
       if (!recognition) return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         onResult(transcript);
