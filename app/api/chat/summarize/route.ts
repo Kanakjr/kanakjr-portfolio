@@ -36,7 +36,11 @@ export async function POST(req: Request) {
       ),
     ];
 
-    const result = await model.invoke(langchainMessages);
+    const result = await model.invoke(langchainMessages, {
+      runName: "Jarvis Summarize",
+      metadata: { messageCount: messages.length },
+      tags: ["jarvis", "summarize"],
+    });
     const summary = (result.content as string).trim();
 
     return Response.json({ summary });

@@ -142,7 +142,14 @@ export async function POST(req: Request) {
       }),
     ];
 
-    const stream = await model.stream(langchainMessages);
+    const stream = await model.stream(langchainMessages, {
+      runName: "Jarvis Chat",
+      metadata: {
+        currentPath: currentPath || "/",
+        query: lastUserMessage?.content || "",
+      },
+      tags: ["jarvis", "chat"],
+    });
 
     return LangChainAdapter.toDataStreamResponse(stream);
   } catch (error) {
