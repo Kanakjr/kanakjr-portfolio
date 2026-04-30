@@ -12,6 +12,8 @@ import {
   getEmbedUrl,
   getThumbnailUrl,
 } from "@/lib/videos";
+import { instagramReels, instagramProfileUrl } from "@/lib/instagram";
+import { LocalVideoDialog } from "@/components/magicui/local-video-dialog";
 import { Suspense } from "react";
 
 function ReelsContent() {
@@ -58,6 +60,70 @@ function ReelsContent() {
             <div className="mt-4 mx-auto w-24 h-0.5 bg-gradient-to-r from-cyber-yellow to-retro-red" />
           </div>
         </BlurFade>
+
+        {/* From Instagram (synced from @nerdguytheory at build time) */}
+        {instagramReels.length > 0 && (
+          <BlurFade delay={0.15} inView>
+            <div className="mb-16">
+              <div className="flex items-center gap-4 mb-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-mono whitespace-nowrap">
+                  From Instagram
+                </h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-cyber-yellow/40 to-transparent" />
+                <span className="text-sm font-mono text-neutral-500 whitespace-nowrap">
+                  {instagramReels.length} reels
+                </span>
+              </div>
+              <p className="text-neutral-500 text-sm font-mono mb-6">
+                Latest reels from{" "}
+                <a
+                  href={instagramProfileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyber-yellow hover:underline"
+                >
+                  @nerdguytheory
+                </a>
+                {" -- "}nerdy hobbies, builds, and bits in motion.
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {instagramReels.map((reel, idx) => (
+                  <BlurFade key={reel.shortcode} delay={0.04 * (idx % 6)} inView>
+                    <MagicCard
+                      className="overflow-hidden h-full flex flex-col"
+                      gradientSize={250}
+                      gradientColor="#FFD700"
+                      gradientOpacity={0.2}
+                    >
+                      <LocalVideoDialog
+                        animationStyle="from-center"
+                        videoSrc={reel.video}
+                        thumbnailSrc={reel.thumb}
+                        thumbnailAlt={reel.title}
+                        fallbackHref={reel.permalink}
+                        caption={reel.caption}
+                      />
+                      <div className="p-3 flex flex-col flex-1">
+                        <p className="text-neutral-300 text-xs leading-relaxed line-clamp-3 mb-2">
+                          {reel.title}
+                        </p>
+                        <a
+                          href={reel.permalink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-auto text-[10px] font-mono text-neutral-500 hover:text-cyber-yellow transition-colors"
+                        >
+                          View on Instagram →
+                        </a>
+                      </div>
+                    </MagicCard>
+                  </BlurFade>
+                ))}
+              </div>
+            </div>
+          </BlurFade>
+        )}
 
         {/* Featured Video */}
         <BlurFade delay={0.2} inView>

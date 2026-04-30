@@ -1,4 +1,5 @@
 import { extname, basename, dirname } from "path";
+import { instagramPosts } from "./instagram";
 
 export interface GalleryImage {
   src: string;
@@ -28,7 +29,7 @@ function img(src: string, alt: string): GalleryImage {
   return { src, thumb: thumb(src), alt };
 }
 
-export const galleryData: GallerySection[] = [
+const staticGalleryData: GallerySection[] = [
   {
     id: "xsr",
     title: "Yamaha XSR",
@@ -92,3 +93,21 @@ export const galleryData: GallerySection[] = [
     ],
   },
 ];
+
+const instagramSection: GallerySection = {
+  id: "nerdguytheory",
+  title: "Nerd Guy Theory",
+  accent: "From @nerdguytheory on Instagram",
+  description:
+    "Latest snapshots from my nerdy hobbies feed -- synced from Instagram on each build.",
+  images: instagramPosts.map((post) => ({
+    src: post.src,
+    thumb: post.thumb,
+    alt: post.alt,
+  })),
+};
+
+export const galleryData: GallerySection[] = [
+  instagramSection,
+  ...staticGalleryData,
+].filter((section) => section.images.length > 0);

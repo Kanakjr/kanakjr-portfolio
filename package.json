@@ -8,7 +8,8 @@
     "embeddings": "tsx scripts/generate-embeddings.ts",
     "summaries": "tsx scripts/generate-summaries.ts",
     "captions": "tsx scripts/generate-captions.ts",
-    "build": "node scripts/generate-thumbnails.mjs && next build",
+    "sync-instagram": "node scripts/sync-instagram.mjs",
+    "build": "node scripts/sync-instagram.mjs && node scripts/generate-thumbnails.mjs && next build",
     "start": "next start",
     "lint": "next lint"
   },
