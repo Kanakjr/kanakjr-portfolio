@@ -21,12 +21,29 @@ export interface InstagramReel {
   takenAt: string;
 }
 
+export interface InstagramHighlightItem {
+  type: "image" | "video";
+  src: string;
+  poster: string | null;
+  duration?: number;
+  takenAt?: string;
+}
+
+export interface InstagramHighlight {
+  id: string;
+  title: string;
+  slug: string;
+  cover: string;
+  items: InstagramHighlightItem[];
+}
+
 interface InstagramDataShape {
   fetchedAt: string | null;
   username: string;
   scanned: number;
   posts: InstagramPost[];
   reels: InstagramReel[];
+  highlights?: InstagramHighlight[];
 }
 
 // Cast through `unknown` because the empty stub produces literal types
@@ -38,5 +55,6 @@ export const instagramUsername: string = data.username;
 export const instagramFetchedAt: string | null = data.fetchedAt;
 export const instagramPosts: InstagramPost[] = data.posts ?? [];
 export const instagramReels: InstagramReel[] = data.reels ?? [];
+export const instagramHighlights: InstagramHighlight[] = data.highlights ?? [];
 
 export const instagramProfileUrl = `https://www.instagram.com/${data.username}/`;

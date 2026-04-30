@@ -31,6 +31,7 @@ public/portfolio/images/**/_thumbs/
 # instagram media (re-synced at build time via scripts/sync-instagram.py)
 public/instagram/posts/
 public/instagram/reels/
+public/instagram/highlights/
 
 # debug
 npm-debug.log*

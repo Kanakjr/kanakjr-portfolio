@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import sys
 import urllib.request
@@ -53,7 +54,10 @@ except ValueError:
 REPO_ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = REPO_ROOT / "public" / "instagram" / "posts"
 REELS_DIR = REPO_ROOT / "public" / "instagram" / "reels"
+HIGHLIGHTS_DIR = REPO_ROOT / "public" / "instagram" / "highlights"
 DATA_FILE = REPO_ROOT / "data" / "instagram.json"
+
+MAX_HIGHLIGHT_ITEMS = 30  # Cap per-highlight to avoid pulling huge histories
 
 DOWNLOAD_TIMEOUT = 30
 USER_AGENT = (
@@ -65,7 +69,16 @@ USER_AGENT = (
 def ensure_dirs() -> None:
     POSTS_DIR.mkdir(parents=True, exist_ok=True)
     REELS_DIR.mkdir(parents=True, exist_ok=True)
+    HIGHLIGHTS_DIR.mkdir(parents=True, exist_ok=True)
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+
+def slugify(value: str, fallback: str = "highlight") -> str:
+    """Filesystem-safe lowercase slug. Strips emoji/punctuation, collapses dashes."""
+    if not value:
+        return fallback
+    out = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return out or fallback
 
 
 def download(url: str, dest: Path) -> bool:
@@ -194,6 +207,123 @@ def serialize_reel(post: "instaloader.Post") -> dict[str, Any] | None:
     }
 
 
+def serialize_highlights(
+    L: "instaloader.Instaloader",
+    profile: "instaloader.Profile",
+) -> list[dict[str, Any]]:
+    """Story highlights ('3d', 'neko', etc.). Requires an authenticated session;
+    silently returns [] when anonymous or when IG declines the request."""
+    if not LOGIN_USER:
+        print("[instagram] highlights need INSTAGRAM_LOGIN_USER; skipping", file=sys.stderr)
+        return []
+    if not hasattr(L, "get_highlights"):
+        print("[instagram] this instaloader has no get_highlights(); skipping", file=sys.stderr)
+        return []
+
+    out: list[dict[str, Any]] = []
+    used_slugs: set[str] = set()
+    try:
+        highlights_iter = L.get_highlights(profile)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[instagram] highlights iteration failed: {exc}", file=sys.stderr)
+        return []
+
+    for highlight in highlights_iter:
+        title = (getattr(highlight, "title", None) or "").strip()
+        unique_id = getattr(highlight, "unique_id", None) or getattr(highlight, "mediaid", None)
+        slug = slugify(title, fallback=f"hl-{unique_id}")
+        # Disambiguate if two highlights slugify identically (e.g. emoji-only).
+        base, n = slug, 2
+        while slug in used_slugs:
+            slug = f"{base}-{n}"
+            n += 1
+        used_slugs.add(slug)
+
+        hl_dir = HIGHLIGHTS_DIR / slug
+        hl_dir.mkdir(parents=True, exist_ok=True)
+
+        cover_url = (
+            getattr(highlight, "cover_cropped_url", None)
+            or getattr(highlight, "cover_url", None)
+        )
+        cover_dest = hl_dir / "cover.jpg"
+        cover_ok = bool(cover_url and download(cover_url, cover_dest))
+
+        items: list[dict[str, Any]] = []
+        try:
+            for idx, item in enumerate(highlight.get_items()):
+                if idx >= MAX_HIGHLIGHT_ITEMS:
+                    break
+                try:
+                    is_video = bool(getattr(item, "is_video", False))
+                    media_url = (
+                        getattr(item, "video_url", None) if is_video else getattr(item, "url", None)
+                    )
+                    poster_url = getattr(item, "url", None)  # static frame, useful as poster for videos
+                    if not media_url:
+                        continue
+
+                    if is_video:
+                        media_dest = hl_dir / f"{idx}.mp4"
+                        if not download(media_url, media_dest):
+                            continue
+                        poster_dest = hl_dir / f"{idx}.jpg"
+                        if poster_url:
+                            download(poster_url, poster_dest)
+                        item_entry: dict[str, Any] = {
+                            "type": "video",
+                            "src": f"/instagram/highlights/{slug}/{idx}.mp4",
+                            "poster": (
+                                f"/instagram/highlights/{slug}/{idx}.jpg"
+                                if poster_dest.exists() and poster_dest.stat().st_size > 0
+                                else None
+                            ),
+                        }
+                        duration = getattr(item, "video_duration", None)
+                        if isinstance(duration, (int, float)) and duration > 0:
+                            item_entry["duration"] = float(duration)
+                    else:
+                        media_dest = hl_dir / f"{idx}.jpg"
+                        if not download(media_url, media_dest):
+                            continue
+                        item_entry = {
+                            "type": "image",
+                            "src": f"/instagram/highlights/{slug}/{idx}.jpg",
+                            "poster": None,
+                        }
+
+                    taken_at = getattr(item, "date_utc", None)
+                    if taken_at is not None:
+                        item_entry["takenAt"] = taken_at.replace(tzinfo=timezone.utc).isoformat()
+
+                    items.append(item_entry)
+                except Exception as exc:  # noqa: BLE001 -- per-item failures should not abort
+                    print(
+                        f"[instagram] skipped highlight item {slug}#{idx}: {exc}",
+                        file=sys.stderr,
+                    )
+        except Exception as exc:  # noqa: BLE001
+            print(f"[instagram] highlight {slug} item iteration failed: {exc}", file=sys.stderr)
+
+        if not items:
+            continue
+
+        out.append({
+            "id": str(unique_id) if unique_id is not None else slug,
+            "title": title or slug,
+            "slug": slug,
+            "cover": (
+                f"/instagram/highlights/{slug}/cover.jpg"
+                if cover_ok
+                else items[0]["poster"] or items[0]["src"]
+            ),
+            "items": items,
+        })
+        print(f"[instagram] highlight {slug!r} ({len(items)} item(s))")
+
+    return out
+
+
 def main() -> int:
     ensure_dirs()
     L = build_loader()
@@ -260,7 +390,11 @@ def main() -> int:
     else:
         print("[instagram] instaloader does not expose get_reels(); skipping reels tab", file=sys.stderr)
 
-    if not posts and not reels:
+    # 3. Story highlights (only with an authed session). Best-effort; if it
+    #    fails, we keep whatever was on disk from the previous successful run.
+    highlights = serialize_highlights(L, profile)
+
+    if not posts and not reels and not highlights:
         return 1
 
     payload = {
@@ -271,10 +405,12 @@ def main() -> int:
         "scannedReels": seen_reels,
         "posts": posts,
         "reels": reels,
+        "highlights": highlights,
     }
     DATA_FILE.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(
-        f"[instagram] wrote {len(posts)} photo(s), {len(reels)} reel(s) "
+        f"[instagram] wrote {len(posts)} photo(s), {len(reels)} reel(s), "
+        f"{len(highlights)} highlight(s) "
         f"(scanned {seen_posts} feed post(s) + {seen_reels} reel(s)) "
         f"-> {DATA_FILE.relative_to(REPO_ROOT)}"
     )

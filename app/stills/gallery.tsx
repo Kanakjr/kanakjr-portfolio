@@ -6,13 +6,21 @@ import Link from "next/link";
 import MagicCard from "@/components/magicui/magic-card";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import RetroGrid from "@/components/magicui/retro-grid";
+import { HighlightsRow } from "@/components/magicui/highlights-row";
 import { galleryData } from "@/lib/gallery";
+import type { InstagramHighlight } from "@/lib/instagram";
 
 interface StillsGalleryProps {
   captions: Record<string, string>;
+  highlights?: InstagramHighlight[];
+  instagramUsername?: string;
 }
 
-export default function StillsGallery({ captions }: StillsGalleryProps) {
+export default function StillsGallery({
+  captions,
+  highlights = [],
+  instagramUsername,
+}: StillsGalleryProps) {
   const [lightbox, setLightbox] = useState<{
     sectionIndex: number;
     imageIndex: number;
@@ -113,6 +121,15 @@ export default function StillsGallery({ captions }: StillsGalleryProps) {
                 </p>
               </div>
             </BlurFade>
+
+            {section.id === "nerdguytheory" && highlights.length > 0 && (
+              <BlurFade delay={0.2} inView>
+                <HighlightsRow
+                  highlights={highlights}
+                  username={instagramUsername}
+                />
+              </BlurFade>
+            )}
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {section.images.map((image, imageIndex) => (
