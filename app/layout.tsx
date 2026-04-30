@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import QuickNav from "@/components/QuickNav";
 import JarvisChat from "@/components/JarvisChat";
 import Terminal from "@/components/Terminal";
@@ -62,6 +63,7 @@ export default function RootLayout({
           {/* Easter eggs */}
           <EasterEggs />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
