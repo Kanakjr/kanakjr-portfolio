@@ -82,6 +82,19 @@ export const portfolioData = {
     },
     projects: [
       {
+        title: "HomeBotAI",
+        category: "IoT / AI Agent",
+        description: "An intelligent smart-home assistant powered by LangChain + Gemini with 59 tools, live Home Assistant awareness, learnable skills, proactive Telegram automations, a voice assistant, and a full Next.js dashboard -- evolved from an n8n-based ambient intelligence system into a production AI agent.",
+        tech: ["LangChain", "Home Assistant", "Google Gemini", "Next.js", "Telegram API"],
+        github: "https://github.com/Kanakjr/homebot",
+        blog: "/blog/homebot-ai-smart-home-assistant",
+        demoVideos: [
+          { label: "v2", url: "https://youtu.be/og9YRxQFgDE" },
+          { label: "Voice", url: "https://youtu.be/YOOdyF5BlpM" },
+          { label: "v1", url: "https://youtu.be/Fru0LM9Jgvg" }
+        ]
+      },
+      {
         title: "NewsGenius - GenAI News Generation",
         category: "GenAI",
         description: "A GenAI-driven app for news media publishers, streamlining content creation with AI-assisted social media posting, summarization, and bullet point generation.",
@@ -105,14 +118,6 @@ export const portfolioData = {
         description: "A Telegram bot that generates personalized AI images from text, voice, and photo inputs using Flux with custom LoRA adaptation, orchestrated entirely through n8n visual workflows.",
         tech: ["n8n", "Flux LoRA", "Replicate", "Supabase", "OpenAI"],
         blog: "/blog/instagenie-ai-image-bot-with-n8n"
-      },
-      {
-        title: "AI-Powered Smart Home",
-        category: "IoT / AI",
-        description: "An ambient intelligence system combining Home Assistant, n8n, and Google Gemini for AI-generated daily digests, context-aware security alerts with image captioning, and adaptive home automation.",
-        tech: ["Home Assistant", "n8n", "Google Gemini", "Telegram API"],
-        blog: "/blog/my-house-thinks-smart-home-ai",
-        demoVideo: "https://youtu.be/Fru0LM9Jgvg"
       },
       {
         title: "Home Lab & Maker Workshop",

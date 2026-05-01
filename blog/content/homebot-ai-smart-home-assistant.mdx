@@ -1,0 +1,164 @@
+---
+title: "HomeBotAI: From Automations to an Intelligent Home Agent"
+description: "How I evolved my smart home from n8n workflows into a full LangChain-powered AI agent with 59 tools, a custom dashboard, voice control, and proactive automations."
+date: "2026-05-01"
+tags: ["Home Automation", "Home Assistant", "LangChain", "AI", "Smart Home", "Gemini"]
+readTime: "10 min read"
+author: "Kanak Dahake Jr"
+featured: true
+coverImage: "/blog/homebot/dashboard.png"
+---
+
+Last year I wrote about [building an AI-powered smart home](/blog/my-house-thinks-smart-home-ai) using Home Assistant, n8n, and Google Gemini. That setup -- scheduled workflows stitching together APIs, an LLM writing daily digests, and camera snapshots getting AI-captioned for security alerts -- proved the concept: a home with ambient intelligence is absolutely worth building.
+
+But living with it daily surfaced limits. Every new idea meant another n8n workflow. Adding a tool meant wiring a new webhook. There was no memory, no learning, no conversation. The "brain" was stateless -- it forgot everything the moment a workflow finished.
+
+So I rebuilt the entire stack from the ground up. **HomeBotAI** is a LangChain/LangGraph ReAct agent with 59 integrated tools, a three-layer memory system, learnable skills, proactive automations, a full Next.js dashboard, a voice assistant, and a standalone Deep Agent -- all running on my Mac Mini home server.
+
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/og9YRxQFgDE"
+  title="HomeBotAI Demo"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+  style={{ borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', marginTop: '1.5rem', marginBottom: '1.5rem' }}
+/>
+
+## What Changed from v1 to v2
+
+The original system used **n8n** as the orchestration layer -- each capability was a separate visual workflow triggered by a cron job or webhook. It worked, but scaling it meant copy-pasting nodes and manually wiring every new integration.
+
+HomeBotAI replaces all of that with a single **LangChain ReAct agent** backed by Google Gemini. Instead of pre-built workflows, the agent reasons about what tools to call, chains them together dynamically, and remembers context across conversations. The n8n workflows for daily digests, security alerts, and adaptive automations are now built-in agent skills that run on schedule or react to Home Assistant state changes -- no external orchestrator needed.
+
+## The Dashboard
+
+![HomeBotAI Dashboard](/blog/homebot/dashboard.png)
+
+The dashboard is a Next.js 15 app with a dark theme, built with Tailwind CSS and Framer Motion. Every widget on the homepage is driven by a JSON config stored in SQLite. The floating AI assistant (bottom-right) lets you rearrange the entire layout through natural language -- "move the energy card to the top" or "add a camera preview widget" -- and changes persist across restarts.
+
+Pages span the full home server stack: Chat, Devices, Cameras, Activity, Energy, Network, Media, Health, Analytics, Reports, Skills, Scenes, Memory, Tools, Home Map, Settings, Server, and Transcoder.
+
+## Conversational Device Control
+
+![Device Control](/blog/homebot/chat-device-control.png)
+
+"Turn the bedroom lights to warm white at 40%" -- the agent resolves entity names against the live Home Assistant state, calls the right HA service, and shows the tool call in the chat UI so you can see exactly what happened. No dashboard hunting, no app switching.
+
+## Smart Media Management
+
+![Media Chat](/blog/homebot/chat-media.png)
+
+The agent searches Sonarr, Prowlarr, Jellyseerr, and Transmission in a single conversation. Ask for a movie recommendation, and it can find the title, check availability, request it on Jellyseerr, and kick off the download through Transmission -- all without leaving the chat.
+
+![Media Dashboard](/blog/homebot/media.png)
+
+The dedicated media page unifies everything: now-playing from Jellyfin, active downloads, TV and movie queues, library browsing, and request status.
+
+## Live Home Awareness
+
+The backbone of everything is a WebSocket subscription that mirrors all 307 Home Assistant entities in memory. Context-aware state summaries are injected into every LLM call -- mention "printer" and the agent automatically includes 3D printer telemetry, ask about "batteries" and it surfaces all device levels. Recent state changes (last 10 minutes) are always visible, and the agent flags anomalies like low batteries, high power draw, or open doors.
+
+## Learnable Skills
+
+![Skills](/blog/homebot/skills.png)
+
+This is where HomeBotAI diverges most from the original setup. Instead of hardcoded workflows, you teach the agent reusable routines through conversation: "When I say goodnight, turn off all lights and set the fan to auto." Skills are stored as procedural memory and can be triggered by name, cron schedules, or HA state changes.
+
+Default skills include a daily digest at 10 PM, a weekly energy report on Sundays, a morning briefing, and presence-based automations (arrival lights, last-person-left lockdown). The reactor engine executes them using the live state cache and a 24-hour event log for context.
+
+## Three-Layer Memory
+
+The agent maintains three distinct memory layers:
+
+- **Episodic**: Conversation history per thread, so the agent remembers what you discussed earlier in a session.
+- **Semantic**: Long-term facts stored as key-value pairs -- your preferences, device quirks, household rules.
+- **Procedural**: The learnable skills described above -- reusable routines the agent can execute on demand or on schedule.
+
+## Proactive Notifications and AI Digests
+
+Automatic Telegram alerts fire without prompting: 3D printer finished, battery critically low, welcome home with a lights status summary, left home with devices still on. Built-in rules with cooldown timers prevent notification spam.
+
+The daily and weekly AI digests from v1 are now agent skills rather than n8n workflows. The daily digest (10 PM) covers activity, energy, and notable events. The weekly report (Sunday 8 PM) analyzes power trends and device usage patterns -- all generated by the agent with full access to the state cache and event history.
+
+## Energy, Network, and Health
+
+![Energy Dashboard](/blog/homebot/energy.png)
+
+The energy dashboard tracks power consumption with live wattage gauges, area charts over configurable time ranges (6h to 7d), and battery level cards that highlight low devices.
+
+![Network](/blog/homebot/network.png)
+
+Network monitoring pulls TP-Link Deco mesh status with per-node bandwidth, connected device inventory grouped by access point, and bandwidth-over-time charts.
+
+![Health](/blog/homebot/health.png)
+
+The health page pulls wearable data from Galaxy Watch and Pixel sensors via Home Assistant -- heart rate monitoring, daily activity rings, sleep tracking, and device battery levels.
+
+## Interactive Home Map
+
+![Home Map](/blog/homebot/home-map.png)
+
+A dedicated floorplan page with an SVG floor plan showing live device states as colored overlays. Lights glow when on, sensors display readings, and devices are clickable for direct toggle control.
+
+## 59 Integrated Tools
+
+![Tools](/blog/homebot/tools.png)
+
+The agent has access to 59 tools spanning Home Assistant control, media services (Sonarr, Radarr, Transmission, Jellyseerr, Prowlarr, Jellyfin), scene management, skill management, and three-layer memory operations -- all accessible via natural language.
+
+## Deep Agent
+
+A standalone LangChain agent service running on port 8322 with 49 tools across 8 modules. It features SKILL.md-based progressive skill loading and a model policy that routes between cloud (Gemini) and local (Ollama) LLMs. The dashboard chat includes a toggle to switch between the main agent and the Deep Agent for heavier tasks.
+
+## Voice Assistant: "Hey Jarvis"
+
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/YOOdyF5BlpM"
+  title="HomeBotAI Voice Assistant Demo"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+  style={{ borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', marginTop: '1.5rem', marginBottom: '1.5rem' }}
+/>
+
+The voice module turns the Mac Mini into an Alexa-style device for the bedroom. **openWakeWord** listens locally for "Hey Jarvis"; when it fires, a **Gemini Live** WebSocket session handles STT, reasoning, and TTS in one low-latency loop.
+
+Twelve function-calling tools are exposed directly -- lights, plugs, fans, scenes, sensor summaries, Jellyfin sessions, Transmission downloads, and session control. Anything more complex (media discovery, Sonarr/Radarr adds, link processing) is routed through a `delegate_to_homebot` tool that calls the Deep Agent, so the voice module inherits everything the agent can do without duplicating tools.
+
+Sessions auto-close after 30 seconds of silence or 13 minutes elapsed, then the mic goes back to wake-word listening.
+
+## Architecture
+
+![Architecture](/blog/homebot/architecture.png)
+
+The system breaks down into four main services:
+
+- **Backend** (FastAPI, port 8321): The LangChain/LangGraph ReAct agent, state cache, reactor, notifier, memory, and 59 tools. Entry points for the Telegram bot, REST API, and CLI.
+- **Dashboard** (Next.js 15, port 3001): Pure client-side UI with 18+ pages. No backend logic -- all data comes from the API.
+- **Deep Agent** (port 8322): Standalone LangChain agent with 49 tools and progressive skill loading. Telegram and voice delegate complex tasks here.
+- **Voice**: Wake word detection + Gemini Live for hands-free interaction with tool calling.
+
+Everything runs in Docker containers on the Mac Mini alongside Home Assistant, Ollama, and the media stack.
+
+## From v1 to v2: The Full Picture
+
+| Capability | v1 (n8n + Gemini) | v2 (HomeBotAI) |
+|---|---|---|
+| Orchestration | n8n visual workflows | LangChain ReAct agent |
+| Tools | Manual webhook wiring | 59 built-in tools |
+| Memory | Stateless | Three-layer (episodic, semantic, procedural) |
+| Dashboard | Home Assistant Lovelace | Custom Next.js with 18+ pages |
+| Daily digests | n8n cron workflow | Agent skill with state context |
+| Security alerts | n8n webhook + Gemini vision | Proactive notification rules + reactor |
+| Voice | None | "Hey Jarvis" with Gemini Live |
+| Learning | None | Teachable skills via conversation |
+| Media | Separate HA integrations | Unified search across 6 services |
+| Local LLM | None | Ollama fallback for skills and discovery |
+
+The [original blog post](/blog/my-house-thinks-smart-home-ai) and its demo video are still worth reading for the foundational ideas. HomeBotAI took those concepts and turned them into a production system that runs 24/7.
+
+**GitHub**: [github.com/Kanakjr/homebot](https://github.com/Kanakjr/homebot)

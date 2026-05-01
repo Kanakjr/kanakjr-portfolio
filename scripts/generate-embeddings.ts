@@ -64,6 +64,7 @@ interface ProjectEntry {
   description: string;
   tech: string[];
   demoVideo?: string;
+  demoVideos?: { label: string; url: string }[];
   blog?: string;
   github?: string;
   githubLinks?: { label: string; url: string }[];
@@ -166,6 +167,11 @@ function buildChunks(): KnowledgeChunk[] {
     const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     const links: string[] = [];
     if (project.demoVideo) links.push(`Demo: ${project.demoVideo}`);
+    if (project.demoVideos) {
+      for (const vid of project.demoVideos) {
+        links.push(`Demo (${vid.label}): ${vid.url}`);
+      }
+    }
     if (project.blog) links.push(`Blog: ${project.blog}`);
     if (project.github) links.push(`GitHub: ${project.github}`);
     if (project.githubLinks) {
