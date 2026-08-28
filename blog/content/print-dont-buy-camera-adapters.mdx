@@ -1,0 +1,98 @@
+---
+title: "Print, Don't Buy: How My 3D Printer Solved Two Camera Adapter Problems Before My Trip"
+description: "A travel tripod plate that no shop had, a hotshoe mount for an action cam on my Fujifilm X-T30 III, and one heat-set screw trick. Zero Amazon orders, roughly Rs. 2,400 saved."
+date: "2026-08-29"
+tags: ["3D Printing", "Maker", "Photography", "Travel", "Cost Saving"]
+readTime: "5 min read"
+author: "Kanak Dahake Jr"
+featured: false
+coverImage: "/blog/camera-adapter/rig-in-hand.jpeg"
+---
+
+A few days before a trip, I found myself staring at two small, annoying problems and one very smug little 3D printer humming in the corner of my room. Both problems had obvious "just buy it" fixes on Amazon. Neither one got bought. This is the story of how, in one evening, roughly ten grams of PLA and one tiny DIY hack completely replaced my checkout cart.
+
+![The finished rig held up mid-configuration: Fujifilm X-T30 III with a DJI Action 5 Pro on top via a 3D-printed hotshoe mount, both screens live](/blog/camera-adapter/rig-in-hand.jpeg)
+
+## Two problems, two abandoned carts
+
+I recently picked up a new travel tripod for the trip. The tripod uses a standard 1/4"-20 screw on top, which is universal in theory and mildly cursed in practice. My **DJI Action 5 Pro** and my **Fujifilm X-T30 III** are both wonderful little machines, but I wanted two things that neither the tripod box nor either camera box could give me:
+
+1. A quick-release plate that actually matched my tripod's clamp system, so I could snap the camera on and off without wrestling the screw every time.
+2. A way to mount the DJI Action 5 Pro on the **hotshoe** of the Fujifilm, so I could shoot stills and video **at the same time** from the same rig. One tripod, one hand, both cameras rolling.
+
+Amazon happily quoted me around Rs. 1,500-2,000 for the OEM [Ulanzi UKA quick release plate](https://www.amazon.in/dp/B0GJ8WHQV1), plus another Rs. 500-800 for a cold-shoe-to-GoPro-mount adapter, plus 3-5 days of waiting. I did not have 3-5 days. I did have a spool of red PLA.
+
+So I opened Printables.
+
+## Solution 1: Ulanzi UKA quick-release plate, printed
+
+The Ulanzi UKA has an oddly specific dovetail profile. Trying to substitute a generic Arca-Swiss plate is a losing game. Fortunately someone had already done the hard modelling work: [Ulanzi UKA Quick Release Plate (Easy Printable)](https://www.printables.com/model/1627350-ulanzi-uka-quick-release-plate-easy-printable/) on Printables. Print time: about an hour. Cost: a few grams of filament.
+
+It slotted straight into the tripod clamp. Solid, no wiggle, no wasted evening.
+
+## Solution 2: Hotshoe to action-cam mount, printed and heat-set
+
+The second one was more fun, because no model on Printables solved it end-to-end. The closest match, [Canon Hotshoe Action Camera Mount for GoPro / Insta360](https://www.printables.com/model/535332-canon-hotshoe-action-camera-mount-gopro-insta360/), gives you the universal hotshoe base and a GoPro-style two-prong mount on top. Great starting point -- except it doesn't include a cage or adapter for the DJI Action 5 Pro's body specifically. The DJI-side piece was missing, and no ready-made remix existed for it.
+
+So I did what the "just download and print" pitch quietly leaves out: I pulled the STLs into Bambu Studio, sliced off the parts I didn't need, and stitched together my own version -- keeping the hotshoe base and two-prong from that model, and building a DJI-shaped counterpart that mates with it. Custom-fit for my exact gear, still printed in the same evening.
+
+Then a smaller problem: the printed part needs to accept a metal screw somewhere, and I didn't have a proper threaded insert kit lying around. So I used the classic maker's shortcut: I took a generic 1/4"-20 screw, warmed the threads over a small flame for a few seconds, and pressed them straight into the PLA. The plastic melts around the threads and re-solidifies into a perfect metal-in-plastic bond. No glue, no insert, no drama. It has held through every mount and unmount since.
+
+![All the printed pieces laid out next to the Fujifilm and the DJI Action 5 Pro](/blog/camera-adapter/parts-flatlay.jpeg)
+
+That flatlay right there? Every single red part came off the printer in one evening.
+
+## The rig, in action
+
+Here is the DJI Action 5 Pro mounted on top of the Fujifilm via the printed hotshoe adapter, both screens live, both ready to shoot:
+
+<div className="video-shorts">
+  <iframe
+    src="https://www.youtube.com/embed/Rfyd_PHcP78"
+    title="DJI Action 5 Pro mounted on Fujifilm X-T30 III via 3D-printed adapter"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+Hand-held, it feels balanced and rigid. It should not, given that the load-bearing part is red PLA held together by a screw I heat-set into the plastic, and yet.
+
+![The full rig mounted on the travel tripod, both cameras framed up, spool of filament visible in the background](/blog/camera-adapter/rig-on-tripod.jpeg)
+
+Clamp both onto the tripod via the printed UKA plate and you get the actual goal: a single tripod head carrying stills and video simultaneously. Perfect for travel, where every gram and every second of setup counts.
+
+## The print itself
+
+For anyone curious about the workflow: this is Bambu Studio slicing the models on the laptop while the Bambu A1 chews through the parts next to it.
+
+<div className="video-shorts">
+  <iframe
+    src="https://www.youtube.com/embed/KoRppVQGBKM"
+    title="Printing the camera adapters on the Bambu A1 with Bambu Studio"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+![The DJI's viewfinder on the tripod, showing the printer that made the adapter it's mounted on -- happy little recursion](/blog/camera-adapter/action-cam-view.jpeg)
+
+## The tally
+
+> **Money saved on this one evening:**
+>
+> - Ulanzi UKA quick-release plate: ~Rs. 1,800 avoided
+> - Hotshoe to action-cam mount: ~Rs. 600 avoided
+> - Filament used: under 10 g, roughly Rs. 15
+> - Shipping wait: 0 days instead of 3-5
+>
+> **Net: about Rs. 2,400 saved, and I had the parts in my hand the same night.**
+
+## The bigger shift
+
+When I [first got the Bambu A1 a year ago](/blog/one-month-with-3d-printer), I mostly printed toys and desk trinkets. Somewhere along the way, the habit flipped. Now, the moment I hit a physical problem -- a wobbly mount, an oddly shaped bracket, a missing adapter, a broken clip -- my first tab isn't Amazon anymore. It's Printables. If the exact model exists, I'm holding it in an hour or two. If it almost exists, I remix it in Bambu Studio -- like the hotshoe mount above, which needed a custom DJI-side to actually be useful. If nothing close exists, that's just an excuse to open the CAD software.
+
+The printer stopped being a hobby the day it started paying for itself. This trip's camera rig is just the latest small victory in an ongoing running total.
+
+![Close-up of the rig on the desk: Fujifilm X-T30 III with the DJI Action 5 Pro riding on its hotshoe via the red printed adapter](/blog/camera-adapter/hero-rig.jpeg)
+
+Print, don't buy. Your Amazon cart will thank you.
