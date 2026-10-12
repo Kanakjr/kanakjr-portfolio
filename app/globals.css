@@ -158,6 +158,10 @@
   @apply rounded-lg border border-white/10 my-6;
 }
 
+.prose-blog video {
+  @apply w-full rounded-lg border border-white/10 my-6;
+}
+
 .prose-blog .video-shorts {
   max-width: 480px;
   margin: 1.5rem auto;
