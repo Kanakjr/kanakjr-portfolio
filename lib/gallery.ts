@@ -75,7 +75,6 @@ const staticGalleryData: GallerySection[] = [
       img("/portfolio/images/3d_prints/stormtrooper.jpg", "Articulated Stormtrooper figure from Star Wars"),
       img("/portfolio/images/3d_prints/baby-chimp.jpg", "Cute articulated baby chimp figurine"),
       img("/portfolio/images/3d_prints/iron-man-arc-reactor.jpg", "Iron Man Arc Reactor prop replica on articulated swivel display stand"),
-      img("/portfolio/images/3d_prints/arc-reactor-bambu-bed.jpg", "Arc Reactor components freshly printed on the Bambu Lab textured PEI plate"),
       img("/portfolio/images/3d_prints/fujifilm-xt30-lens-hood-grip.jpg", "Custom 3D printed square lens hood and red thumb grip on Fujifilm X-T30"),
       img("/portfolio/images/3d_prints/action-cam-tactical-cage.jpg", "Custom tactical camera cage and ergonomic grip for DJI Osmo Action with hazard stripes"),
       img("/portfolio/images/3d_prints/action-cam-lattice-grip-handle.jpg", "Ergonomic lattice voronoi handheld grip for DJI action camera"),
