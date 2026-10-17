@@ -1,7 +1,7 @@
 export const portfolioData = {
     hero: {
       name: "Kanak Dahake Jr",
-      role: "Software Development Specialist - GenAI",
+      role: "AI Tech Lead",
       tagline: "Turning complex problems into intelligent systems - from enterprise GenAI and cybersecurity to smart home automation.",
       bio: "Master's in Cybersecurity from Georgia Tech, 2 US patents, and a relentless urge to automate everything. Currently at Amdocs engineering Telco AI.",
       location: "Pune, India",
@@ -15,7 +15,7 @@ export const portfolioData = {
     experience: [
       {
         company: "Amdocs (Amaiz AI)",
-        role: "Software Development Specialist - GenAI",
+        role: "AI Tech Lead",
         period: "June 2024 – Present",
         description: "Built a configurable Multimodal RAG pipeline, human-in-loop command generation with pydantic models for API integration, and context entity management. Developed AI agents for personalized telco billing support and product recommendations."
       },

@@ -33,7 +33,7 @@ const HELP_TEXT = `Available commands:
 Shortcut: press backtick (\`) to toggle terminal`;
 
 const WHOAMI_TEXT = `Kanak Dahake Jr
-Software Development Specialist - GenAI @ Amdocs
+AI Tech Lead @ Amdocs
 MS Cybersecurity - Georgia Tech (4.0 GPA)
 2 US Patents | CompTIA Security+
 

@@ -35,7 +35,7 @@ When relevant, reference pages on the site using markdown links, for example:
 // ---------------------------------------------------------------------------
 const FALLBACK_CONTEXT = `=== PROFILE ===
 Name: Kanak Dahake Jr
-Current Role: Software Development Specialist - GenAI at Amdocs (Amaiz AI)
+Current Role: AI Tech Lead at Amdocs (Amaiz AI)
 Location: Pune, India
 Email: ksdusa4@gmail.com
 Website: https://kanakjr.in
@@ -47,7 +47,7 @@ YouTube: https://youtube.com/@kanakdahake
 Experienced Engineer specializing in GenAI, Cybersecurity, NLP, and multimodal RAG pipelines. Master's in Cybersecurity from Georgia Tech (4.0 GPA). 2 US Patents filed via PwC.
 
 === EXPERIENCE ===
-1. Amdocs (Amaiz AI) | Software Development Specialist - GenAI | June 2024 - Present
+1. Amdocs (Amaiz AI) | AI Tech Lead | June 2024 - Present
 2. PwC U.S. Advisory | Senior Associate / Associate - Innovation Hub | Dec 2020 - June 2024
 3. Digitate (Ignio AI), TCS | Technical Lead / Product Developer | Jun 2017 - Nov 2020
 

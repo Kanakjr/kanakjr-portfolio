@@ -104,7 +104,7 @@ export const resumeData = {
       company: "Amdocs (Amaiz AI)",
       roles: [
         {
-          title: "Software Development Specialist - GenAI",
+          title: "AI Tech Lead",
           period: "June 2024 - Present",
           location: "Pune, IN",
           bullets: [

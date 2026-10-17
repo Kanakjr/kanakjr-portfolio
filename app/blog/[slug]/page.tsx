@@ -6,6 +6,11 @@ import { getRelatedContent } from "@/lib/knowledge";
 import RelatedContent from "@/components/blog/RelatedContent";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import BookmarkButton from "@/components/blog/BookmarkButton";
+import AmsLiteTopMountFigure from "@/components/figures/AmsLiteTopMountFigure";
+
+const mdxComponents = {
+  AmsLiteTopMountFigure,
+};
 
 export function generateStaticParams() {
   const posts = getAllPosts();
@@ -113,7 +118,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* MDX Content */}
         <article className="prose-blog">
-          <MDXRemote source={post.content} />
+          <MDXRemote source={post.content} components={mdxComponents} />
         </article>
 
         {/* Tags */}

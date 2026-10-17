@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "../components/iso/iso.css";
 
 @layer base {
   :root {
