@@ -28,7 +28,10 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
           {galleryData.map((section, sectionIndex) => (
             <BlurFade key={section.id} delay={0.1 + sectionIndex * 0.1} inView>
-              <Link href="/stills" className="group block">
+              <Link
+                href={`/stills#${section.id === "3d_prints" ? "3d-prints" : section.id}`}
+                className="group block"
+              >
                 <MagicCard
                   className="p-4 transition-transform duration-300 hover:scale-[1.02]"
                   gradientSize={250}

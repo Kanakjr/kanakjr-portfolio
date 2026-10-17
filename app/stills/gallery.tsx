@@ -16,6 +16,11 @@ interface StillsGalleryProps {
   instagramUsername?: string;
 }
 
+function getSectionSlug(id: string): string {
+  if (id === "3d_prints") return "3d-prints";
+  return id;
+}
+
 export default function StillsGallery({
   captions,
   highlights = [],
@@ -25,6 +30,42 @@ export default function StillsGallery({
     sectionIndex: number;
     imageIndex: number;
   } | null>(null);
+  const [copiedSection, setCopiedSection] = useState<string | null>(null);
+
+  // Smooth scroll to section if URL has a hash on mount or hash change
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+      const targetId = hash === "3d_prints" ? "3d-prints" : hash;
+      const el = document.getElementById(targetId) || document.getElementById(hash);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 150);
+      }
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  const handleCopyLink = (e: React.MouseEvent, slug: string, title: string) => {
+    e.preventDefault();
+    const url = `${window.location.origin}/stills#${slug}`;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        setCopiedSection(title);
+        setTimeout(() => setCopiedSection(null), 2500);
+      });
+    }
+    const el = document.getElementById(slug);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    window.history.pushState(null, "", `/stills#${slug}`);
+  };
 
   const openLightbox = (sectionIndex: number, imageIndex: number) => {
     setLightbox({ sectionIndex, imageIndex });
@@ -90,9 +131,21 @@ export default function StillsGallery({
     <main className="relative min-h-screen overflow-hidden bg-background">
       <RetroGrid className="opacity-30" />
 
+      {/* Copied Feedback Toast */}
+      {copiedSection && (
+        <div className="fixed bottom-8 right-8 z-50 flex items-center gap-2.5 bg-neutral-900/95 border border-cyber-yellow/60 text-white px-4 py-2.5 rounded-lg shadow-2xl font-mono text-xs backdrop-blur-md transition-all">
+          <svg className="w-4 h-4 text-cyber-yellow shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>
+            Copied link to <span className="text-cyber-yellow font-bold">#{copiedSection}</span>
+          </span>
+        </div>
+      )}
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-32">
         <BlurFade delay={0.1} inView>
-          <div className="mb-16 text-center">
+          <div className="mb-10 text-center">
             <h1 className="text-5xl font-bold text-white font-mono md:text-6xl mb-4">
               <span className="text-cyber-yellow">Stills</span>
             </h1>
@@ -103,33 +156,87 @@ export default function StillsGallery({
           </div>
         </BlurFade>
 
-        {galleryData.map((section, sectionIndex) => (
-          <div key={section.id} className="mb-24 last:mb-0">
-            <BlurFade delay={0.15} inView>
-              <div className="mb-10">
-                <div className="flex items-center gap-4 mb-2">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white font-mono">
-                    {section.title}
-                  </h2>
-                  <div className="h-px flex-1 bg-gradient-to-r from-cyber-yellow/40 to-transparent" />
-                </div>
-                <p className="text-cyber-yellow/80 font-mono text-sm tracking-wider uppercase mb-1">
-                  {section.accent}
-                </p>
-                <p className="text-neutral-400 text-base">
-                  {section.description}
-                </p>
-              </div>
-            </BlurFade>
+        {/* Quick Section Navigation Bar */}
+        <BlurFade delay={0.15} inView>
+          <nav aria-label="Gallery sections" className="flex flex-wrap items-center justify-center gap-2 mb-16">
+            {galleryData.map((sec) => {
+              const slug = getSectionSlug(sec.id);
+              return (
+                <a
+                  key={sec.id}
+                  href={`#${slug}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(slug);
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                      window.history.pushState(null, "", `/stills#${slug}`);
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium border border-neutral-800 bg-neutral-900/80 text-neutral-400 hover:text-cyber-yellow hover:border-cyber-yellow/50 hover:bg-cyber-yellow/10 transition-all cursor-pointer"
+                >
+                  <span>{sec.title}</span>
+                  <span className="text-[10px] text-neutral-500 font-normal">
+                    {sec.images.length}
+                  </span>
+                </a>
+              );
+            })}
+          </nav>
+        </BlurFade>
 
-            {section.id === "nerdguytheory" && highlights.length > 0 && (
-              <BlurFade delay={0.2} inView>
-                <HighlightsRow
-                  highlights={highlights}
-                  username={instagramUsername}
+        {galleryData.map((section, sectionIndex) => {
+          const slug = getSectionSlug(section.id);
+          return (
+            <div
+              key={section.id}
+              id={slug}
+              className="mb-24 last:mb-0 scroll-mt-28 relative"
+            >
+              {/* Supporting both #3d-prints and legacy/internal #3d_prints */}
+              {slug !== section.id && (
+                <span
+                  id={section.id}
+                  className="block -mt-28 pt-28 pointer-events-none absolute"
+                  aria-hidden="true"
                 />
+              )}
+
+              <BlurFade delay={0.15} inView>
+                <div className="mb-10">
+                  <div className="flex items-center gap-4 mb-2 group/title">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white font-mono">
+                      <a
+                        href={`#${slug}`}
+                        onClick={(e) => handleCopyLink(e, slug, section.title)}
+                        className="hover:text-cyber-yellow transition-colors inline-flex items-center gap-2.5 cursor-pointer"
+                        title="Click to copy link to this section"
+                      >
+                        <span>{section.title}</span>
+                        <span className="text-cyber-yellow/40 group-hover/title:text-cyber-yellow text-xl md:text-2xl font-normal transition-colors">
+                          #
+                        </span>
+                      </a>
+                    </h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-cyber-yellow/40 to-transparent" />
+                  </div>
+                  <p className="text-cyber-yellow/80 font-mono text-sm tracking-wider uppercase mb-1">
+                    {section.accent}
+                  </p>
+                  <p className="text-neutral-400 text-base">
+                    {section.description}
+                  </p>
+                </div>
               </BlurFade>
-            )}
+
+              {section.id === "nerdguytheory" && highlights.length > 0 && (
+                <BlurFade delay={0.2} inView>
+                  <HighlightsRow
+                    highlights={highlights}
+                    username={instagramUsername}
+                  />
+                </BlurFade>
+              )}
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {section.images.map((image, imageIndex) => (
@@ -167,7 +274,8 @@ export default function StillsGallery({
               ))}
             </div>
           </div>
-        ))}
+        );
+      })}
 
         <div className="mt-16 text-center">
           <Link
