@@ -19,10 +19,7 @@ Then my ISP swapped my router and left the old **TP-Link Archer C6 v2** in a dra
 
 ## What I built
 
-```
-Phone / laptop ──Wi-Fi──▶ Travel router ──WireGuard over IPv6──▶ Mac Mini at home ──▶ Internet
-                           (joins hotel Wi-Fi)                    (home IP address)
-```
+![Architecture: devices in a hotel room connect to the OpenWrt travel router, which tunnels over WireGuard on IPv6 to a Mac Mini at home, while the IPv4 path is blocked by CGNAT](/blog/openwrt-travel-gateway/architecture.jpg)
 
 - **Hardware:** TP-Link Archer C6 v2, 128 MB RAM, **56 KiB of free flash**
 - **Firmware:** OpenWrt 25.12
