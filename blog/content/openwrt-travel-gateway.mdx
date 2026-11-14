@@ -59,7 +59,7 @@ Here is the quick video walkthrough of that dual-MacBook workbench setup while f
 
 With OpenWrt booted, I tackled the core networking challenge: **How do I tunnel back to my home Mac Mini?**
 
-Most residential internet connections in India (like Airtel Fiber) do not give you a public IPv4 address. You are placed behind **Carrier-Grade NAT (CGNAT)**. That means you cannot simply port-forward port 51820 on your home router because you share a public IPv4 address with thousands of other households.
+Most modern residential fiber broadband connections do not give you a public IPv4 address. You are placed behind **Carrier-Grade NAT (CGNAT)**. That means you cannot simply port-forward port 51820 on your home router because you share a public IPv4 address with thousands of other households.
 
 My first clever idea was: **Cloudflare Tunnel (`cloudflared`) + Transparent Proxy (GOST)**.
 Cloudflare Tunnels establish an *outbound* connection from my home Mac Mini to Cloudflare's edge—no port forwarding or public IP required!
@@ -100,10 +100,10 @@ I opened the management app for my home mesh router (a TP-Link Deco system). By 
 
 I toggled IPv6 on, configured PPPoE with prefix delegation, and within seconds, my home Mac Mini negotiated an address:
 ```
-en0: inet6 2401:xxxx:xxxx:xxxx::1000 prefixlen 64 dynamic
+en0: inet6 2001:db8:xxxx:xxxx::1000 prefixlen 64 dynamic
 ```
 
-A globally routable, public IPv6 address straight from Airtel's fiber backbone!
+A globally routable, public IPv6 address straight from the fiber backbone!
 
 **IPv6 has no Carrier-Grade NAT.** Every single device receives a globally reachable public address.
 
@@ -113,7 +113,7 @@ Instead of running heavy userspace binaries, I could use **in-kernel WireGuard (
 - **Speed:** Native hardware ChaCha20-Poly1305 encryption running at wire speed.
 
 ```
-[ Travel Router ] ── (Direct UDP [2401:...]:51820) ──> [ Home Mac Mini ] ──> [ Residential IP ]
+[ Travel Router ] ── (Direct UDP [2001:db8:...]:51820) ──> [ Home Mac Mini ] ──> [ Residential IP ]
 ```
 
 I fired up the tunnel, and the numbers spoke for themselves:
@@ -181,7 +181,7 @@ Now, whenever I travel:
 2. My phone automatically connects to my private 5 GHz Wi-Fi hotspot.
 3. The "Sign-in to network" notification pops up $\rightarrow$ I tap it $\rightarrow$ select the hotel Wi-Fi.
 4. I tap **"Home Mac Mini VPN"**.
-5. Instantly, all my devices are browsing through my home Airtel residential broadband connection at 100+ Mbps, with verified residential IP reputation, ad-blocking, and zero corporate geo-restriction flags.
+5. Instantly, all my devices are browsing through my home residential broadband connection at 100+ Mbps, with verified residential IP reputation, ad-blocking, and zero corporate geo-restriction flags.
 
 Best of all, an old router that would have otherwise ended up in electronic waste now has a permanent place in my travel backpack.
 
