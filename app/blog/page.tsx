@@ -15,7 +15,7 @@ export default function BlogPage() {
     <main className="relative min-h-screen overflow-hidden bg-background">
       <RetroGrid className="opacity-30" />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-4 py-32">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 py-32 lg:max-w-5xl lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center">
           <h1 className="text-5xl font-bold text-white font-mono md:text-6xl mb-4">

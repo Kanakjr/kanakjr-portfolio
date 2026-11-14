@@ -7,9 +7,12 @@ import RelatedContent from "@/components/blog/RelatedContent";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import BookmarkButton from "@/components/blog/BookmarkButton";
 import AmsLiteTopMountFigure from "@/components/figures/AmsLiteTopMountFigure";
+import MediaGrid, { Media } from "@/components/blog/MediaGrid";
 
 const mdxComponents = {
   AmsLiteTopMountFigure,
+  MediaGrid,
+  Media,
 };
 
 export function generateStaticParams() {
@@ -47,7 +50,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-3xl px-4 py-32">
+      <div className="relative z-10 mx-auto max-w-3xl px-4 py-32 lg:max-w-[960px] lg:px-8">
         {/* Back link */}
         <Link
           href="/blog"

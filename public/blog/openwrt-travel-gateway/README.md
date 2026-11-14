@@ -1,10 +1,9 @@
 # Project Assets & Media
 
-All assets recorded during development and build are documented here:
-
-- `build-setup-video.mp4`: Complete video showing the dual-MacBook setup (legacy MacBook with built-in Ethernet alongside modern MacBook) and OpenWrt installation.
-- `macbook-lan-hack.jpg`: Still frame showing the unibody MacBook bridging physical RJ45 Gigabit Ethernet to the TP-Link Archer C6 router.
-- `hardware-setup.jpg`: Still frame showing the desk setup, cabling, and router during firmware bootstrap.
-- `portal-mobile-dashboard.jpg`: Mobile screenshot of the Travel Gateway web portal running live on mobile (10.8.0.2).
-- `openwrt-system-specs.png`: LuCI system status showing the TP-Link Archer C6 v2 hardware specs, 128 MB RAM, and 384 KiB flash storage.
-- `openwrt-network-status.jpg`: LuCI network status showing active upstream client and dual-stack DHCP/DHCPv6 leases.
+- `hero.jpg`: AI-generated hero/cover image (Meshy, nano-banana-pro, using the real router photo as a reference).
+- `router-in-hand.jpg`: Real photo of the TP-Link Archer C6 v2 (web-sized).
+- `build-setup.mp4` / `build-setup-poster.jpg`: 18s dual-MacBook flashing clip (H.264 720p) and its poster frame.
+- `macbook-lan-hack.jpg`: Still of the 2012 MacBook wired to the router over RJ45.
+- `portal-mobile-dashboard.jpg`: Travel Gateway mobile portal running on the router (10.8.0.2).
+- `openwrt-network-status.jpg`: LuCI network status with dual-stack (IPv4 + IPv6) upstream.
+- `openwrt-system-specs.png`: LuCI system status: Archer C6 v2, 128 MB RAM, 384 KiB overlay.

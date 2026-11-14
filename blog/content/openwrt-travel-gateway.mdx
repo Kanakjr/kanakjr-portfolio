@@ -1,190 +1,118 @@
 ---
-title: "Building My Own Pocket Travel Gateway: How an Old Router & IPv6 Outsmarted Hotel Wi-Fi and Corporate Geo-Fences"
-description: "How I resurrected a discarded TP-Link router with OpenWrt, bypassed residential ISP CGNAT using native IPv6 WireGuard back to my Mac Mini, and built a 5.6 KB mobile captive portal for 1-tap hotel Wi-Fi switching."
+title: "An Old Router, IPv6, and a Tunnel Home: My Pocket Travel Gateway"
+description: "I turned a discarded TP-Link Archer C6 into a travel router that tunnels every device back to my Mac Mini at home over IPv6 WireGuard, with a 5.6 KB mobile portal for joining hotel Wi-Fi in one tap."
 date: "2026-11-14"
 tags: ["Home Lab", "OpenWrt", "WireGuard", "Networking", "Self-Hosting", "Mac Mini", "Remote Work"]
-readTime: "7 min read"
+readTime: "5 min read"
 author: "Kanak Dahake Jr"
 featured: true
-coverImage: "/blog/openwrt-travel-gateway/cover.jpg"
+coverImage: "/blog/openwrt-travel-gateway/hero.jpg"
 ---
 
-![The TP-Link Archer C6 Travel Gateway in hand](/blog/openwrt-travel-gateway/hero-router.jpg)
+![A travel router on a hotel desk with a glowing tunnel arcing across a world map to a Mac Mini at home](/blog/openwrt-travel-gateway/hero.jpg)
 
-*The resurrected TP-Link Archer C6 v2: a dedicated, pocket-sized residential security gateway powered by OpenWrt and in-kernel WireGuard.*
+Remote work lets you work from anywhere, as long as "anywhere" looks like your home network.
 
-There is a running joke in the developer community: *"Remote work lets you work from anywhere in the world, as long as 'anywhere' is within two feet of your home router."*
+Open a work laptop on hotel Wi-Fi and SSO flags the login. Route it through a commercial VPN or a cloud VM and IT asks why you're suddenly in a data center in Virginia. I wanted every device I travel with to sit behind one private hotspot in my bag, with all of its traffic going home first. To the rest of the internet, I never leave my desk.
 
-If you have ever traveled with a corporate laptop, you know the dread. You check into a hotel, open your laptop, connect to the public Wi-Fi, and suddenly:
-- Your corporate single sign-on (SSO) flags an anomalous login from an untrusted hotel subnet.
-- The company VPN refuses to route through the hotel's captive portal.
-- Or worse, if you try routing through a commercial VPN like NordVPN or an AWS EC2 instance, IT security pings you immediately: *"Why is your laptop connecting from an Ashburn, Virginia data center while you are supposed to be in Mumbai?"*
+Then my ISP swapped my router and left the old **TP-Link Archer C6 v2** in a drawer. That became the project.
 
-I wanted complete, frictionless digital freedom. When I travel, I want **every single device**—my work laptop, my personal MacBook, my phone, and my tablet—to connect to a private, trusted Wi-Fi hotspot in my backpack. And I want that hotspot to transparently tunnel every packet back to my Mac Mini at home, so to the rest of the world, I never left my desk.
+## What I built
 
-The catalyst happened right on my desk: my ISP upgraded my broadband and gave me a brand-new router, leaving an old **TP-Link Archer C6 v2** collecting dust in a drawer. 
+```
+Phone / laptop ──Wi-Fi──▶ Travel router ──WireGuard over IPv6──▶ Mac Mini at home ──▶ Internet
+                           (joins hotel Wi-Fi)                    (home IP address)
+```
 
-Armed with a soldering spirit, an ancient laptop, and a refusal to buy commercial travel routers, I set out to build the ultimate pocket gateway. Here is how it happened.
+- **Hardware:** TP-Link Archer C6 v2, 128 MB RAM, **56 KiB of free flash**
+- **Firmware:** OpenWrt 25.12
+- **Tunnel:** in-kernel WireGuard to my Mac Mini, over IPv6
+- **UI:** a 5.6 KB gzipped web app for picking hotel Wi-Fi and switching modes in one tap
 
----
-
-## Act I: The "Where's the LAN Port?!" Dilemma
-
-Every good hardware adventure begins with an absurd roadblock within the first five minutes.
-
-To flash OpenWrt onto the TP-Link Archer C6, you need a wired Ethernet connection to `192.168.1.1` to access the OEM firmware update interface and push the recovery squashfs image.
-
-I grabbed my daily driver: a modern MacBook Pro. It has screaming fast Apple Silicon, an incredible Liquid Retina XDR screen, and... **zero physical RJ45 Ethernet ports**. And naturally, in true developer fashion, my USB-C Ethernet dongle had vanished into the fifth dimension.
-
-Then I remembered: buried at the bottom of my closet was an ancient, mid-2012 unibody MacBook. Its battery was questionable and it weighed as much as a brick. But running my hand along its aluminum edge: **a glorious, native, physical RJ45 Gigabit Ethernet port.**
-
-I booted up the legacy MacBook, plugged the cable straight into the router's LAN port, assigned a static IP, and within minutes, OpenWrt 25.12 was installed and humming.
-
-Here is the quick video walkthrough of that dual-MacBook workbench setup while flashing OpenWrt:
-
-<video 
-  src="/blog/openwrt-travel-gateway/build-setup-video.mp4" 
-  controls 
-  playsInline 
-  className="w-full rounded-xl border border-neutral-800 my-6 shadow-2xl"
-/>
+It took four tries to get there.
 
 ---
 
-## Act II: The 128 MB RAM Wall & The Cloudflare Tunnel Crash
+## 1. Flashing it with no Ethernet port
 
-With OpenWrt booted, I tackled the core networking challenge: **How do I tunnel back to my home Mac Mini?**
+Flashing OpenWrt on this router needs a wired connection. My MacBook Pro has no Ethernet port, and my USB-C dongle had disappeared.
 
-Most modern residential fiber broadband connections do not give you a public IPv4 address. You are placed behind **Carrier-Grade NAT (CGNAT)**. That means you cannot simply port-forward port 51820 on your home router because you share a public IPv4 address with thousands of other households.
+What I did have was a mid-2012 MacBook at the back of a closet, with a real RJ45 port. I set a static IP, ran a cable to the router's LAN port, and a few minutes later OpenWrt was running.
 
-My first clever idea was: **Cloudflare Tunnel (`cloudflared`) + Transparent Proxy (GOST)**.
-Cloudflare Tunnels establish an *outbound* connection from my home Mac Mini to Cloudflare's edge—no port forwarding or public IP required!
+<MediaGrid caption="The router, the flash in progress, and the 2012 MacBook that still has an Ethernet port.">
+  <Media src="/blog/openwrt-travel-gateway/router-in-hand.jpg" alt="TP-Link Archer C6 v2 held in hand" label="The router" />
+  <Media src="/blog/openwrt-travel-gateway/build-setup.mp4" poster="/blog/openwrt-travel-gateway/build-setup-poster.jpg" alt="Video of the dual-MacBook flashing setup" label="Flashing (18s)" video="true" />
+  <Media src="/blog/openwrt-travel-gateway/macbook-lan-hack.jpg" alt="Old MacBook wired to the router showing OpenWrt LuCI" label="LuCI over a real cable" />
+</MediaGrid>
 
-```
-[ Laptop / Phone ] ──> [ OpenWrt Router ] ──(WSS)──> [ Cloudflare Tunnel ] ──> [ Home Mac Mini ]
-```
+## 2. First plan: Cloudflare Tunnel. It crashed the router.
 
-It looked brilliant on a whiteboard. But the moment I deployed it onto the router, reality hit like a freight train.
+My home connection is behind **CGNAT**: no public IPv4 address, so I can't forward a port. My first idea was to avoid inbound connections altogether: run a Cloudflare Tunnel from the Mac Mini and a Go-based proxy (`gost`) on the router.
 
-### 1. The Cloudflare HTTP CONNECT Wall
-Cloudflare's public reverse proxy strictly blocks raw HTTP `CONNECT` tunneling with a hard `400 Bad Request`.
+It failed twice:
 
-### 2. The Linux Kernel OOM Killer
-To circumvent this, I cross-compiled `gost` (a Go-based tunneling tool) for the router's MIPS architecture. The moment the Go runtime initialized its garbage collector and heap, it requested **631 MB of virtual memory** and **15 MB RSS**.
-
-On a constrained router with **only 128 MB of RAM total**, the Linux kernel immediately triggered its emergency defense:
-```
-[ 7778.024299] oom-kill: global_oom, task=gost, total-vm:631484kB, anon-rss:15096kB
-```
-The router froze, killed the process, and dropped all Wi-Fi clients.
-
-To make matters worse, look at the flash storage on this router:
-
-![OpenWrt Hardware Constraints on TP-Link Archer C6](/blog/openwrt-travel-gateway/openwrt-system-specs.png)
-
-Out of 384 KiB of JFFS2 overlay flash, **328 KiB was already occupied**. I had only **56 KiB of free persistent storage space!** Running bloated userspace Go binaries was completely out of the question.
-
----
-
-## Act III: The IPv6 Epiphany & Bypassing CGNAT Naturally
-
-Sitting back, defeated by the memory wall, I asked myself the fundamental question:
-
-> *"Why am I torturing a 128 MB MIPS router with heavy userspace proxies to dance around IPv4 CGNAT, when the modern internet has an entirely separate addressing system?"*
-
-I opened the management app for my home mesh router (a TP-Link Deco system). By default, **IPv6 was disabled**.
-
-I toggled IPv6 on, configured PPPoE with prefix delegation, and within seconds, my home Mac Mini negotiated an address:
-```
-en0: inet6 2001:db8:xxxx:xxxx::1000 prefixlen 64 dynamic
-```
-
-A globally routable, public IPv6 address straight from the fiber backbone!
-
-**IPv6 has no Carrier-Grade NAT.** Every single device receives a globally reachable public address.
-
-Instead of running heavy userspace binaries, I could use **in-kernel WireGuard (`wireguard.ko`)**:
-- **RAM footprint:** Virtually **0 MB** in userspace (processed directly inside kernel packet buffers).
-- **Disk footprint:** Zero userspace daemon needed.
-- **Speed:** Native hardware ChaCha20-Poly1305 encryption running at wire speed.
+- **Cloudflare rejected it.** Its edge returns `400 Bad Request` for raw HTTP `CONNECT` tunneling.
+- **The kernel killed it.** On startup, the Go runtime reserved 631 MB of virtual memory on a router with 128 MB of RAM:
 
 ```
-[ Travel Router ] ── (Direct UDP [2001:db8:...]:51820) ──> [ Home Mac Mini ] ──> [ Residential IP ]
+oom-kill: global_oom, task=gost, total-vm:631484kB, anon-rss:15096kB
 ```
 
-I fired up the tunnel, and the numbers spoke for themselves:
+Wi-Fi dropped, and the router froze. On top of that, only 56 KiB of the flash was free. Big userspace binaries were never going to fit.
+
+## 3. The fix: IPv6 gets around CGNAT
+
+CGNAT only applies to IPv4. I turned on IPv6 in my home mesh router's settings, and the Mac Mini immediately got a public, globally routable IPv6 address.
+
+That meant I didn't need a proxy at all. **WireGuard is built into the Linux kernel**, so it needs no daemon and almost no RAM. Because there's no room for it on flash, the router downloads the WireGuard kernel module into RAM (`/tmp`) when I switch on VPN mode, loads it, then connects straight to the Mac Mini's IPv6 address on UDP 51820.
+
 ```
 interface: wg0
   latest handshake: 14 seconds ago
   transfer: 49.15 MiB received, 32.34 MiB sent
 ```
-Zero packet loss. Zero OOM errors. Full-speed residential broadband anywhere in the world.
 
-![OpenWrt Dual-Stack Upstream Network](/blog/openwrt-travel-gateway/openwrt-network-status.jpg)
+No crashes, no packet loss, and all traffic leaves through my home connection.
 
----
+## 4. A 5.6 KB portal for hotel Wi-Fi
 
-## Act IV: Building the 5.6 KB Mobile Captive Portal
+The tunnel worked, but joining hotel Wi-Fi meant logging into LuCI on a phone and pinch-zooming through four tabs. With 56 KiB of flash, there was no room for Node, Python, or a build step, so I kept it small:
 
-The VPN was rock solid, but usability was still terrible.
+- **UI:** a single HTML file with inline CSS and plain JavaScript. 21 KB raw, **5.6 KB** after `gzip -9`.
+- **API:** a 2 KB POSIX shell CGI script that turns `iwinfo` scan output into JSON with BusyBox `awk`.
+- **Captive-portal detection:** the router answers the connectivity checks Android and iOS run (`/generate_204`, `captive.apple.com`), so the phone shows **"Sign in to network"**. Tapping it opens the portal.
+- **Three modes, one tap each:** Home VPN, Tor, or direct hotel Wi-Fi.
 
-When you land in a hotel room after a 14-hour flight, the last thing you want to do is open `192.168.1.1` on your phone, log into OpenWrt's desktop-oriented LuCI interface, pinch-to-zoom across four tabs, and fiddle with wireless bridge settings just to join the hotel Wi-Fi.
+## 5. The bug that hid the router's own address
 
-I needed a **1-tap mobile web app**.
+Then a strange one: `http://10.8.0.2` loaded, but `http://192.168.1.1` timed out. The router couldn't serve its own LAN address.
 
-Remember the constraint: **56 KiB of free flash overlay**. No Node.js. No npm. No Tailwind build step. No Python runtime.
+The cause was my own policy routing. Everything from the LAN went to a table whose only route was the tunnel, **including requests to the router itself**, which went to the Mac Mini instead. Two higher-priority rules fixed it:
 
-![Travel Gateway Mobile Web Portal](/blog/openwrt-travel-gateway/portal-mobile-dashboard.jpg)
-
-Here is how I pulled it off:
-1. **The UI:** A single responsive HTML file with inline CSS and vanilla JavaScript. Polished dark mode, native touch targets, and live signal strength indicators.
-2. **The Gzip Compression Trick:** Raw HTML was 21 KB. When compressed with `gzip -9`, the entire bundle shrunk to **just 5.6 KB**!
-3. **The Backend:** A 2 KB POSIX `/bin/sh` CGI script (`/www/cgi-bin/portal-api`) using BusyBox `awk` to parse `iwinfo phy1-sta0 scan` into clean JSON in under 80 milliseconds.
-4. **RFC Captive Portal Interception:** When you arrive at a hotel and turn on the router, Android and iOS automatically fire connectivity probes (`/generate_204` and `captive.apple.com`). The router intercepts these and immediately shows the native system notification: **🔔 "Sign in to OpenWrt network"**. Tapping it opens the Travel Gateway right in the phone's webview!
-
----
-
-## Act V: The Phantom Routing Bug
-
-During testing, I hit a bizarre bug:
-- When I opened `http://10.8.0.2` (the router's WireGuard IP), the portal loaded instantly.
-- But when I opened `http://192.168.1.1` (the router's LAN IP), the browser timed out!
-
-Why would a router be unable to talk to its own LAN IP?
-
-The culprit was **Policy-Based Routing (PBR)**:
-To ensure all internet traffic went through the home VPN, I had configured:
 ```bash
-ip rule add iif br-lan lookup 100
-ip route add default dev wg0 table 100
-```
-Because routing table 100 had `default dev wg0` without an exception for the local subnet, **packets from my phone intended for the router's own web server (`192.168.1.1`) were being shoved down the WireGuard tunnel to the Mac Mini!**
-
-The fix was a single high-priority bypass rule in `/etc/rc.local`:
-```bash
-# Bypass WireGuard tunnel for local router management
 ip rule add pref 90 iif br-lan to 192.168.1.0/24 lookup main
 ip rule add pref 91 iif br-lan to 10.8.0.0/24 lookup main
 ```
-The moment rule 90 was loaded, `http://192.168.1.1` began loading in under 40 milliseconds.
 
 ---
 
-## The Result: Pocket Residential Freedom
+## How I use it now
 
-Now, whenever I travel:
-1. I plug the router into any USB-C power bank or hotel wall socket.
-2. My phone automatically connects to my private 5 GHz Wi-Fi hotspot.
-3. The "Sign-in to network" notification pops up $\rightarrow$ I tap it $\rightarrow$ select the hotel Wi-Fi.
-4. I tap **"Home Mac Mini VPN"**.
-5. Instantly, all my devices are browsing through my home residential broadband connection at 100+ Mbps, with verified residential IP reputation, ad-blocking, and zero corporate geo-restriction flags.
+1. Plug the router into a power bank or a hotel outlet.
+2. My phone joins the private hotspot and shows "Sign in to network."
+3. Tap it, pick the hotel Wi-Fi, then tap **Home Mac Mini VPN**.
+4. Every device now uses my home connection.
 
-Best of all, an old router that would have otherwise ended up in electronic waste now has a permanent place in my travel backpack.
+<MediaGrid caption="The portal, the dual-stack upstream connection, and how little room the router has.">
+  <Media src="/blog/openwrt-travel-gateway/portal-mobile-dashboard.jpg" alt="Travel Gateway mobile portal" label="1-tap portal" position="top" />
+  <Media src="/blog/openwrt-travel-gateway/openwrt-network-status.jpg" alt="OpenWrt network status with IPv4 and IPv6 upstream" label="IPv4 + IPv6 upstream" position="top" />
+  <Media src="/blog/openwrt-travel-gateway/openwrt-system-specs.png" alt="OpenWrt system status showing 128 MB RAM" label="128 MB RAM, 384 KiB overlay" position="top" />
+</MediaGrid>
+
+**The catch:** the tunnel needs IPv6 on both ends. If a hotel network is IPv4-only, it can't reach home directly. In that case I can still use the direct or Tor mode.
+
+A router headed for e-waste now lives in my backpack.
 
 ---
 
-### Source Code & Guides
-
-The entire project—including the 5.6 KB web portal, the POSIX shell CGI APIs, the macOS WireGuard server scripts, and UCI configuration templates—is completely open source:
-
-👉 **GitHub: [Kanakjr/openwrt-travel-gateway](https://github.com/Kanakjr/openwrt-travel-gateway)**
+**Code:** the portal, CGI scripts, macOS WireGuard server scripts, and OpenWrt config templates are all open source at **[Kanakjr/openwrt-travel-gateway](https://github.com/Kanakjr/openwrt-travel-gateway)**.
