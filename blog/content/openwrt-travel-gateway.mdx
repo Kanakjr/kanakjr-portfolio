@@ -6,10 +6,10 @@ tags: ["Home Lab", "OpenWrt", "WireGuard", "Networking", "Self-Hosting", "Mac Mi
 readTime: "5 min read"
 author: "Kanak Dahake Jr"
 featured: true
-coverImage: "/blog/openwrt-travel-gateway/hero.jpg"
+coverImage: "/blog/openwrt-travel-gateway/architecture.jpg"
 ---
 
-![A travel router on a hotel desk with a glowing tunnel arcing across a world map to a Mac Mini at home](/blog/openwrt-travel-gateway/hero.jpg)
+![Architecture: devices in a hotel room connect to the OpenWrt travel router, which tunnels over WireGuard on IPv6 to a Mac Mini at home, while the IPv4 path is blocked by CGNAT](/blog/openwrt-travel-gateway/architecture.jpg)
 
 Remote work lets you work from anywhere, as long as "anywhere" looks like your home network.
 
@@ -19,7 +19,10 @@ Then my ISP swapped my router and left the old **TP-Link Archer C6 v2** in a dra
 
 ## What I built
 
-![Architecture: devices in a hotel room connect to the OpenWrt travel router, which tunnels over WireGuard on IPv6 to a Mac Mini at home, while the IPv4 path is blocked by CGNAT](/blog/openwrt-travel-gateway/architecture.jpg)
+```
+Phone / laptop ──Wi-Fi──▶ Travel router ──WireGuard over IPv6──▶ Mac Mini at home ──▶ Internet
+                           (joins hotel Wi-Fi)                    (home IP address)
+```
 
 - **Hardware:** TP-Link Archer C6 v2, 128 MB RAM, **56 KiB of free flash**
 - **Firmware:** OpenWrt 25.12
