@@ -18,6 +18,7 @@ interface BlogPost {
   author: string;
   featured: boolean;
   coverImage: string;
+  cardImage?: string;
 }
 
 interface TagCount {
@@ -34,6 +35,7 @@ interface BlogListProps {
 export default function BlogList({ posts, tags, summaries = {} }: BlogListProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showBookmarked, setShowBookmarked] = useState(false);
+  const [showAllTags, setShowAllTags] = useState(false);
   const { isBookmarked, loaded: bookmarksLoaded } = useBookmarks();
 
   const filteredPosts = posts.filter((post) => {
@@ -43,6 +45,13 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
   });
 
   const totalCount = posts.length;
+
+  // Tags arrive sorted by count; show the main ones and keep the active tag visible
+  const TOP_TAGS = 8;
+  const visibleTags = showAllTags
+    ? tags
+    : tags.filter((t, i) => i < TOP_TAGS || t.tag === activeTag);
+  const hiddenCount = tags.length - visibleTags.length;
 
   return (
     <>
@@ -74,7 +83,7 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
             Saved
           </button>
         )}
-        {tags.map(({ tag, count }) => (
+        {visibleTags.map(({ tag, count }) => (
           <button
             key={tag}
             onClick={() => setActiveTag(activeTag === tag ? null : tag)}
@@ -88,6 +97,14 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
             <span className="ml-1 text-[10px] opacity-70">{count}</span>
           </button>
         ))}
+        {(hiddenCount > 0 || showAllTags) && (
+          <button
+            onClick={() => setShowAllTags(!showAllTags)}
+            className="px-4 py-1.5 text-xs font-mono rounded-full border border-dashed border-white/15 text-neutral-500 hover:border-white/30 hover:text-neutral-300 transition-all duration-300"
+          >
+            {showAllTags ? "Fewer tags" : `+${hiddenCount} more`}
+          </button>
+        )}
       </div>
 
       {/* Blog Cards */}
@@ -186,10 +203,10 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
                     </div>
 
                     {/* Cover image on left */}
-                    {post.coverImage && (
+                    {(post.cardImage || post.coverImage) && (
                       <div className="relative hidden md:block w-64 flex-shrink-0">
                         <Image
-                          src={post.coverImage}
+                          src={post.cardImage || post.coverImage}
                           alt={post.title}
                           fill
                           className="object-cover"

@@ -2,50 +2,45 @@
 
 import RetroGrid from "@/components/magicui/retro-grid";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
-import ShimmerButton from "@/components/magicui/shimmer-button";
-import BorderBeam from "@/components/magicui/border-beam";
 import Image from "next/image";
+import Link from "next/link";
 import { portfolioData } from "@/lib/data";
+
+const proof = [
+  { label: "AI Tech Lead @ Amdocs", href: "#career" },
+  { label: "2 US patents", href: "#patents" },
+  { label: "MS Cybersecurity, Georgia Tech", href: "#achievements" },
+];
 
 export default function Hero() {
   const { hero } = portfolioData;
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
       <RetroGrid className="opacity-100" />
 
-      <div className="relative z-10 flex flex-col items-center gap-6 px-4 text-center max-w-5xl mx-auto py-20">
-        {/* Avatar with Border Beam */}
-        <div className="relative h-48 w-48">
-          <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-white/20">
-            <Image
-              src="/avatar.jpg"
-              alt={hero.name}
-              fill
-              className="object-cover"
-              priority
-              unoptimized
-            />
-          </div>
-          <BorderBeam
-            size={220}
-            duration={12}
-            borderWidth={2}
-            colorFrom="rgba(255, 215, 0, 0.6)"
-            colorTo="rgba(255, 69, 0, 0.6)"
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 px-4 py-24 text-center">
+        <div className="relative h-32 w-32 overflow-hidden rounded-full border-2 border-white/15 md:h-44 md:w-44">
+          <Image
+            src="/avatar.jpg"
+            alt={hero.name}
+            fill
+            className="object-cover"
+            priority
+            unoptimized
           />
         </div>
 
-        {/* Title with Typing Animation */}
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="text-5xl font-bold text-white font-mono md:text-7xl">
-            I&apos;m <span className="text-cyber-yellow">{hero.name}</span>
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <h1 className="font-mono text-4xl font-bold text-white sm:text-5xl md:text-7xl">
+            I&apos;m <span className="whitespace-nowrap text-cyber-yellow">{hero.name}</span>
           </h1>
 
-          <div className="flex items-center gap-3 text-3xl md:text-4xl">
+          {/* Fixed height + no wrapping so the typing effect never reflows the page */}
+          <div className="flex h-9 items-center gap-2 whitespace-nowrap text-xl md:h-12 md:gap-3 md:text-4xl">
             <span className="text-neutral-300">I am a</span>
             <TypingAnimation
               words={["AI Engineer", "Security Specialist", "Innovator", "Hacker"]}
-              className="text-cyber-yellow font-bold"
+              className="font-bold text-cyber-yellow"
               typeSpeed={80}
               deleteSpeed={40}
               pauseDelay={2000}
@@ -55,42 +50,37 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Description */}
-        <p className="max-w-2xl text-lg text-neutral-400 md:text-xl">
+        <p className="max-w-2xl text-base text-neutral-400 md:text-xl">
           {hero.tagline}
         </p>
-        
-        <p className="max-w-2xl text-base text-neutral-500 font-mono">
-          {hero.bio}
-        </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-4 justify-center">
-          <a href="/resume">
-            <ShimmerButton
-              shimmerColor="#FFD700"
-              background="rgba(255, 215, 0, 0.1)"
-              className="border-cyber-yellow/30 text-cyber-yellow hover:border-cyber-yellow"
-            >
-              View Resume
-            </ShimmerButton>
-          </a>
+        <ul className="flex flex-wrap justify-center gap-2">
+          {proof.map((p) => (
+            <li key={p.label}>
+              <a
+                href={p.href}
+                className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-neutral-300 transition-colors hover:border-cyber-yellow/50 hover:text-cyber-yellow"
+              >
+                {p.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-          <ShimmerButton
-            shimmerColor="#FF4500"
-            background="rgba(255, 69, 0, 0.1)"
-            className="border-retro-red/30 text-retro-red hover:border-retro-red"
-            onClick={() => {
-              const footer = document.querySelector('footer');
-              if (footer) {
-                footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
+        <div className="flex flex-wrap justify-center gap-3 pt-2">
+          <Link
+            href="/resume"
+            className="rounded-lg bg-cyber-yellow px-6 py-3 font-mono text-sm font-semibold text-black transition-opacity hover:opacity-85"
           >
-            Get in Touch
-          </ShimmerButton>
+            View resume
+          </Link>
+          <a
+            href={`mailto:${hero.email}`}
+            className="rounded-lg border border-white/20 px-6 py-3 font-mono text-sm text-white transition-colors hover:border-cyber-yellow hover:text-cyber-yellow"
+          >
+            Email me
+          </a>
         </div>
-
       </div>
     </section>
   );

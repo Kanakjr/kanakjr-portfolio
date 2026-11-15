@@ -10,22 +10,22 @@ const PREVIEW_COUNT = 3;
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="relative py-20 px-4">
-      <div className="mx-auto max-w-7xl">
+    <section id="portfolio" className="relative py-14 px-4 md:py-20">
+      <div className="mx-auto max-w-6xl">
         {/* Section Header */}
         <BlurFade delay={0.1} inView>
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
+          <div className="mb-10 flex flex-col gap-2 md:mb-12">
+            <h2 className="font-mono text-3xl font-bold text-white md:text-5xl">
               <span className="text-cyber-yellow">Stills</span>
             </h2>
-            <p className="text-neutral-400 text-lg">
+            <p className="text-neutral-400 md:text-lg">
               Beyond code -- bikes, builds, and things I make with my hands
             </p>
           </div>
         </BlurFade>
 
         {/* Compact preview grid -- all sections in one row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mb-10">
           {galleryData.map((section, sectionIndex) => (
             <BlurFade key={section.id} delay={0.1 + sectionIndex * 0.1} inView>
               <Link
@@ -33,7 +33,7 @@ export default function Portfolio() {
                 className="group block"
               >
                 <MagicCard
-                  className="p-4 transition-transform duration-300 hover:scale-[1.02]"
+                  className="p-4"
                   gradientSize={250}
                   gradientColor="#FFD700"
                   gradientOpacity={0.3}
@@ -64,7 +64,7 @@ export default function Portfolio() {
                           src={image.thumb}
                           alt={image.alt}
                           fill
-                          sizes="(max-width: 640px) 30vw, (max-width: 1024px) 15vw, 10vw"
+                          sizes="(max-width: 640px) 30vw, (max-width: 1024px) 15vw, 8vw"
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           loading="lazy"
                         />
@@ -79,7 +79,7 @@ export default function Portfolio() {
 
         {/* View all link */}
         <BlurFade delay={0.3} inView>
-          <div className="text-center">
+          <div>
             <Link
               href="/stills"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-cyber-yellow/10 border border-white/10 hover:border-cyber-yellow/50 rounded-lg text-white hover:text-cyber-yellow transition-all font-mono text-sm"

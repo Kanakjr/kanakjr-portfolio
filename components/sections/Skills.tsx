@@ -1,99 +1,40 @@
-"use client";
-
-import IconCloud from "@/components/magicui/icon-cloud";
 import { portfolioData } from "@/lib/data";
 
-const slugs = [
-  "python",
-  "javascript",
-  "gnubash",
-  "react",
-  "streamlit",
-  "amazonaws",
-  "microsoftazure",
-  "docker",
-  "kubernetes",
-  "git",
-  "mongodb",
-  "neo4j",
-  "tensorflow",
-  "pytorch",
-  "openai",
-  "langchain",
-  "fastapi",
+const groups = [
+  { title: "Core", items: portfolioData.skills.core },
+  { title: "AI & ML", items: portfolioData.skills.ai },
+  { title: "Stack", items: portfolioData.skills.stack },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-20 px-4 overflow-hidden">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
-            Competency <span className="text-cyber-yellow">Spectrum</span>
+    <section id="skills" className="relative px-4 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 flex flex-col gap-2 md:mb-12">
+          <h2 className="font-mono text-3xl font-bold text-white md:text-5xl">
+            Tool<span className="text-cyber-yellow">kit</span>
           </h2>
-          <p className="text-neutral-400 text-lg">
-            Technologies and tools I work with
-          </p>
+          <p className="text-neutral-400 md:text-lg">Technologies and tools I work with.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Icon Cloud */}
-          <div className="relative flex items-center justify-center">
-            <div className="w-full max-w-[500px] aspect-square">
-              <IconCloud iconSlugs={slugs} />
-            </div>
-          </div>
-
-          {/* Skill Categories */}
-          <div className="space-y-8">
-            <div className="group">
-              <h3 className="text-2xl font-bold text-cyber-yellow font-mono mb-4 group-hover:text-retro-red transition-colors">
-                Core Technologies
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {groups.map((g) => (
+            <div key={g.title} className="flex flex-col gap-3">
+              <h3 className="font-mono text-sm uppercase tracking-[0.18em] text-cyber-yellow">
+                {g.title}
               </h3>
-              <div className="flex flex-wrap gap-3">
-                {portfolioData.skills.core.map((skill) => (
-                  <span
+              <ul className="flex flex-wrap gap-2">
+                {g.items.map((skill) => (
+                  <li
                     key={skill}
-                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-neutral-300 hover:border-cyber-yellow/50 hover:text-cyber-yellow transition-all cursor-default"
+                    className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-neutral-300"
                   >
                     {skill}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
-
-            <div className="group">
-              <h3 className="text-2xl font-bold text-cyber-yellow font-mono mb-4 group-hover:text-retro-red transition-colors">
-                AI & Machine Learning
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {portfolioData.skills.ai.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-neutral-300 hover:border-cyber-yellow/50 hover:text-cyber-yellow transition-all cursor-default"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="group">
-              <h3 className="text-2xl font-bold text-cyber-yellow font-mono mb-4 group-hover:text-retro-red transition-colors">
-                Development Stack
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {portfolioData.skills.stack.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-neutral-300 hover:border-cyber-yellow/50 hover:text-cyber-yellow transition-all cursor-default"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

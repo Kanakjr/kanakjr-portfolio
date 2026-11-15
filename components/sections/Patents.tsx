@@ -1,70 +1,39 @@
-"use client";
-
 import { portfolioData } from "@/lib/data";
-import MagicCard from "@/components/magicui/magic-card";
-import { Particles } from "@/components/magicui/particles";
 
 export default function Patents() {
   return (
-    <section id="patents" className="relative py-20 px-4 overflow-hidden">
-      <Particles
-        className="absolute inset-0"
-        quantity={100}
-        ease={80}
-        color="#FFD700"
-        refresh={false}
-      />
-      
-      <div className="mx-auto max-w-7xl relative z-10">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
-            Patent <span className="text-cyber-yellow">Portfolio</span>
+    <section id="patents" className="relative px-4 py-14 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 flex flex-col gap-2 md:mb-12">
+          <h2 className="font-mono text-3xl font-bold text-white md:text-5xl">
+            <span className="text-cyber-yellow">Patents</span>
           </h2>
-          <p className="text-neutral-400 text-lg">
-            Innovations in AI-powered data analysis and visualization
+          <p className="text-neutral-400 md:text-lg">
+            Innovations in AI-powered data analysis and visualization.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {portfolioData.patents.map((patent) => (
-            <MagicCard
+            <a
               key={patent.id}
-              className="p-8 hover:scale-105 transition-transform duration-300"
-              gradientSize={300}
-              gradientColor="#FFD700"
-              gradientOpacity={0.4}
+              href={patent.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-cyber-yellow/40"
             >
-              <div className="space-y-4">
-                <div className="flex items-start justify-between">
-                  <div className="text-5xl">📜</div>
-                  <span className="text-xs font-mono text-neutral-500 bg-white/5 px-3 py-1 rounded-full">
-                    {patent.date}
-                  </span>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="text-sm font-mono text-cyber-yellow">
-                    {patent.id}
-                  </div>
-                  <h3 className="text-xl font-bold text-white leading-tight">
-                    {patent.title}
-                  </h3>
-                </div>
-
-                <p className="text-neutral-400 text-sm leading-relaxed">
-                  {patent.description}
-                </p>
-
-                <a
-                  href={patent.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-cyber-yellow/10 hover:bg-cyber-yellow/20 border border-cyber-yellow/20 hover:border-cyber-yellow/50 rounded-lg text-cyber-yellow hover:text-white transition-all font-mono text-sm"
-                >
-                  View Patent PDF →
-                </a>
+              <div className="flex items-center justify-between gap-4 font-mono text-xs">
+                <span className="text-cyber-yellow">{patent.id}</span>
+                <span className="text-neutral-500">{patent.date}</span>
               </div>
-            </MagicCard>
+              <h3 className="text-lg font-bold leading-snug text-white md:text-xl">
+                {patent.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-neutral-400">{patent.description}</p>
+              <span className="mt-auto pt-1 font-mono text-xs text-neutral-400 transition-colors group-hover:text-cyber-yellow">
+                Read the patent (PDF) ↗
+              </span>
+            </a>
           ))}
         </div>
       </div>

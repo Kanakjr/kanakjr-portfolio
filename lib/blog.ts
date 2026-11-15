@@ -15,6 +15,8 @@ export interface BlogPost {
   author: string;
   featured: boolean;
   coverImage: string;
+  /** Optional image for list cards when the cover is a wide diagram */
+  cardImage?: string;
   content: string;
 }
 
@@ -37,6 +39,7 @@ export function getAllPosts(): BlogPost[] {
       author: data.author ?? "",
       featured: data.featured ?? false,
       coverImage: data.coverImage ?? "",
+      cardImage: data.cardImage ?? undefined,
       content,
     };
   });

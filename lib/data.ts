@@ -83,6 +83,8 @@ export const portfolioData = {
     projects: [
       {
         title: "HomeBotAI",
+        image: "/projects/homebot.jpg",
+        wide: true,
         category: "IoT / AI Agent",
         description: "An intelligent smart-home assistant powered by LangChain + Gemini with 59 tools, live Home Assistant awareness, learnable skills, proactive Telegram automations, a voice assistant, and a full Next.js dashboard -- evolved from an n8n-based ambient intelligence system into a production AI agent.",
         tech: ["LangChain", "Home Assistant", "Google Gemini", "Next.js", "Telegram API"],
@@ -95,11 +97,13 @@ export const portfolioData = {
         ]
       },
       {
-        title: "NewsGenius - GenAI News Generation",
-        category: "GenAI",
-        description: "A GenAI-driven app for news media publishers, streamlining content creation with AI-assisted social media posting, summarization, and bullet point generation.",
-        tech: ["Python", "GenAI", "React", "LangChain"],
-        demoVideo: "https://youtu.be/fmH5PAESSxo"
+        title: "OpenWrt Travel Gateway",
+        category: "Networking / Self-Hosting",
+        image: "/blog/openwrt-travel-gateway/architecture.jpg",
+        description: "A discarded TP-Link Archer C6 turned pocket travel router: in-kernel WireGuard over IPv6 back to a Mac Mini at home (beating CGNAT), plus a 5.6 KB mobile portal for joining hotel Wi-Fi in one tap.",
+        tech: ["OpenWrt", "WireGuard", "IPv6", "Shell CGI"],
+        github: "https://github.com/Kanakjr/openwrt-travel-gateway",
+        blog: "/blog/openwrt-travel-gateway"
       },
       {
         title: "AI Companion Agents",
@@ -114,25 +118,39 @@ export const portfolioData = {
       },
       {
         title: "InstaGenie - AI Image Bot",
+        image: "/projects/instagenie.jpg",
+        imagePosition: "right",
         category: "AI / Automation",
         description: "A Telegram bot that generates personalized AI images from text, voice, and photo inputs using Flux with custom LoRA adaptation, orchestrated entirely through n8n visual workflows.",
         tech: ["n8n", "Flux LoRA", "Replicate", "Supabase", "OpenAI"],
         blog: "/blog/instagenie-ai-image-bot-with-n8n"
       },
       {
-        title: "Home Lab & Maker Workshop",
-        category: "Hardware / Self-Hosting",
-        description: "A Mac Mini-powered home server running 15+ containerized services (Plex, Ollama, Coolify) alongside a Bambu A1 3D printer integrated into Home Assistant for smart monitoring and custom prints.",
-        tech: ["Docker", "Mac Mini", "3D Printing", "Home Assistant", "Coolify"],
-        blog: "/blog/goodbye-raspberry-pi-hello-mac-mini"
+        title: "NewsGenius - GenAI News Generation",
+        image: "/projects/newsgenius.jpg",
+        category: "GenAI",
+        description: "A GenAI-driven app for news media publishers, streamlining content creation with AI-assisted social media posting, summarization, and bullet point generation.",
+        tech: ["Python", "GenAI", "React", "LangChain"],
+        demoVideo: "https://youtu.be/fmH5PAESSxo"
       },
       {
         title: "CryptoVulnerability - Vulnerability Reporting",
+        image: "/projects/vulnreporting.jpg",
+        imagePosition: "left",
         category: "Blockchain",
         description: "A privacy-focused vulnerability reporting system on blockchain using Hyperledger Fabric for responsible disclosure.",
         tech: ["Hyperledger Fabric", "Blockchain", "Node.js", "Go"],
         demoVideo: "https://youtu.be/TLWH58xnZPQ?t=403",
         github: "https://github.com/Kanakjr/VulnReporting"
+      },
+      {
+        title: "Home Lab & Maker Workshop",
+        image: "/projects/homelab.jpg",
+        wide: true,
+        category: "Hardware / Self-Hosting",
+        description: "A Mac Mini-powered home server running 15+ containerized services (Plex, Ollama, Coolify) alongside a Bambu A1 3D printer integrated into Home Assistant for smart monitoring and custom prints.",
+        tech: ["Docker", "Mac Mini", "3D Printing", "Home Assistant", "Coolify"],
+        blog: "/blog/goodbye-raspberry-pi-hello-mac-mini"
       }
     ],
     achievements: [

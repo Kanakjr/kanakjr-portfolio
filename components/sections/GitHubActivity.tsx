@@ -49,7 +49,7 @@ export default function GitHubActivity() {
 
   if (loading) {
     return (
-      <section className="relative py-20 px-4">
+      <section className="relative py-14 px-4 md:py-20">
         <div className="mx-auto max-w-7xl text-center">
           <div className="w-6 h-6 border-2 border-cyber-yellow/40 border-t-cyber-yellow rounded-full animate-spin mx-auto" />
         </div>
@@ -60,18 +60,18 @@ export default function GitHubActivity() {
   if (repos.length === 0) return null;
 
   return (
-    <section className="relative py-20 px-4">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold text-white font-mono md:text-5xl mb-4">
-            Open <span className="text-cyber-yellow">Source</span>
+    <section className="relative py-14 px-4 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 flex flex-col gap-2 md:mb-12">
+          <h2 className="font-mono text-3xl font-bold text-white md:text-5xl">
+            Open <span className="text-cyber-yellow">source</span>
           </h2>
-          <p className="text-neutral-400 text-lg">
-            Recent activity on GitHub
+          <p className="text-neutral-400 md:text-lg">
+            Recent activity on GitHub.
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {repos.map((repo, i) => (
             <motion.a
               key={repo.id}
@@ -82,6 +82,7 @@ export default function GitHubActivity() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
+              className={i >= 3 ? "hidden sm:block" : undefined}
             >
               <MagicCard className="p-5 h-full hover:border-cyber-yellow/30 transition-all duration-300 cursor-pointer">
                 <div className="flex flex-col gap-2 h-full">
@@ -136,7 +137,7 @@ export default function GitHubActivity() {
           ))}
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-8">
           <a
             href="https://github.com/kanakjr"
             target="_blank"
