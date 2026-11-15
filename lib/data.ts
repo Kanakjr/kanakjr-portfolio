@@ -64,24 +64,42 @@ export const portfolioData = {
         googlePatents: "https://patents.google.com/patent/US20250384199A1/en"
       }
     ],
-    skills: {
-      core: [
-        "Python", "Cybersecurity",
-        "Azure", "AWS",
-        "Docker", "Git", "Kubernetes",
-      ],
-      ai: [
-        "GenAI & NLP", "ML & DL",
-        "Langchain & Langgraph",
-        "RAG", "Transformer (GPT, LLaMA)",
-        "FLUX, SDXL, LORA FineTuning",
-        "OpenCV",
-      ],
-      stack: [
-        "Streamlit","VectorDB", "MongoDB",
-        "Neo4j", "Blockchain", "FastAPI"
-      ]
-    },
+    skillGroups: [
+      {
+        title: "Agentic AI",
+        featured: true,
+        blurb: "Agents that use tools, keep memory, and hand off to humans when it matters.",
+        items: [
+          "LangGraph", "LangChain", "Deep Agents", "Model Context Protocol (MCP)", "FastMCP",
+          "Tool / function calling", "Multi-agent workflows", "Human-in-the-loop", "Structured output (Pydantic)",
+          "LangSmith tracing & evals", "n8n automations"
+        ],
+        usedIn: ["HomeBotAI", "PDF Deep Agent", "Amdocs Telco AI"]
+      },
+      {
+        title: "Models & modalities",
+        items: [
+          "Gemini", "GPT", "Ollama (local LLMs)", "Vision models",
+          "Whisper (speech-to-text)", "ElevenLabs (voice)", "FLUX + LoRA fine-tuning"
+        ]
+      },
+      {
+        title: "RAG & memory",
+        items: ["Multimodal RAG", "pgvector", "ChromaDB", "Neo4j / graph RAG", "Embeddings"]
+      },
+      {
+        title: "Build & ship",
+        items: ["Python", "TypeScript", "FastAPI", "Next.js", "Docker", "Kubernetes", "Azure", "AWS", "Home Assistant"]
+      },
+      {
+        title: "Security",
+        items: ["IAM & cloud security", "ML threat detection", "Anomaly detection", "Security+"]
+      },
+      {
+        title: "AI-native dev",
+        items: ["Claude Code", "Cursor", "Prompt & eval design"]
+      }
+    ],
     projects: [
       {
         title: "HomeBotAI",
