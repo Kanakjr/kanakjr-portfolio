@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 px-4 py-24 text-center 2xl:max-w-6xl 2xl:gap-8 2xl:py-0">
         <div className="relative h-32 w-32 overflow-hidden rounded-full border-2 border-white/15 md:h-44 md:w-44 2xl:h-60 2xl:w-60">
           <Image
-            src="/avatar.jpg"
+            src="/avatars/sticker-radial.jpg"
             alt={hero.name}
             fill
             className="object-cover"

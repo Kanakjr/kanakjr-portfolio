@@ -108,7 +108,6 @@ export const portfolioData = {
         category: "IoT / AI Agent",
         description: "An intelligent smart-home assistant powered by LangChain + Gemini with 59 tools, live Home Assistant awareness, learnable skills, proactive Telegram automations, a voice assistant, and a full Next.js dashboard -- evolved from an n8n-based ambient intelligence system into a production AI agent.",
         tech: ["LangChain", "Home Assistant", "Google Gemini", "Next.js", "Telegram API"],
-        github: "https://github.com/Kanakjr/homebot",
         blog: "/blog/homebot-ai-smart-home-assistant",
         demoVideos: [
           { label: "v2", url: "https://youtu.be/og9YRxQFgDE" },
@@ -126,16 +125,23 @@ export const portfolioData = {
         blog: "/blog/openwrt-travel-gateway"
       },
       {
-        title: "AI Companion Agents",
-        image: "/projects/ai-agents.jpg",
-        category: "AI Agent",
-        description: "Conversational AI agents built with LangChain for domain-specific tasks -- SalesCompanion for sales planning and email drafting, BillBot for receipt management and data extraction, and PDF Deep Agent for natural language PDF manipulation via MCP.",
-        tech: ["Python", "LangChain", "LLMs", "FastMCP", "ChromaDB"],
-        githubLinks: [
-          { label: "Sales", url: "https://github.com/Kanakjr/SalesCompanionAgent" },
-          { label: "Bill", url: "https://github.com/Kanakjr/BillBot" },
-          { label: "PDF", url: "https://github.com/Kanakjr/pdf-deep-agent" }
-        ]
+        title: "LogPose",
+        category: "AI / Habit tracking",
+        image: "/projects/logpose.jpg",
+        imagePosition: "top",
+        wide: true,
+        description: "A One Piece-themed habit tracker PWA where real-world actions raise your Bounty and train your Haki. A Gemini vision \"Marine Verifier\" checks photo evidence and returns a structured verdict before a voyage counts.",
+        tech: ["Gemini Vision", "FastAPI", "PWA", "Docker"],
+        github: "https://github.com/Kanakjr/LogPose"
+      },
+      {
+        title: "AI File Organiser",
+        category: "AI / Desktop",
+        image: "/projects/ai-file-organiser.jpg",
+        imagePosition: "top",
+        description: "A desktop app that asks an LLM to plan how a messy folder should be renamed and sorted, shows the plan for review, and only moves files after you approve. Works with local models (Ollama, LM Studio) or Gemini via LiteLLM.",
+        tech: ["LiteLLM", "Gemini", "Ollama", "Python"],
+        github: "https://github.com/Kanakjr/AI-File-Organiser"
       },
       {
         title: "InstaGenie - AI Image Bot",
@@ -145,24 +151,6 @@ export const portfolioData = {
         description: "A Telegram bot that generates personalized AI images from text, voice, and photo inputs using Flux with custom LoRA adaptation, orchestrated entirely through n8n visual workflows.",
         tech: ["n8n", "Flux LoRA", "Replicate", "Supabase", "OpenAI"],
         blog: "/blog/instagenie-ai-image-bot-with-n8n"
-      },
-      {
-        title: "NewsGenius - GenAI News Generation",
-        image: "/projects/newsgenius.jpg",
-        category: "GenAI",
-        description: "A GenAI-driven app for news media publishers, streamlining content creation with AI-assisted social media posting, summarization, and bullet point generation.",
-        tech: ["Python", "GenAI", "React", "LangChain"],
-        demoVideo: "https://youtu.be/fmH5PAESSxo"
-      },
-      {
-        title: "CryptoVulnerability - Vulnerability Reporting",
-        image: "/projects/vulnreporting.jpg",
-        imagePosition: "left",
-        category: "Blockchain",
-        description: "A privacy-focused vulnerability reporting system on blockchain using Hyperledger Fabric for responsible disclosure.",
-        tech: ["Hyperledger Fabric", "Blockchain", "Node.js", "Go"],
-        demoVideo: "https://youtu.be/TLWH58xnZPQ?t=403",
-        github: "https://github.com/Kanakjr/VulnReporting"
       },
       {
         title: "Home Lab & Maker Workshop",

@@ -4,9 +4,24 @@ import { portfolioData } from "@/lib/data";
 
 type ProjectLink = { label: string; url: string; kind: "blog" | "code" | "demo" };
 
-const projects = portfolioData.projects;
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  tech: string[];
+  image?: string;
+  imagePosition?: string;
+  wide?: boolean;
+  blog?: string;
+  github?: string;
+  githubLinks?: { label: string; url: string }[];
+  demoVideo?: string;
+  demoVideos?: { label: string; url: string }[];
+};
 
-function linksFor(project: (typeof projects)[number]): ProjectLink[] {
+const projects: Project[] = portfolioData.projects;
+
+function linksFor(project: Project): ProjectLink[] {
   const links: ProjectLink[] = [];
   if (project.blog) links.push({ label: "Read the build", url: project.blog, kind: "blog" });
   if (project.githubLinks) {
@@ -28,7 +43,7 @@ const positionClass: Record<string, string> = {
   top: "object-top",
 };
 
-function Cover({ project }: { project: (typeof projects)[number] }) {
+function Cover({ project }: { project: Project }) {
   if (project.image) {
     return (
       <Image
