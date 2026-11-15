@@ -109,6 +109,7 @@ export const portfolioData = {
       },
       {
         title: "AI Companion Agents",
+        image: "/projects/ai-agents.jpg",
         category: "AI Agent",
         description: "Conversational AI agents built with LangChain for domain-specific tasks -- SalesCompanion for sales planning and email drafting, BillBot for receipt management and data extraction, and PDF Deep Agent for natural language PDF manipulation via MCP.",
         tech: ["Python", "LangChain", "LLMs", "FastMCP", "ChromaDB"],
