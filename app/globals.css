@@ -201,3 +201,19 @@
   border-radius: 12px;
   display: block;
 }
+
+/* Print (resume → PDF): hide floating site chrome, tidy margins */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 12mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color-scheme: light !important;
+  }
+  .fixed {
+    display: none !important;
+  }
+}
