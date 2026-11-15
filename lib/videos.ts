@@ -1,3 +1,5 @@
+import youtubeData from "@/data/youtube.json";
+
 export interface Video {
   id: string;
   title: string;
@@ -6,6 +8,8 @@ export interface Video {
   youtubeId: string;
   tags: string[];
   featured?: boolean;
+  published?: string;
+  isShort?: boolean;
 }
 
 /**
@@ -29,7 +33,7 @@ export function getMaxResThumbnailUrl(youtubeId: string): string {
   return `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
 }
 
-export const videosData: Video[] = [
+const curatedVideos: Video[] = [
   // ── Featured ──────────────────────────────────────────────────────────
   {
     id: "xsr-konkan",
@@ -39,7 +43,6 @@ export const videosData: Video[] = [
     category: "Motorcycle",
     youtubeId: "0qTGF9XbxkQ",
     tags: ["Yamaha XSR", "Konkan", "Motovlog"],
-    featured: true,
   },
 
   // ── GenAI & LLMs ─────────────────────────────────────────────────────
@@ -389,3 +392,61 @@ export const videosData: Video[] = [
     tags: ["Voice Modulator", "DIY", "Electronics"],
   },
 ];
+
+// ── Auto-synced uploads (scripts/sync-youtube.mjs → data/youtube.json) ──
+type SyncedVideo = {
+  youtubeId: string;
+  title: string;
+  description: string;
+  published: string;
+  isShort: boolean;
+};
+
+function inferCategory(title: string, description: string): string {
+  const t = `${title} ${description}`.toLowerCase();
+  if (/xsr|yamaha|motorcycle|\bride\b|motovlog|konkan|goa/.test(t)) return "Motorcycle";
+  if (/3d[- ]?print|bambu|adapter|filament|multiboard/.test(t)) return "IoT / Hardware";
+  if (/home ?bot|jarvis|home assistant|smart home|self-hosted|homelab|home lab/.test(t)) return "AI Assistant";
+  if (/llm|langchain|gemini|genai|\bai\b/.test(t)) return "GenAI";
+  return "Vlog";
+}
+
+function cleanDescription(d: string): string {
+  const text = d
+    .replace(/https?:\/\/\S+/g, "")
+    .replace(/#\w+/g, "")
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, " ").trim())
+    .find((p) => p.length > 0) ?? "";
+  return text.length > 220 ? `${text.slice(0, 217).trimEnd()}...` : text;
+}
+
+function hashtags(d: string): string[] {
+  return Array.from(new Set((d.match(/#(\w+)/g) ?? []).map((h) => h.slice(1)))).slice(0, 3);
+}
+
+const curatedIds = new Set(curatedVideos.map((v) => v.youtubeId));
+
+const syncedVideos: Video[] = (youtubeData.videos as SyncedVideo[])
+  .filter((v) => !curatedIds.has(v.youtubeId))
+  .map((v) => {
+    const category = inferCategory(v.title, v.description);
+    const tags = hashtags(v.description);
+    return {
+      id: `yt-${v.youtubeId}`,
+      title: v.title.replace(/\s*#\w+/g, "").trim(),
+      description: cleanDescription(v.description),
+      category,
+      youtubeId: v.youtubeId,
+      tags: v.isShort ? ["Short", ...tags].slice(0, 3) : tags.length ? tags : [category],
+      published: v.published,
+      isShort: v.isShort,
+    };
+  });
+
+// Newest uploads first, then the hand-curated archive.
+export const videosData: Video[] = [...syncedVideos, ...curatedVideos];
+
+// Feature the newest long-form upload; fall back to the first curated video.
+const featuredIdx = videosData.findIndex((v) => !v.isShort);
+if (featuredIdx >= 0) videosData[featuredIdx] = { ...videosData[featuredIdx], featured: true };

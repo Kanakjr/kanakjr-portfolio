@@ -1,0 +1,111 @@
+{
+  "channelId": "UCLAN_-PS2OrlHqbAHaxeU-A",
+  "fetchedAt": "2026-11-15T15:58:54.018Z",
+  "videos": [
+    {
+      "youtubeId": "aCRXjZhj_kQ",
+      "title": "I Built a Private Netflix for My Whole Family (Self-Hosted + AI Copilot)",
+      "description": "I got tired of too many streaming apps, shows that keep disappearing, and ads everywhere. So I built my own private streaming hub for my whole family: a profile for everyone, my own library, new episodes that fetch themselves, and an AI copilot that suggests what to watch but never acts until I confirm.\n\nHomeBot Cinema is open source (a fork of Stremio Web) and runs on a machine you own. Here's the full tour. 👇\n\n⏱️ CHAPTERS\n0:00 Why I built this\n0:16 Discover: movies, series and anime\n0:27 Smart Filters\n0:46 Library, calendar and downloads\n1:06 Admin panel\n1:24 The AI Copilot\n2:02 Profiles for the whole family\n2:14 Pick a version and press play\n2:40 Player: speed, cast and subtitles\n3:02 Save to your computer, browse by actor\n3:14 Series, auto-download and wrap-up\n\n✨ WHAT YOU'LL SEE\n• Smart Filters powered by TMDB: find titles by rating, genre, language and streaming service, with 40 ready-made quick picks\n• An AI copilot (Google Gemini) that sees titles only, never names, emails or PINs. It can only suggest and prepare things; nothing happens until you press Confirm\n• Separate profiles for everyone at home, each with their own watch history, library and settings\n• Pick the version you like by quality or size, and it checks it's ready before you press play\n• A player with subtitles, playback speed and casting\n• Save movies to your own computer, with quality settings you control\n• Auto-download: follow a show and every new episode arrives on its own\n• A calendar of upcoming episodes and an admin panel for storage, people and quality\n\n📱 ALSO INCLUDED (not shown in this video)\nOptional PIN per profile and a kids profile, and it installs on your phone like an app. Sign-in goes through Cloudflare Access, so only the people you invite get in.\n\n🔧 BUILT WITH\nNode.js / Express, SQLite, React (Stremio Web + stremio-core), Docker, Transmission, TMDB, Google Gemini. Narration voice: ElevenLabs.\n\n🔗 LINKS\nGitHub: https://github.com/Kanakjr/homebot-cinema\nBuilt on Stremio Web: https://github.com/Stremio/stremio-web\n\n💬 QUESTIONS?\nAsk in the comments. I read them all. If you want a deeper video on the AI copilot, auto-download, or the Cloudflare setup, tell me which one.\n\n⚠️ DISCLAIMER\nHomeBot Cinema does not host, index or provide any media. It is a client for sources you configure yourself and a manager for your own server. You are responsible for following the laws, licenses and terms of service that apply to you and to the content you use. Not affiliated with or endorsed by Stremio, TMDB, Google or ElevenLabs. Poster images shown belong to their respective owners.\n\n#selfhosted #homelab #aiassistant #opensource #mediaserver #homeserver #docker",
+      "published": "2026-11-15T14:44:21+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "heDtoXJaJqA",
+      "title": "I 3D Printed an Adapter to Use DJI Action Filters on My Fujifilm Camera",
+      "description": "Why buy another filter kit when you can print an adapter?\n\nI designed a parametric adapter in OpenSCAD that lets me reuse DJI Osmo Action 5 Pro ND/CPL filters on my Fujifilm X-T30 III with the XC13-33mm lens. This video shows the complete process: testing the idea, tuning the fit with calibration rings, reducing vignetting, printing the final adapter, and mounting it on the camera.\n\nDesigned in OpenSCAD and printed in PETG on a Bambu Lab A1.\n\nRead the full build story:\nhttps://kanakjr.in/blog/reuse-dji-filters-fujifilm-lens\n\nGear and tools:\nFujifilm X-T30 III\nFujinon XC13-33mm F3.5-6.3 lens\nDJI Osmo Action 5 Pro filter kit\nBambu Lab A1\nOpenSCAD with BOSL2\n\n#3DPrinting #Fujifilm #Photography #OpenSCAD #DIY #BambuLab",
+      "published": "2026-10-12T16:56:48+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "KoRppVQGBKM",
+      "title": "Printing Camera Adapters on the Bambu A1 (Bambu Studio Workflow)",
+      "description": "Printing two camera adapters on the Bambu Lab A1: a Ulanzi UKA quick-release plate for my travel tripod, and a hotshoe mount so my DJI Action 5 Pro can ride on top of my Fujifilm X-T30 III. Sliced in Bambu Studio.\n\nModels used:\n- Ulanzi UKA Quick Release Plate: https://www.printables.com/model/1627350-ulanzi-uka-quick-release-plate-easy-printable/\n- Canon Hotshoe Action Camera Mount for GoPro / Insta360: https://www.printables.com/model/535332-canon-hotshoe-action-camera-mount-gopro-insta360/\n\nFull write-up (cost breakdown, the lighter-heat screw trick, and the finished rig):\nhttps://kanakjr.in/blog/print-dont-buy-camera-adapters",
+      "published": "2026-08-28T18:50:53+00:00",
+      "isShort": true
+    },
+    {
+      "youtubeId": "Rfyd_PHcP78",
+      "title": "Mounting a DJI Action 5 Pro on a Fujifilm X-T30 III with a 3D-Printed Adapter",
+      "description": "A DJI Action 5 Pro mounted on top of my Fujifilm X-T30 III via a 3D-printed hotshoe adapter, so I can shoot stills and video at the same time from a single tripod.\nParts:\n- Fujifilm X-T30 III\n- DJI Action 5 Pro\n- Canon Hotshoe Action Camera Mount (Printables): https://www.printables.com/model/535332-canon-hotshoe-action-camera-mount-gopro-insta360/\n- Generic 1/4\"-20 screw heat-set into the printed part with a cigarette lighter\nFull write-up (why I printed instead of bought, and the money saved):\nhttps://kanakjr.in/blog/print-dont-buy-camera-adapters\nPrinted on a Bambu Lab A1.",
+      "published": "2026-08-28T18:49:23+00:00",
+      "isShort": true
+    },
+    {
+      "youtubeId": "h4QcNTl69uc",
+      "title": "1,200 km through the monsoon · Pune to Goa on a Yamaha XSR 155",
+      "description": "Nine days. Twelve hundred kilometres. One monsoon.\n\nA ride from Pune to Goa and back through the Western Ghats\nin August 2026, cut down to under five minutes.\nNo music. Just the engine, the rain, and the road.\n\nRode down NH-48 through Kolhapur and the Amboli ghat descent,\nbased five nights on the Goa coast doing daily loops around\nPanjim and Anjuna, took one full day inland to Mollem and\nDudhsagar in the middle of the monsoon, and came back up\nthrough Panchgani instead of straight to Pune.\n\n------------------------------------------------\n\nChapters\n0:00  Prologue\n0:25  Leaving before the sun\n1:15  Somewhere south\n1:50  Into the green\n3:20  The ride home\n4:10  Home\n\n------------------------------------------------\n\nThe bike:\nYamaha XSR 155\nAir-cooled 155cc single, 6-speed, Variable Valve Actuation\n\nThe gear:\nCamera: DJI Osmo Action\n\nThe route:\nPune · Katraj · Satara · Karad · Kolhapur ·\nNipani · Belgaum · Amboli · Sawantwadi ·\nPernem · Mapusa · Baga\n\nInside Goa: Candolim, Panjim, Anjuna, Old Goa,\n            Mapusa, Ponda, Mollem, Dudhsagar\n\nBack via: Mollem · Belgaum · Kolhapur · Satara ·\nPanchgani (overnight) · Shirwal · Katraj · Pune\n\nThe numbers (from Google Timeline)\nTotal distance:      ~1,200 km\nTotal moving time:    69h 26m\nDays on the road:     9\nLongest single day:   410 km (outbound day 1)\nLongest single leg:   167 km (Mollem to Kolhapur, day 8)\n\n------------------------------------------------\n\nMade with a lot of rain and one very slow film.\n\n#MonsoonRide #GoaMonsoon #YamahaXSR155 #WesternGhats\n#PuneToGoa #Ghats #IndianBikers #Motovlog #DJIOsmoAction\n#AmboliGhat #Dudhsagar #Mollem #Ridereel #Cinematicreel",
+      "published": "2026-08-22T18:53:40+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "nFk5pgOkjUU",
+      "title": "Flying over German Islands in Microsoft Flight Simulator #ai #tech #bikelife",
+      "description": "#ai #tech #bikelife Taking a scenic cruise over the German islands of Dune. Nothing beats this view.\n#MFS #FlightSim #Aviation #GamingSetup #Dune",
+      "published": "2026-04-23T19:18:44+00:00",
+      "isShort": true
+    },
+    {
+      "youtubeId": "6qW23QaOZgw",
+      "title": "The perfect street fighter: Yamaha XSR 155",
+      "description": "That silver tank hitting different in the evening light. Chasing sunsets and city skylines. 🏙️✨\nHashtags: #Yamaha #XSR155 #FASR #YamahaMotorcycles #ModernRetro #BikeLife #MotorcycleDiaries",
+      "published": "2026-04-23T16:56:33+00:00",
+      "isShort": true
+    },
+    {
+      "youtubeId": "YOOdyF5BlpM",
+      "title": "Hey Jarvis! Building a Custom AI Home Assistant with Gemini Live & DeepAgent",
+      "description": "Meet HomeBot, a custom smart home AI assistant powered by Gemini Live for seamless, conversational voice interaction. In this demo, I show how HomeBot integrates directly with the physical environment to control smart lights, report on room sensors (like temperature and air quality), and monitor ongoing 3D prints in real-time.\n\nBeyond basic smart home controls, HomeBot uses a custom \"deepagent\" architecture to handle complex, multi-step tasks. Watch as it autonomously fetches movie recommendations, checks the existing media library, and delegates download tasks completely hands-free.\n\nWhat's in the demo:\n0:00 - Waking up the agent\n0:10 - Real-time smart light control (Color & Temperature)\n0:50 - Room environment & air quality report\n1:10 - Live 3D printer status monitoring\n1:28 - Movie recommendations & autonomous downloading via DeepAgent\n\n💻 Get the code and build your own:\nGitHub Repository: https://github.com/Kanakjr/homebot\n\n#AI #SmartHome #GeminiLive #Python #HomeAutomation #OpenSource #DeepAgent",
+      "published": "2026-04-20T07:45:00+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "og9YRxQFgDE",
+      "title": "HomeBot AI: The Ultimate Smart Home AI (Home Assistant, Gemini, LangChain Deepagent & Ollama)",
+      "description": "Welcome to a walkthrough of HomeBot AI, a custom project I've been developing to solve the fragmentation in my home automation setup. Between Home Assistant entities, Sonarr/Radarr for media management, network tracking, and monitoring prints on my Bambu Lab A1, there was no single, aggregated way to control everything.\n\nEnter HomeBot AI: A unified dashboard powered by a LangChain DeepAgent, leveraging Gemini Flash 2.5 for complex tasks and local offline models like Qwen via Ollama for privacy-focused, zero-cost tasks like AI summaries.\n\nIn this video, I demonstrate how HomeBot AI brings generative UI widgets, automated media downloading, intelligent agent memory, automated video transcoding, and power analytics all under one roof.\n\nLinks & Resources:\n• GitHub Repository: https://github.com/Kanakjr/homebot\n• HomeBot Documentation & Architecture: https://kanakjr.github.io/homebot/\n\nTimestamps:\n00:00 - The Problem with Fragmented Smart Homes\n01:07 - HomeBot AI Demo: Generative UI & LangChain DeepAgent\n02:15 - Downloading Media via Chat (Radarr/Sonarr Integration)\n03:03 - Local AI Summaries (Qwen) & The Master Dashboard\n03:44 - Monitoring Power Usage, Network, and 3D Prints\n03:57 - Creating Custom Widgets with Generative AI\n04:57 - Interactive SVG Home Control Map\n05:26 - Activity Logs, Bandwidth Analytics, and Health Tracking\n06:30 - Daily AI Skills, Telegram Notifications, and Agent Memory\n07:24 - Automated MP4 Transcoding to Save Storage\n07:53 - Server Management, Docker Tunnels, & Settings\n08:45 - System Architecture Breakdown (Backend, LangGraph, SQLite)\n09:45 - Future Roadmap: Real-time Updates & Spotify Integration\n\nIf you're interested in GenAI development and taking your home automation to the next level, check out the repo and let me know what features you'd like to see next!",
+      "published": "2026-03-24T18:35:40+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "0qTGF9XbxkQ",
+      "title": "YAMAHA XSR 155: Konkan Costal Ride",
+      "description": "Just wrapped up a soul-satisfying 800 km trip over the long weekend. The route took me from Pune to Harihareshwar, then down the coast to Ratnagiri, and finally back home.\n\nThe Ride Experience:\nThe bike was buttery smooth throughout the Konkan twisties. I was honestly surprised by the efficiency. I managed to clock an average of 50 kmpl, which is phenomenal given the varied terrain.\n\nThe Ergonomics:\nIf there’s one gripe, it’s the handlebar position. By the time I hit the 600 km mark, I started feeling some strain in my shoulders. The stance is slightly aggressive for long hudistance touring, but it was nothing a few stretches and short breaks couldn't fix. It’s manageable, but something to keep in mind if you plan on back-to-back 300km+ days.\n\nFinal Verdict:\nI absolutely love this machine. It’s got character, looks gorgeous in the wild (shot this near Ganpatipule), and holds its own on the highway.\n\nRide Stats:\nTotal Distance: 800 km\nRoute: Pune  Harihareshwar - Ganpatipule - Ratnagiri - Pune\nMileage: ~51 kmpl\nComfort: 7/10 (Shoulder strain is real)\nFun Factor: 11/10",
+      "published": "2026-02-01T18:03:57+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "Fru0LM9Jgvg",
+      "title": "Building a Truly Intelligent Home: The Ultimate AI Dashboard Tour",
+      "description": "Ever wondered what a truly intelligent smart home looks like? It's not just about voice commands and schedules. It's about a home that understands context, anticipates your needs, and communicates with you.\n\nIn this video, I give you a complete tour of the custom dashboard that acts as the command center for my AI-powered smart home. Built with the powerful combination of Home Assistant, n8n, and a Large Language Model (LLM), this system goes beyond simple \"if-this-then-that\" automation to provide true ambient intelligence.\n\nWant to build this yourself? I've written a detailed blog post that breaks down the entire setup, including the workflows and automations that make this possible.\nRead the full story here:  https://kanakjr.medium.com/my-house-thinks-building-a-genius-level-smart-home-with-ai-47ad2a5e58c0\n\nWhat you'll see in this tour:\n0:00 - My Desk Setup & Dashboard Overview\n0:14 - Dynamic & Smart Lighting Control\n0:28 - Real-time Environmental Monitoring (Temp, Humidity, Air Quality)\n0:32 - Connected Device Status (Air Purifier, DietPi Server)\n0:54 - Interacting with Physical Smart Controllers\n1:31 - A Look Behind the Scenes at the Automation Workflow\n\n#SmartHome #HomeAssistant #AI #HomeAutomation #DIY #Tech #n8n #LLM #Project #SmartHomeTour",
+      "published": "2025-07-13T13:49:57+00:00",
+      "isShort": true
+    },
+    {
+      "youtubeId": "ATjjxrY6B4g",
+      "title": "Demystifying LLM & Frameworks: A Comprehensive Guide",
+      "description": "Join us in this session where expert I will takes us through the intricacies of Large Language Models (LLM) and the frameworks that power them. Whether you're a beginner eager to learn about the world of AI and machine learning, or a seasoned professional looking to deepen your understanding of LLMs, this video is packed with insights. From basic concepts to advanced applications, get ready to dive into discussions that cover the latest trends, challenges, and opportunities in the field of artificial intelligence. Don't miss out on this opportunity to expand your knowledge and stay ahead in the ever-evolving tech landscape.",
+      "published": "2024-05-24T08:53:04+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "D0o0SSXRWEc",
+      "title": "News Content Creation with NewsGenius: AI-Powered Image Generation Demo using DALL·E-3 Model!",
+      "description": "Welcome to the future of news content creation with NewsGenius! 🚀 In this demo, witness the incredible power of artificial intelligence as we showcase the latest DALL·E-3 model in action. NewsGenius is a cutting-edge AI-powered web app designed to empower news media publishers and content creators to generate engaging articles effortlessly.",
+      "published": "2023-11-11T10:26:53+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "fmH5PAESSxo",
+      "title": "NewsGenius - AI Powered News/Articles Generation",
+      "description": "Are you a news media publisher or content creator looking to supercharge your news article production process? Look no further! NewsGenius is here to transform the way you create news content. In this video, we'll dive into the exciting world of NewsGenius, an AI-powered web app designed to assist news media publishers and content creators by harnessing the power of artificial intelligence.\n\nNewsGenius streamlines content creation like never before, offering a wide range of AI-driven tools to help you with tasks such as social media posting, article writing, image generation, summarization, and bullet point creation. Whether you're a seasoned journalist or just getting started in the news industry, NewsGenius provides an all-in-one solution to enhance your efficiency and productivity.\n\nJoin us as we explore the features and benefits of NewsGenius, and learn how this innovative tool can revolutionize your news content creation.",
+      "published": "2023-11-09T07:39:15+00:00",
+      "isShort": false
+    },
+    {
+      "youtubeId": "TLWH58xnZPQ",
+      "title": "Vulnerability Reporting and Disclosure on Blockchain",
+      "description": "",
+      "published": "2023-06-30T09:33:10+00:00",
+      "isShort": false
+    }
+  ]
+}

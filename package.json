@@ -9,7 +9,8 @@
     "summaries": "tsx scripts/generate-summaries.ts",
     "captions": "tsx scripts/generate-captions.ts",
     "sync-instagram": "node scripts/sync-instagram.mjs",
-    "build": "node scripts/sync-instagram.mjs && node scripts/generate-thumbnails.mjs && next build",
+    "sync-youtube": "node scripts/sync-youtube.mjs",
+    "build": "node scripts/sync-instagram.mjs && node scripts/sync-youtube.mjs && node scripts/generate-thumbnails.mjs && next build",
     "start": "next start",
     "lint": "next lint"
   },
