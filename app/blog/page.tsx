@@ -15,20 +15,19 @@ export default function BlogPage() {
     <main className="relative min-h-screen overflow-hidden bg-background">
       <RetroGrid className="opacity-30" />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-4 py-32 lg:max-w-5xl lg:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-24 pt-28 md:pt-32 2xl:max-w-7xl">
         {/* Header */}
-        <div className="mb-16 text-center">
-          <h1 className="text-5xl font-bold text-white font-mono md:text-6xl mb-4">
+        <div className="mb-10 flex flex-col items-start gap-3 md:mb-12">
+          <h1 className="font-mono text-4xl font-bold text-white md:text-6xl">
             The <span className="text-cyber-yellow">Blog</span>
           </h1>
-          <p className="text-neutral-400 text-lg max-w-xl mx-auto">
+          <p className="max-w-2xl text-neutral-400 md:text-lg">
             Thoughts on AI, cybersecurity, and building things that matter.
           </p>
-          <div className="mt-4 mx-auto w-24 h-0.5 bg-gradient-to-r from-cyber-yellow to-retro-red" />
           <Link
             href="/feed.xml"
             target="_blank"
-            className="inline-flex items-center gap-1.5 mt-4 text-xs font-mono text-neutral-500 hover:text-cyber-yellow transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 hover:text-cyber-yellow transition-colors"
           >
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" />

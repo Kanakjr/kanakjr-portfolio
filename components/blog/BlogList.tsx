@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import MagicCard from "@/components/magicui/magic-card";
 import BookmarkButton from "@/components/blog/BookmarkButton";
 import { useBookmarks } from "@/lib/hooks/useBookmarks";
 
@@ -32,7 +31,7 @@ interface BlogListProps {
   summaries?: Record<string, string>;
 }
 
-export default function BlogList({ posts, tags, summaries = {} }: BlogListProps) {
+export default function BlogList({ posts, tags }: BlogListProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showBookmarked, setShowBookmarked] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
@@ -56,7 +55,7 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
   return (
     <>
       {/* Tag Filter Bar */}
-      <div className="mb-12 flex flex-wrap gap-2 justify-center">
+      <div className="mb-10 flex flex-wrap gap-2">
         <button
           onClick={() => { setActiveTag(null); setShowBookmarked(false); }}
           className={`px-4 py-1.5 text-xs font-mono rounded-full border transition-all duration-300 ${
@@ -107,121 +106,121 @@ export default function BlogList({ posts, tags, summaries = {} }: BlogListProps)
         )}
       </div>
 
-      {/* Blog Cards */}
-      <div className="flex flex-col gap-8">
-        <AnimatePresence mode="popLayout">
-          {filteredPosts.map((post, index) => (
-            <motion.div
-              key={post.slug}
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-            >
-              <Link href={`/blog/${post.slug}`}>
-                <MagicCard className="p-0 hover:border-cyber-yellow/30 transition-all duration-300 cursor-pointer overflow-hidden">
-                  <div className="flex flex-row-reverse">
-                    {/* Text content */}
-                    <div className="flex flex-col gap-4 p-8 flex-1 min-w-0">
-                      {/* Meta */}
-                      <div className="flex items-center gap-3 flex-wrap">
-                        {post.featured && (
-                          <span className="px-2.5 py-0.5 text-[10px] font-mono rounded-full bg-retro-red/10 text-retro-red border border-retro-red/20 uppercase tracking-wider">
-                            Featured
-                          </span>
-                        )}
-                        <span className="text-xs font-mono text-neutral-500">
-                          {new Date(post.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </span>
-                        <span className="text-xs font-mono text-neutral-600">
-                          /
-                        </span>
-                        <span className="text-xs font-mono text-neutral-500">
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      {/* Title */}
-                      <h2 className="text-2xl font-bold text-white font-mono transition-colors md:text-3xl">
-                        {post.title}
-                      </h2>
-
-                      {/* Excerpt */}
-                      <p className="text-neutral-400 leading-relaxed">
-                        {post.description}
-                      </p>
-
-                      {/* AI Summary */}
-                      {summaries[post.slug] && (
-                        <p className="text-xs text-neutral-500 italic border-l-2 border-cyber-yellow/20 pl-3">
-                          <span className="text-cyber-yellow/50 not-italic font-mono text-[10px] mr-1">AI</span>
-                          {summaries[post.slug].length > 150
-                            ? summaries[post.slug].slice(0, 150) + "..."
-                            : summaries[post.slug]}
-                        </p>
-                      )}
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className={`px-2 py-0.5 text-xs font-mono border rounded transition-colors ${
-                              activeTag === tag
-                                ? "text-cyber-yellow border-cyber-yellow/30"
-                                : "text-neutral-500 border-white/10"
-                            }`}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Read More + Bookmark */}
-                      <div className="flex items-center gap-2 mt-2 text-sm font-mono text-cyber-yellow/70 transition-colors">
-                        <span>Read article</span>
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
-                        <BookmarkButton slug={post.slug} className="ml-auto" />
-                      </div>
-                    </div>
-
-                    {/* Cover image on left */}
-                    {(post.cardImage || post.coverImage) && (
-                      <div className="relative hidden md:block w-64 flex-shrink-0">
+      {/* Blog Cards: newest post as a large feature, the rest in a grid */}
+      <div className="flex flex-col gap-6 md:gap-8">
+        {(() => {
+          const showHero = !activeTag && !showBookmarked && filteredPosts.length > 0;
+          const hero = showHero ? filteredPosts[0] : null;
+          const rest = showHero ? filteredPosts.slice(1) : filteredPosts;
+          const fmt = (d: string) =>
+            new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+          return (
+            <>
+              {hero && (
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+                  <Link
+                    href={`/blog/${hero.slug}`}
+                    className="group grid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors duration-300 hover:border-cyber-yellow/40 md:grid-cols-[1.25fr_1fr]"
+                  >
+                    {(hero.cardImage || hero.coverImage) && (
+                      <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900 md:aspect-auto md:min-h-[360px]">
                         <Image
-                          src={post.cardImage || post.coverImage}
-                          alt={post.title}
+                          src={hero.coverImage || hero.cardImage!}
+                          alt=""
                           fill
-                          className="object-cover"
-                          sizes="256px"
+                          priority
+                          sizes="(max-width: 768px) 100vw, 60vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                         />
-                        {/* Yellow gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/60 to-cyber-yellow/20" />
                       </div>
                     )}
-                  </div>
-                </MagicCard>
-              </Link>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+                    <div className="flex flex-col justify-center gap-4 p-6 md:p-10">
+                      <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-neutral-500">
+                        <span className="rounded-full border border-cyber-yellow/40 px-2.5 py-0.5 uppercase tracking-wider text-cyber-yellow">
+                          Latest
+                        </span>
+                        <span>{fmt(hero.date)}</span>
+                        <span>·</span>
+                        <span>{hero.readTime}</span>
+                      </div>
+                      <h2 className="font-mono text-2xl font-bold leading-tight text-white transition-colors group-hover:text-cyber-yellow md:text-4xl">
+                        {hero.title}
+                      </h2>
+                      <p className="leading-relaxed text-neutral-400 md:text-lg">{hero.description}</p>
+                      <div className="mt-2 flex items-center gap-2 font-mono text-sm text-cyber-yellow">
+                        <span>Read article →</span>
+                        <BookmarkButton slug={hero.slug} className="ml-auto" />
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              )}
+
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+                <AnimatePresence mode="popLayout">
+                  {rest.map((post, index) => {
+                    const img = post.cardImage || post.coverImage;
+                    return (
+                      <motion.div
+                        key={post.slug}
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3, delay: Math.min(index, 8) * 0.04 }}
+                      >
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          className="group flex h-full flex-row overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] transition-colors duration-300 hover:border-cyber-yellow/40 sm:flex-col"
+                        >
+                          {img && (
+                            <div className="relative w-28 shrink-0 overflow-hidden border-r border-white/10 bg-neutral-900 sm:aspect-[16/10] sm:w-auto sm:border-b sm:border-r-0">
+                              <Image
+                                src={img}
+                                alt=""
+                                fill
+                                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                              />
+                            </div>
+                          )}
+                          <div className="flex min-w-0 flex-1 flex-col gap-1.5 p-4 sm:gap-2.5 sm:p-5">
+                            <div className="flex items-center gap-2 font-mono text-xs text-neutral-500">
+                              <span>{fmt(post.date)}</span>
+                              <span>·</span>
+                              <span>{post.readTime}</span>
+                            </div>
+                            <h2 className="font-mono text-sm font-bold leading-snug text-white transition-colors group-hover:text-cyber-yellow sm:text-lg">
+                              {post.title}
+                            </h2>
+                            <p className="hidden text-sm leading-relaxed text-neutral-400 sm:line-clamp-3">{post.description}</p>
+                            <div className="mt-auto flex items-center gap-2 pt-3">
+                              <div className="hidden min-w-0 flex-wrap gap-1.5 sm:flex">
+                                {post.tags.slice(0, 3).map((tag) => (
+                                  <span
+                                    key={tag}
+                                    className={`rounded border px-1.5 py-0.5 font-mono text-[11px] ${
+                                      activeTag === tag
+                                        ? "border-cyber-yellow/30 text-cyber-yellow"
+                                        : "border-white/10 text-neutral-500"
+                                    }`}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                              <BookmarkButton slug={post.slug} className="ml-auto shrink-0" />
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            </>
+          );
+        })()}
 
         {filteredPosts.length === 0 && (
           <div className="text-center py-16">
