@@ -176,7 +176,7 @@ export const portfolioData = {
         title: "Certified Information Assurance Professional",
         organization: "DIAT/DRDO",
         description: "Advanced certification in Information Security",
-        link: "https://wp3.kanakjr.in/diat-certificate/"
+        link: null
       },
       {
         title: "Innovator Award",
@@ -188,13 +188,13 @@ export const portfolioData = {
         title: "The Best Engineering Student",
         organization: "The Institution of Engineers (India)",
         description: "Awarded for outstanding academic and technical excellence",
-        link: "https://wp3.kanakjr.in/rewarded-as-the-best-engineering-student/"
+        link: null
       },
       {
         title: "Promising Innovator",
         organization: "KPIT",
         description: "Recognized as finalist in KPIT Sparkle 2016",
-        link: "https://wp3.kanakjr.in/sparkle-2016-finalist/"
+        link: null
       },
       {
         title: "100k+ App Downloads",
