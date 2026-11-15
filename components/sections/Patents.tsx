@@ -15,12 +15,9 @@ export default function Patents() {
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {portfolioData.patents.map((patent) => (
-            <a
+            <div
               key={patent.id}
-              href={patent.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-cyber-yellow/40"
+              className="flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-cyber-yellow/40"
             >
               <div className="flex items-center justify-between gap-4 font-mono text-xs">
                 <span className="text-cyber-yellow">{patent.id}</span>
@@ -30,10 +27,25 @@ export default function Patents() {
                 {patent.title}
               </h3>
               <p className="text-sm leading-relaxed text-neutral-400">{patent.description}</p>
-              <span className="mt-auto pt-1 font-mono text-xs text-neutral-400 transition-colors group-hover:text-cyber-yellow">
-                Read the patent (PDF) ↗
-              </span>
-            </a>
+              <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+                <a
+                  href={patent.googlePatents}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-md bg-cyber-yellow px-3 py-1.5 font-mono text-xs font-semibold text-black transition-opacity hover:opacity-85"
+                >
+                  Google Patents ↗
+                </a>
+                <a
+                  href={patent.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-neutral-400 underline-offset-4 transition-colors hover:text-cyber-yellow hover:underline"
+                >
+                  PDF ↗
+                </a>
+              </div>
+            </div>
           ))}
         </div>
       </div>

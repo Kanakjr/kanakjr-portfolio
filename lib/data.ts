@@ -52,14 +52,16 @@ export const portfolioData = {
         title: "Systems and methods for relational database insight extraction and visualization",
         date: "Mar 18, 2025",
         description: "A system for processing relational database data using generative AI language models to extract insights and generate visualizations from user queries.",
-        link: "/patent/US-12254015-B1.pdf"
+        link: "/patent/US-12254015-B1.pdf",
+        googlePatents: "https://patents.google.com/patent/US12254015B1/en"
       },
       {
         id: "US-20250384199-A1",
         title: "Systems and methods for generating dashboards from images",
         date: "Dec 18, 2025",
         description: "A method for generating dashboards from images using machine learning techniques including object detection, OCR, and natural language processing.",
-        link: "/patent/US-20250384199-A1.pdf"
+        link: "/patent/US-20250384199-A1.pdf",
+        googlePatents: "https://patents.google.com/patent/US20250384199A1/en"
       }
     ],
     skills: {
