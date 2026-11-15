@@ -3,7 +3,7 @@ import { portfolioData } from "@/lib/data";
 export default function Achievements() {
   return (
     <section id="achievements" className="relative px-4 py-14 md:py-20">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl 2xl:max-w-7xl">
         <div className="mb-10 flex flex-col gap-2 md:mb-12">
           <h2 className="font-mono text-3xl font-bold text-white md:text-5xl">
             Awards & <span className="text-cyber-yellow">recognition</span>

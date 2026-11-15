@@ -40,7 +40,7 @@ export default function QuickNav() {
         href="/"
         className="hidden md:flex fixed top-8 left-8 z-50 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:border-cyber-yellow/50 transition-all duration-300 hover:scale-110 cursor-pointer"
       >
-        <div className="relative w-6 h-6">
+        <div className="relative w-6 h-6 2xl:w-7 2xl:h-7">
           <Image
             src="/logokanakjr.png"
             alt="Kanak Jr Logo"
@@ -52,16 +52,16 @@ export default function QuickNav() {
       </Link>
 
       {/* Desktop Nav links */}
-      <nav className="hidden md:flex fixed top-8 left-28 z-50 gap-2">
+      <nav className="hidden md:flex fixed top-8 left-28 z-50 gap-2 2xl:left-32 2xl:gap-3">
         {navItems.map((item) => (
           <Link
             key={item.label}
             href={item.href}
-            className="group relative px-3 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:border-cyber-yellow/50 transition-all duration-300 hover:scale-105"
+            className="group relative px-3 py-2 2xl:px-4 2xl:py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:border-cyber-yellow/50 transition-all duration-300 hover:scale-105"
             onMouseEnter={() => setHoveredItem(item.label)}
             onMouseLeave={() => setHoveredItem(null)}
           >
-            <span className="text-xs font-mono text-white/80 group-hover:text-cyber-yellow transition-colors">
+            <span className="text-xs 2xl:text-sm font-mono text-white/80 group-hover:text-cyber-yellow transition-colors">
               {item.label}
             </span>
             <span
@@ -85,7 +85,7 @@ export default function QuickNav() {
           title="Terminal (` key)"
         >
           <svg
-            className="w-4 h-4 text-white/80 group-hover:text-cyber-yellow transition-colors"
+            className="w-4 h-4 2xl:w-5 2xl:h-5 text-white/80 group-hover:text-cyber-yellow transition-colors"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -99,7 +99,7 @@ export default function QuickNav() {
           className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:border-cyber-yellow/50 transition-all duration-300 hover:scale-110 group"
         >
           <svg
-            className="w-4 h-4 text-white/80 group-hover:text-cyber-yellow transition-colors"
+            className="w-4 h-4 2xl:w-5 2xl:h-5 text-white/80 group-hover:text-cyber-yellow transition-colors"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -117,7 +117,7 @@ export default function QuickNav() {
           className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:border-cyber-yellow/50 transition-all duration-300 hover:scale-110 group"
         >
           <svg
-            className="w-4 h-4 text-white/80 group-hover:text-cyber-yellow transition-colors"
+            className="w-4 h-4 2xl:w-5 2xl:h-5 text-white/80 group-hover:text-cyber-yellow transition-colors"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

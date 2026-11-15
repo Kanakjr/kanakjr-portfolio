@@ -61,7 +61,7 @@ export default function GitHubActivity() {
 
   return (
     <section className="relative py-14 px-4 md:py-20">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl 2xl:max-w-7xl">
         <div className="mb-10 flex flex-col gap-2 md:mb-12">
           <h2 className="font-mono text-3xl font-bold text-white md:text-5xl">
             Open <span className="text-cyber-yellow">source</span>
