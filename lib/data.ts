@@ -162,6 +162,31 @@ export const portfolioData = {
         blog: "/blog/goodbye-raspberry-pi-hello-mac-mini"
       }
     ],
+    recognition: {
+      stats: [
+        { value: 4.0, decimals: 1, suffix: "", label: "GPA", detail: "MS Cybersecurity · Georgia Tech", href: null },
+        { value: 2, decimals: 0, suffix: "", label: "US patents", detail: "1 granted · 1 published (PwC)", href: "#patents" },
+        { value: 100, decimals: 0, suffix: "k+", label: "app downloads", detail: "Kanak Assis mobile app", href: null }
+      ],
+      awards: [
+        {
+          title: "Innovator Award",
+          org: "PwC",
+          year: "2023",
+          note: "For building the GenAI Insights app.",
+          link: "https://www.linkedin.com/posts/kanak-dahake_innovatoraward-innovation-pwc-activity-7089837735628218370-TMf7",
+          featured: true
+        },
+        { title: "Best Engineering Student", org: "The Institution of Engineers (India)", year: null, note: "Academic and technical excellence.", link: null },
+        { title: "Promising Innovator", org: "KPIT Sparkle", year: "2016", note: "National innovation challenge finalist.", link: null },
+        { title: "FBStart sponsorship", org: "Facebook", year: null, note: "Backed a chatbot app.", link: null },
+        { title: "CodeVita finalist", org: "TCS", year: null, note: "Global coding contest; secured a TCS placement.", link: null }
+      ],
+      certifications: [
+        { title: "Security+", org: "CompTIA", link: "https://www.credly.com/users/kanak-dahake.8271bc9e/badges" },
+        { title: "Information Assurance Professional", org: "DIAT / DRDO", link: null }
+      ]
+    },
     achievements: [
       {
         title: "MS Cybersecurity - 4.0 GPA",
