@@ -162,31 +162,19 @@ export const portfolioData = {
         blog: "/blog/goodbye-raspberry-pi-hello-mac-mini"
       }
     ],
-    recognition: {
-      stats: [
-        { value: 4.0, decimals: 1, suffix: "", label: "GPA", detail: "MS Cybersecurity · Georgia Tech", href: null },
-        { value: 2, decimals: 0, suffix: "", label: "US patents", detail: "1 granted · 1 published (PwC)", href: "#patents" },
-        { value: 100, decimals: 0, suffix: "k+", label: "app downloads", detail: "Kanak Assis mobile app", href: null }
-      ],
-      awards: [
-        {
-          title: "Innovator Award",
-          org: "PwC",
-          year: "2023",
-          note: "For building the GenAI Insights app.",
-          link: "https://www.linkedin.com/posts/kanak-dahake_innovatoraward-innovation-pwc-activity-7089837735628218370-TMf7",
-          featured: true
-        },
-        { title: "Best Engineering Student", org: "The Institution of Engineers (India)", year: null, note: "Academic and technical excellence.", link: null },
-        { title: "Promising Innovator", org: "KPIT Sparkle", year: "2016", note: "National innovation challenge finalist.", link: null },
-        { title: "FBStart sponsorship", org: "Facebook", year: null, note: "Backed a chatbot app.", link: null },
-        { title: "CodeVita finalist", org: "TCS", year: null, note: "Global coding contest; secured a TCS placement.", link: null }
-      ],
-      certifications: [
-        { title: "Security+", org: "CompTIA", link: "https://www.credly.com/users/kanak-dahake.8271bc9e/badges" },
-        { title: "Information Assurance Professional", org: "DIAT / DRDO", link: null }
-      ]
-    },
+    recognition: [
+      { icon: "trophy", title: "Innovator Award", org: "PwC", year: "2023", note: "For building the GenAI Insights app.", highlight: true,
+        link: "https://www.linkedin.com/posts/kanak-dahake_innovatoraward-innovation-pwc-activity-7089837735628218370-TMf7" },
+      { icon: "patent", title: "2 US patents", org: "PwC", year: "2025", note: "1 granted, 1 published: GenAI database insights and image-to-dashboard.", highlight: true, link: "#patents" },
+      { icon: "grad", title: "4.0 GPA, MS Cybersecurity", org: "Georgia Institute of Technology", year: "2022", note: "Information Security track.", highlight: true, link: null },
+      { icon: "download", title: "100k+ app downloads", org: "Kanak Assis", year: null, note: "Personal mobile app.", link: null },
+      { icon: "star", title: "Best Engineering Student", org: "The Institution of Engineers (India)", year: null, note: "Academic and technical excellence.", link: null },
+      { icon: "bulb", title: "Promising Innovator", org: "KPIT Sparkle", year: "2016", note: "National innovation challenge finalist.", link: null },
+      { icon: "rocket", title: "FBStart sponsorship", org: "Facebook", year: null, note: "Backed a chatbot app.", link: null },
+      { icon: "code", title: "CodeVita finalist", org: "TCS", year: null, note: "Global coding contest.", link: null },
+      { icon: "shield", title: "Security+", org: "CompTIA", year: null, note: "Certification.", link: "https://www.credly.com/users/kanak-dahake.8271bc9e/badges" },
+      { icon: "lock", title: "Information Assurance Professional", org: "DIAT / DRDO", year: null, note: "Certification.", link: null }
+    ],
     achievements: [
       {
         title: "MS Cybersecurity - 4.0 GPA",
